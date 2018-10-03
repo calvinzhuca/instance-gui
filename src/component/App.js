@@ -2,7 +2,8 @@ import React from "react";
 import FilterableProductTable from "./FilterableProductTable";
 import DropdownNode from './DropdownNode'
 import 'react-dropdown/style.css'
-
+import SvgCommonTag from './SvgCommonTag'
+import SvgTag from './SvgTag'
 
 class App extends React.Component {
 
@@ -42,7 +43,9 @@ const targetNode = [
         <DropdownNode options={sourceNode}/>
         
         <DropdownNode options={targetNode}/>
-
+    <SvgTag />
+    
+    
 
         <FilterableProductTable products={PRODUCTS} />
 
