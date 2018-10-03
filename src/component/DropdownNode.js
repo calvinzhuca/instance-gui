@@ -21,20 +21,20 @@ class DropdownNode extends React.Component {
   }
 
   render() {
-  
-  
+
+
 
 
 
     const defaultOption = this.state.selected
-    const placeHolderValue = typeof this.state.selected === 'string' ? this.state.selected : this.state.selected.label
-      
- 
+    const placeHolderValue = typeof this.state.selected === 'string' ? this.state.selected : this.state.selected.value
+
+
     return (
         <div>
             <Dropdown options={this.state.options} onChange={this._onSelect} value={defaultOption} placeholder="Select an option" />
             <div className='result'>
-                You selected
+                Selected value: 
                     <strong> {placeHolderValue} </strong>
             </div>
         </div>
