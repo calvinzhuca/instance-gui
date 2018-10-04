@@ -57,31 +57,30 @@ export default class App extends React.Component {
   render() {
 
 const sourceNode = [
-  { value: '_4AFFDB6F-2C01-49FB-851A-A330D77C52E1', label: 'beginNode_v1:_4AFFDB6F-2C01-49FB-851A-A330D77C52E1' },
-  { value: '_DE006624-FF55-4A7E-97C6-58E69D838DB0', label: 'endNode_v1:_DE006624-FF55-4A7E-97C6-58E69D838DB0' },
-  { value: '_2C0FB115-C8E6-49A2-AF2A-3FAA0B6EE0D3', label: 'userInput1:_2C0FB115-C8E6-49A2-AF2A-3FAA0B6EE0D3'}
+  { value: '_D3E17247-1D94-47D8-93AD-D645E317B736', label: 'Self Evaluation:_D3E17247-1D94-47D8-93AD-D645E317B736' },
+  { value: '_E35438DF-03AF-4D7B-9DCB-30BC70E7E92E', label: 'PM Evaluation:_E35438DF-03AF-4D7B-9DCB-30BC70E7E92E' },
+  { value: '_AB431E82-86BC-460F-9D8B-7A7617565B36', label: 'HR Evaluation:_AB431E82-86BC-460F-9D8B-7A7617565B36'}
 
 ];
 
 const targetNode = [
-  { value: '_89BBE3F7-5F0A-47F3-BD81-AEA2B2783A89', label: 'beginNode_v2:_89BBE3F7-5F0A-47F3-BD81-AEA2B2783A89' },
-  { value: '_09DECC05-5BBC-4B93-B1BF-F4EB54B10D17', label: 'endNode_v2:_09DECC05-5BBC-4B93-B1BF-F4EB54B10D17' },
-  { value: '_CD1467DE-1C78-4DD0-BC33-EA2556D57969', label: 'userInput1:_CD1467DE-1C78-4DD0-BC33-EA2556D57969'},
-  { value: '_F95A804A-46EA-45B8-98DB-60A46431CC68', label: 'userInput2:_F95A804A-46EA-45B8-98DB-60A46431CC68' },
-  { value: '_DE006624-FF55-4A7E-97C6-58E69D838DB0', label: 'middleNode_v2:_DE006624-FF55-4A7E-97C6-58E69D838DB0'}
+  { value: '_D3E17247-1D94-47D8-93AD-D645E317B736', label: 'Self Evaluation:_D3E17247-1D94-47D8-93AD-D645E317B736' },
+  { value: '_E35438DF-03AF-4D7B-9DCB-30BC70E7E92E', label: 'PM Evaluation:_E35438DF-03AF-4D7B-9DCB-30BC70E7E92E' },
+  { value: '_AB431E82-86BC-460F-9D8B-7A7617565B36', label: 'HR Evaluation:_AB431E82-86BC-460F-9D8B-7A7617565B36'},
+  { value: '_B8E4DA1E-A62B-49C2-9A94-FEE5F5FD2B4E', label: 'Input:_B8E4DA1E-A62B-49C2-9A94-FEE5F5FD2B4E'}
 ];
 
 
 
 const sourceDiagram = () => (
   <div>
-    <SvgTag1 />
+    <SvgTag1 selectorId={this.state.sourceNodeStr}/>
   </div>
 );
 
 const targetDiagram = () => (
   <div>
-    <SvgTag2 />
+    <SvgTag2 selectorId={this.state.targetNodeStr}/>
   </div>
 );
 
