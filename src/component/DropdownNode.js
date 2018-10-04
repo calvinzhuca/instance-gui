@@ -9,22 +9,17 @@ class DropdownNode extends React.Component {
     super(props)
     this.state = {
         selected: { },
-
-      options: this.props.options
     }
-    this._onSelect = this._onSelect.bind(this)
+    this.handleChange = this.handleChange.bind(this)
   }
 
-  _onSelect (option) {
+  handleChange(option) {
     console.log('You selected ', option.label)
     this.setState({selected: option})
+    this.props.onDropdownChange(option);
   }
 
   render() {
-
-
-
-
 
     const defaultOption = this.state.selected
     const placeHolderValue = typeof this.state.selected === 'string' ? this.state.selected : this.state.selected.value
@@ -32,9 +27,9 @@ class DropdownNode extends React.Component {
 
     return (
         <div>
-            <Dropdown options={this.state.options} onChange={this._onSelect} value={defaultOption} placeholder="Select an option" />
+            <Dropdown options={this.props.options} onChange={this.handleChange} value={defaultOption} placeholder="Select an option" />
             <div className='result'>
-                Selected value: 
+                Selected value:
                     <strong> {placeHolderValue} </strong>
             </div>
         </div>

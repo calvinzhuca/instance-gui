@@ -6,17 +6,52 @@ import DropdownNode from './DropdownNode'
 import SvgTag1 from './SvgTag1'
 import SvgTag2 from './SvgTag2'
 import SearchBar from "./SearchBar";
-
+import MapButton from "./MapButton";
 
 class App extends React.Component {
 
+  constructor (props) {
+    super(props);
+    this.state = {allNodeMapping: '',
+                  sourceNodeStr: '',
+                  targetNodeStr: ''};
+    this.handleSourceDropdownChange = this.handleSourceDropdownChange.bind(this);
+    this.handleTargetDropdownChange = this.handleTargetDropdownChange.bind(this);
+    this.handleMapButtonClick = this.handleMapButtonClick.bind(this);
+  }
 
 
+  handleSourceDropdownChange(option){
+    this.setState({
+      sourceNodeStr: option.value
+    });
 
+     console.log('SourceDropdown selected ', this.state.sourceNodeStr);
 
+  }
 
+  handleTargetDropdownChange(option){
+    this.setState({
+      targetNodeStr: option.value
+    });
+    console.log('TargetDropdown selected ', this.state.targetNodeStr);
+  }
+
+  handleMapButtonClick(){
+    var currentNodeMapping = this.state.sourceNodeStr + ":" + this.state.targetNodeStr;
+    console.log('handleMapButtonClick currentNodeMapping ', currentNodeMapping);
+    var allMappingStr = this.state.allNodeMapping + "," + currentNodeMapping;
+    this.setState({
+      allNodeMapping: allMappingStr
+    });
+    console.log('handleMapButtonClick nodeMapping' + this.state.allNodeMapping)
+
+  }
 
   render() {
+
+
+
 const PRODUCTS = [
   {category: 'Sporting Goods', price: '$49.99', stocked: true, name: 'Football'},
   {category: 'Sporting Goods', price: '$9.99', stocked: true, name: 'Baseball'},
@@ -61,10 +96,11 @@ const targetDiagram = () => (
 <div>
   <Router>
     <div>
-<SearchBar/>
-      <table >
+      <SearchBar />
+      <table>
         <tbody>
           <tr>
+            <td>&nbsp;</td>
             <td>&nbsp;</td>
             <td>&nbsp;</td>
           </tr>
@@ -75,24 +111,39 @@ const targetDiagram = () => (
             <td>
               <Link to="/targetDiagram">targetDiagram</Link>
             </td>
+            <td>&nbsp;</td>
           </tr>
           <tr>
             <td>
-              <DropdownNode options={sourceNode} />
+              <DropdownNode
+                options={sourceNode}
+                onDropdownChange={this.handleSourceDropdownChange}
+              />
             </td>
             <td>
-              <DropdownNode options={targetNode} />
+              <DropdownNode
+                options={targetNode}
+                onDropdownChange={this.handleTargetDropdownChange}
+              />
+            </td>
+            <td>
+              <MapButton onMapButtonClick={this.handleMapButtonClick} />
             </td>
           </tr>
         </tbody>
       </table>
-
+      <div className='result'>
+          Node Mapping:
+              <strong> {this.state.allNodeMapping} </strong>
+      </div>
       <Route path="/sourceDiagram" component={sourceDiagram} />
       <Route path="/targetDiagram" component={targetDiagram} />
+
 
     </div>
   </Router>
 </div>
+
 
     );
   }
