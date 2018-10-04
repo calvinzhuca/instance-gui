@@ -8,7 +8,7 @@ import SvgTag2 from './SvgTag2'
 import SearchBar from "./SearchBar";
 import MapButton from "./MapButton";
 
-class App extends React.Component {
+export default class App extends React.Component {
 
   constructor (props) {
     super(props);
@@ -40,7 +40,13 @@ class App extends React.Component {
   handleMapButtonClick(){
     var currentNodeMapping = this.state.sourceNodeStr + ":" + this.state.targetNodeStr;
     console.log('handleMapButtonClick currentNodeMapping ', currentNodeMapping);
-    var allMappingStr = this.state.allNodeMapping + "," + currentNodeMapping;
+    if (this.state.allNodeMapping.length > 0)
+    {
+      var allMappingStr = this.state.allNodeMapping + "," + currentNodeMapping;
+    }else{
+      var allMappingStr = currentNodeMapping;
+    }
+
     this.setState({
       allNodeMapping: allMappingStr
     });
@@ -49,17 +55,6 @@ class App extends React.Component {
   }
 
   render() {
-
-
-
-const PRODUCTS = [
-  {category: 'Sporting Goods', price: '$49.99', stocked: true, name: 'Football'},
-  {category: 'Sporting Goods', price: '$9.99', stocked: true, name: 'Baseball'},
-  {category: 'Sporting Goods', price: '$29.99', stocked: false, name: 'Basketball'},
-  {category: 'Electronics', price: '$99.99', stocked: true, name: 'iPod Touch'},
-  {category: 'Electronics', price: '$399.99', stocked: false, name: 'iPhone 5'},
-  {category: 'Electronics', price: '$199.99', stocked: true, name: 'Nexus 7'}
-];
 
 const sourceNode = [
   { value: '_4AFFDB6F-2C01-49FB-851A-A330D77C52E1', label: 'beginNode_v1:_4AFFDB6F-2C01-49FB-851A-A330D77C52E1' },
@@ -133,7 +128,7 @@ const targetDiagram = () => (
         </tbody>
       </table>
       <div className='result'>
-          Node Mapping:
+          Node Mapping result:
               <strong> {this.state.allNodeMapping} </strong>
       </div>
       <Route path="/sourceDiagram" component={sourceDiagram} />
@@ -148,4 +143,3 @@ const targetDiagram = () => (
     );
   }
 }
-export default App;

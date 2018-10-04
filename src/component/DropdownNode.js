@@ -3,7 +3,7 @@ import Dropdown from 'react-dropdown'
 import 'react-dropdown/style.css'
 
 
-class DropdownNode extends React.Component {
+export default class DropdownNode extends React.Component {
 
   constructor (props) {
     super(props)
@@ -28,13 +28,8 @@ class DropdownNode extends React.Component {
     return (
         <div>
             <Dropdown options={this.props.options} onChange={this.handleChange} value={defaultOption} placeholder="Select an option" />
-            <div className='result'>
-                Selected value:
-                    <strong> {placeHolderValue} </strong>
-            </div>
         </div>
 
     );
   }
 }
-export default DropdownNode;
