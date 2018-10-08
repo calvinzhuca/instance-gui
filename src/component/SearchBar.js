@@ -1,7 +1,7 @@
 import React from "react";
 
 
-class SearchBar extends React.Component {
+export default class SearchBar extends React.Component {
   constructor(props) {
     super(props);
     this.handleFilterTextChange = this.handleFilterTextChange.bind(this);
@@ -21,7 +21,7 @@ class SearchBar extends React.Component {
       <form>
         <input
           type="text"
-          placeholder="Search..."
+          placeholder="Search Process Definition..."
           value={this.props.filterText}
           onChange={this.handleFilterTextChange}
         />
@@ -32,10 +32,9 @@ class SearchBar extends React.Component {
             onChange={this.handleInStockChange}
           />
           {' '}
-          
+          checked for target process
         </p>
       </form>
     );
   }
 }
-export default SearchBar;

@@ -1,5 +1,5 @@
 import React, { Component } from 'react';
-import svgcontents from '../svg/2.svg'
+
 import { Samy, SvgProxy } from 'react-samy-svg';
 
 export default class SvgTag2 extends Component {
