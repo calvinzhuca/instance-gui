@@ -2,11 +2,10 @@ import React, { Component } from 'react';
 import { BrowserRouter as Router, Route, Link } from "react-router-dom";
 
 import DiagramLink from "./DiagramLink";
-import DefinitionDiagramButton from "./DefinitionDiagramButton";
+import DefinitionDiagrams from "./DefinitionDiagrams";
 import MapButton from "./MapButton";
 import DropdownNode from './DropdownNode'
-import svgcontents1 from '../svg/1.svg'
-import svgcontents2 from '../svg/2.svg'
+
 
 export default class DefinitionMappingTable extends Component {
   constructor (props) {
@@ -92,14 +91,8 @@ export default class DefinitionMappingTable extends Component {
         <tbody>
 
 
-          <tr>
-            <td>
-              <DefinitionDiagramButton svgcontents={svgcontents1} />
-            </td>
-            <td>
-              <DefinitionDiagramButton svgcontents={svgcontents2} />
-            </td>
-          </tr>
+              <DefinitionDiagrams />
+
 
 
 
