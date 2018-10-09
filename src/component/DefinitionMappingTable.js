@@ -53,6 +53,7 @@ export default class DefinitionMappingTable extends Component {
   }
 
 
+
   render() {
 
     const sourceProcessDefinitions = [
@@ -87,40 +88,54 @@ export default class DefinitionMappingTable extends Component {
 
 
       <div>
-      <table>
+      <table border="1" >
         <tbody>
-
-
-              <DefinitionDiagrams />
-
-
-
-
-
           <tr>
             <td>
-              <DropdownNode
-                options={sourceNode}
-                onDropdownChange={this.handleSourceDropdownChange}
-              />
+                  <table>
+                    <tbody>
+                      <tr>
+                                  <td>
+                                  <DropdownNode
+                                    options={sourceNode}
+                                    onDropdownChange={this.handleSourceDropdownChange}
+                                  />
+                                </td>
+                                <td>
+                                  <DropdownNode
+                                    options={targetNode}
+                                    onDropdownChange={this.handleTargetDropdownChange}
+                                  />
+                                </td>
+                                <td>
+                                  <MapButton onMapButtonClick={this.handleMapButtonClick} />
+                                  </td>
+                          </tr>
+
+                        </tbody>
+                  </table>
             </td>
-            <td>
-              <DropdownNode
-                options={targetNode}
-                onDropdownChange={this.handleTargetDropdownChange}
-              />
-            </td>
-            <td>
-              <MapButton onMapButtonClick={this.handleMapButtonClick} />
-            </td>
+          </tr>
+          <tr>
+
+          </tr>
+          <tr>
+              <td>
+                <div className='result'>
+                    Node Mapping result:
+                        <strong> {this.state.allNodeMapping} </strong>
+                </div>
+              </td>
+          </tr>
+          <tr>
+              <td>
+                  <DefinitionDiagrams sourceNodeStr={this.state.sourceNodeStr}  targetNodeStr={this.state.targetNodeStr}/>
+              </td>
           </tr>
 
         </tbody>
       </table>
-      <div className='result'>
-          Node Mapping result:
-              <strong> {this.state.allNodeMapping} </strong>
-      </div>
+
 
 
 
