@@ -20,17 +20,23 @@ export default class DefinitionMappingTable extends Component {
 
 
   handleSourceDropdownChange(option){
+    let tmpPreviousSelector = this.state.sourceCurrentSelector;
+    let tmpCurrentSelector = "#"  + option.value + "undefined";
     this.setState({
-      sourceNodeStr: option.value
+      sourceNodeStr: option.value,
+      sourcePreviousSelector: tmpPreviousSelector,
+      sourceCurrentSelector: tmpCurrentSelector
     });
-
-     console.log('SourceDropdown selected ', this.state.sourceNodeStr);
 
   }
 
   handleTargetDropdownChange(option){
+    let tmpPreviousSelector = this.state.targetCurrentSelector;
+    let tmpCurrentSelector = "#"  + option.value + "undefined";
     this.setState({
-      targetNodeStr: option.value
+      targetNodeStr: option.value,
+      targetPreviousSelector: tmpPreviousSelector,
+      targetCurrentSelector: tmpCurrentSelector
     });
     console.log('TargetDropdown selected ', this.state.targetNodeStr);
   }
@@ -87,59 +93,59 @@ export default class DefinitionMappingTable extends Component {
 
 
 
-      <div>
-      <table border="1" >
-        <tbody>
-          <tr>
-            <td>
-                  <table>
-                    <tbody>
-                      <tr>
-                                  <td>
-                                  <DropdownNode
-                                    options={sourceNode}
-                                    onDropdownChange={this.handleSourceDropdownChange}
-                                  />
-                                </td>
-                                <td>
-                                  <DropdownNode
-                                    options={targetNode}
-                                    onDropdownChange={this.handleTargetDropdownChange}
-                                  />
-                                </td>
-                                <td>
-                                  <MapButton onMapButtonClick={this.handleMapButtonClick} />
-                                  </td>
-                          </tr>
+<div>
+  <table border="0">
+    <tbody>
+      <tr>
+        <td>
+          <table>
+            <tbody>
+              <tr>
+                <td>
+                  <DropdownNode
+                    options={sourceNode}
+                    onDropdownChange={this.handleSourceDropdownChange}
+                  />
+                </td>
+                <td>
+                  <DropdownNode
+                    options={targetNode}
+                    onDropdownChange={this.handleTargetDropdownChange}
+                  />
+                </td>
+                <td>
+                  <MapButton onMapButtonClick={this.handleMapButtonClick} />
+                </td>
+              </tr>
+            </tbody>
+          </table>
+        </td>
+      </tr>
+      <tr />
+      <tr>
+        <td>
+          <div className="result">
+            Node Mapping result:
+            <strong> {this.state.allNodeMapping} </strong>
+          </div>
+        </td>
+      </tr>
+      <tr>
+        <td>
+          <DefinitionDiagrams
+            sourceCurrentSelector={this.state.sourceCurrentSelector}
+            sourcePreviousSelector={this.state.sourcePreviousSelector}
+            
+            targetCurrentSelector={this.state.targetCurrentSelector}
+            targetPreviousSelector={this.state.targetPreviousSelector}
 
-                        </tbody>
-                  </table>
-            </td>
-          </tr>
-          <tr>
+          />
+        </td>
+      </tr>
+    </tbody>
+  </table>
+</div>
 
-          </tr>
-          <tr>
-              <td>
-                <div className='result'>
-                    Node Mapping result:
-                        <strong> {this.state.allNodeMapping} </strong>
-                </div>
-              </td>
-          </tr>
-          <tr>
-              <td>
-                  <DefinitionDiagrams sourceNodeStr={this.state.sourceNodeStr}  targetNodeStr={this.state.targetNodeStr}/>
-              </td>
-          </tr>
-
-        </tbody>
-      </table>
-
-
-
-
-      </div>
     );
   }
 }

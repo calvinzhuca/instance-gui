@@ -1,4 +1,5 @@
 import React, { Component } from 'react';
+
 import SvgTag from './SvgTag'
 import DefinitionDiagramButton from './DefinitionDiagramButton'
 import svgcontents1 from '../svg/1.svg'
@@ -44,7 +45,7 @@ export default class DefinitionDiagrams extends Component {
 
 
         return (
-          <table border="1">
+          <table border="0">
             <tbody>
               <tr>
                 <td>
@@ -72,19 +73,21 @@ export default class DefinitionDiagrams extends Component {
                 <td>
                   <h2 style={sourceShown}>
                     Source Process Definition Diagram
-                    <SvgTag
-                      selectorId={this.props.sourceNodeStr}
-                      svgcontents={svgcontents1}
+                    <SvgTag svgcontents={svgcontents1}
+                      previousSelector={this.props.sourcePreviousSelector}
+                      currentSelector={this.props.sourceCurrentSelector}
+                    />
+                  </h2>
+                  <h2 style={targetShown}>
+                    Source Process Definition Diagram
+                    <SvgTag svgcontents={svgcontents2}
+                      previousSelector={this.props.targetPreviousSelector}
+                      currentSelector={this.props.targetCurrentSelector}
                     />
                   </h2>
 
-                  <h2 style={targetShown}>
-                    Target Process Definition Diagram
-                    <SvgTag
-                      selectorId={this.props.targetNodeStr}
-                      svgcontents={svgcontents2}
-                    />
-                  </h2>
+
+
                 </td>
               </tr>
             </tbody>

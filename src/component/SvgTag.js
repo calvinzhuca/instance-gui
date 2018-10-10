@@ -1,18 +1,15 @@
 import React, { Component } from 'react';
-
-import { Samy, SvgProxy } from 'react-samy-svg';
+import { SvgLoader, SvgProxy } from 'react-svgmt';
 
 export default class SvgTag extends Component {
     render () {
-      //this selectorid maps to the svg id, has to start with "#"
-      const selectorId = "#"  + this.props.selectorId + "undefined";
-      console.log('SvgTag selectorId ' + selectorId);
         return (
 
                 <div>
-                <Samy svgXML={this.props.svgcontents} style={{width:'100%', height:'20%', border:'solid 1px'}}>
-                  <SvgProxy selector={selectorId} fill="red"/>
-                </Samy>
+                  <SvgLoader svgXML={this.props.svgcontents} style={{width:'100%', height:'20%', border:'solid 1px'}}>
+                      <SvgProxy selector={this.props.previousSelector} fill="black"/>
+                      <SvgProxy selector={this.props.currentSelector} fill="red"/>
+                  </SvgLoader>
                 </div>
                 )
     }
