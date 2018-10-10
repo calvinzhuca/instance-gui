@@ -12,12 +12,30 @@ export default class DefinitionMappingTable extends Component {
     super(props);
     this.state = {allNodeMapping: '',
                   sourceNodeStr: '',
-                  targetNodeStr: ''};
+                  targetNodeStr: '',
+                  sourceDiagramshown: false,
+                  targetDiagramshown: false
+                };
     this.handleSourceDropdownChange = this.handleSourceDropdownChange.bind(this);
     this.handleTargetDropdownChange = this.handleTargetDropdownChange.bind(this);
+    this.handleSourceDiagramButtonClick = this.handleSourceDiagramButtonClick.bind(this);
+    this.handleTargetDiagramButtonClick = this.handleTargetDiagramButtonClick.bind(this);
     this.handleMapButtonClick = this.handleMapButtonClick.bind(this);
   }
 
+  handleSourceDiagramButtonClick(){
+    console.log('handleSourceDiagramButtonClick ' + this.state.sourceDiagramshown)
+    this.setState({
+			sourceDiagramshown: !this.state.sourceDiagramshown
+		});
+  }
+
+  handleTargetDiagramButtonClick(){
+    console.log('handleTargetDiagramButtonClick ' + this.state.targetDiagramshown)
+    this.setState({
+			targetDiagramshown: !this.state.targetDiagramshown
+		});
+  }
 
   handleSourceDropdownChange(option){
     let tmpPreviousSelector = this.state.sourceCurrentSelector;
@@ -25,10 +43,14 @@ export default class DefinitionMappingTable extends Component {
     this.setState({
       sourceNodeStr: option.value,
       sourcePreviousSelector: tmpPreviousSelector,
-      sourceCurrentSelector: tmpCurrentSelector
+      sourceCurrentSelector: tmpCurrentSelector,
+      sourceDiagramshown: true,
+      targetDiagramshown: false
     });
 
   }
+
+
 
   handleTargetDropdownChange(option){
     let tmpPreviousSelector = this.state.targetCurrentSelector;
@@ -36,7 +58,9 @@ export default class DefinitionMappingTable extends Component {
     this.setState({
       targetNodeStr: option.value,
       targetPreviousSelector: tmpPreviousSelector,
-      targetCurrentSelector: tmpCurrentSelector
+      targetCurrentSelector: tmpCurrentSelector,
+      sourceDiagramshown: false,
+      targetDiagramshown: true
     });
     console.log('TargetDropdown selected ', this.state.targetNodeStr);
   }
@@ -135,10 +159,15 @@ export default class DefinitionMappingTable extends Component {
           <DefinitionDiagrams
             sourceCurrentSelector={this.state.sourceCurrentSelector}
             sourcePreviousSelector={this.state.sourcePreviousSelector}
-            
+
             targetCurrentSelector={this.state.targetCurrentSelector}
             targetPreviousSelector={this.state.targetPreviousSelector}
 
+            sourceDiagramButtonClick={this.handleSourceDiagramButtonClick}
+            targetDiagramButtonClick={this.handleTargetDiagramButtonClick}
+
+            sourceDiagramshown={this.state.sourceDiagramshown}
+            targetDiagramshown={this.state.targetDiagramshown}
           />
         </td>
       </tr>

@@ -7,42 +7,21 @@ import svgcontents2 from '../svg/2.svg'
 
 
 export default class DefinitionDiagrams extends Component {
-  constructor (props) {
-    super(props)
 
-    this.state = {
-			sourceDiagramshown: false,
-      targetDiagramshown: false
-		};
-    this.handleSourceDiagramButtonClick = this.handleSourceDiagramButtonClick.bind(this);
-    this.handleTargetDiagramButtonClick = this.handleTargetDiagramButtonClick.bind(this);
-  }
 
-  handleSourceDiagramButtonClick(){
-    console.log('handleSourceDiagramButtonClick ' + this.state.sourceDiagramshown)
-    this.setState({
-			sourceDiagramshown: !this.state.sourceDiagramshown
-		});
-  }
-
-  handleTargetDiagramButtonClick(){
-    console.log('handleTargetDiagramButtonClick ' + this.state.targetDiagramshown)
-    this.setState({
-			targetDiagramshown: !this.state.targetDiagramshown
-		});
-  }
 
     render () {
-      var sourceShown = {
-  			display: this.state.sourceDiagramshown ? "block" : "none"
+      const sourceShown = {
+  			display: this.props.sourceDiagramshown ? "block" : "none"
   		};
 
-      var targetShown = {
-  			display: this.state.targetDiagramshown ? "block" : "none"
+      const targetShown = {
+  			display: this.props.targetDiagramshown ? "block" : "none"
   		}
 
 
-
+      const sourceDisplayText= this.props.sourceDiagramshown ? "Hide Source Diagram" : "Show Source Diagram";
+      const targetDisplayText= this.props.targetDiagramshown ? "Hide Target Diagram" : "Show Target Diagram";
 
         return (
           <table border="0">
@@ -54,14 +33,16 @@ export default class DefinitionDiagrams extends Component {
                       <tr>
                         <td>
                           <DefinitionDiagramButton
-                            onButtonClick={this.handleSourceDiagramButtonClick}
-                            displayText="Source Diagram"
+                            onButtonClick={this.props.sourceDiagramButtonClick}
+                            displayText={sourceDisplayText}
+                            sourceDiagramshown={this.props.sourceDiagramshown}
                           />
                         </td>
                         <td>
                           <DefinitionDiagramButton
-                            onButtonClick={this.handleTargetDiagramButtonClick}
-                            displayText="Target Diagram"
+                            onButtonClick={this.props.targetDiagramButtonClick}
+                            displayText={targetDisplayText}
+                            isShown={targetShown}
                           />
                         </td>
                       </tr>
@@ -79,7 +60,7 @@ export default class DefinitionDiagrams extends Component {
                     />
                   </h2>
                   <h2 style={targetShown}>
-                    Source Process Definition Diagram
+                    Target Process Definition Diagram
                     <SvgTag svgcontents={svgcontents2}
                       previousSelector={this.props.targetPreviousSelector}
                       currentSelector={this.props.targetCurrentSelector}
