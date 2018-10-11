@@ -1,7 +1,6 @@
 import React, { Component } from 'react';
 import { BrowserRouter as Router, Route, Link } from "react-router-dom";
 
-import DiagramLink from "./DiagramLink";
 import DefinitionDiagrams from "./DefinitionDiagrams";
 import MapButton from "./MapButton";
 import DropdownNode from './DropdownNode'

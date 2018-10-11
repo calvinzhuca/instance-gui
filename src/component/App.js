@@ -18,22 +18,15 @@ export default class App extends Component {
 
 
    return (
+      <div>
+        <div>
+          <SearchBar />
 
+          <DefinitionTables />
 
-<div>
-
-    <div>
-      <SearchBar />
-
-      <DefinitionTables/>
-
-      <DefinitionMappingTable />
-
-
-    </div>
-
-</div>
-
+          <DefinitionMappingTable />
+        </div>
+      </div>
 
     );
   }
