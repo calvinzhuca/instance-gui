@@ -1,4 +1,6 @@
 import React, { Component } from 'react';
+
+
 import DefinitionRow from "./DefinitionRow";
 
 export default class DefinitionTable extends Component {
@@ -16,14 +18,18 @@ export default class DefinitionTable extends Component {
     });
 
     return (
-      <table >
+      <div>
+
+      <table border="1" cellPadding="1">
         <thead>
           <tr>
-            <th>{this.props.tableHeader}</th>
+            <th colspan="2" >{this.props.tableHeader}</th>
+
           </tr>
         </thead>
         <tbody>{rows}</tbody>
       </table>
+      </div>
     );
   }
 }

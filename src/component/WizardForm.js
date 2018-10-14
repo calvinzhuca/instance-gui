@@ -4,6 +4,9 @@ import { Field } from 'react-final-form'
 import Wizard from "./Wizard"
 import Styles from './WizardFormStyles'
 
+import DefinitionTables from "./DefinitionTables";
+
+
 export default class WizardForm extends Component {
   render() {
     const sleep = ms => new Promise(resolve => setTimeout(resolve, ms))
@@ -39,32 +42,11 @@ export default class WizardForm extends Component {
         <h2>Wizard Form</h2>
 
         <Wizard
-          initialValues={{ name: 'test plan', description: '' }}
+          initialValues={{ name: "test plan", description: "",source_container_id: "evaluation_1.0.0-SNAPSHOT",target_container_id: "evaluation_2.0.0-SNAPSHOT",target_process_id: "evaluation" }}
           onSubmit={onSubmit}
         >
           <Wizard.Page>
-            <div>
-              <label>Plan Name</label>
-              <Field
-                name="name"
-                component="input"
-                type="text"
-                placeholder="no more than 20 characters"
-                validate={required}
-              />
-              <Error name="firstName" />
-            </div>
-            <div>
-              <label>Description</label>
-              <Field
-                name="description"
-                component="input"
-                type="text"
-                placeholder="no more than 1000 characters"
-                validate={required}
-              />
-              <Error name="lastName" />
-            </div>
+              <DefinitionTables/>
           </Wizard.Page>
           <Wizard.Page
             validate={values => {
