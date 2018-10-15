@@ -9,14 +9,6 @@ export const onSubmit = async values => {
   window.alert(JSON.stringify(values, 0, 2))
 }
 
-export const load = async () => {
-  await sleep(2000)
-  return {
-    source_container_id: 'erikras',
-    target_container_id: 'Erik'
-  }
-}
-
 export const Error = ({ name }) => (
   <Field
     name={name}

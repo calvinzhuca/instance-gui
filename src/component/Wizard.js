@@ -40,6 +40,8 @@ export default class Wizard extends React.Component {
   }
 
   handleSubmit = values => {
+    console.log ("!!!!!!!!!!!!!!!!!!!!!!!!!!! handleSubmit2: " + values.mappings);
+
     const { children, onSubmit } = this.props
     const { page } = this.state
     const isLastPage = page === React.Children.count(children) - 1
@@ -49,6 +51,13 @@ export default class Wizard extends React.Component {
       this.next(values)
     }
   }
+
+  handleDropdownChange = values => {
+    console.log ("!!!!!!!!!!!!!!!!!!!!!!!!!!! handleDropdownChange: " + values.mappings);
+
+  }
+
+
 
   render() {
     const { children } = this.props

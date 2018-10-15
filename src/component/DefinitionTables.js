@@ -1,7 +1,7 @@
 import React, { Component } from 'react';
 import { Field } from 'react-final-form'
-import * as constants from './WizardConstants';
 
+import * as constants from './WizardConstants';
 import DefinitionTable from "./DefinitionTable";
 
 export default class DefinitionTables extends Component {
@@ -27,7 +27,7 @@ export default class DefinitionTables extends Component {
         <table border="0" cellPadding="1">
           <tbody>
             <tr>
-              <td colspan="2">
+              <td colSpan="2">
                   <div>
                     <label>Plan Name: </label>
                     <Field

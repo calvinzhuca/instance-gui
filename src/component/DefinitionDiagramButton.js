@@ -15,7 +15,7 @@ export default class DefinitionDiagramButton extends Component {
     render () {
         return (
           <div>
-            <button onClick={this.handleClick}>{this.props.displayText}</button>
+            <button type="button" onClick={this.handleClick}>{this.props.displayText}</button>
           </div>
                 )
     }

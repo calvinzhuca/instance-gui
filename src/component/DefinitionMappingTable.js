@@ -1,10 +1,12 @@
 import React, { Component } from 'react';
 import { BrowserRouter as Router, Route, Link } from "react-router-dom";
+import { Field } from 'react-final-form'
 
 import DefinitionDiagrams from "./DefinitionDiagrams";
 import MapButton from "./MapButton";
 import DropdownNode from './DropdownNode'
-
+import * as constants from './WizardConstants';
+import TestCompont from "./TestCompont";
 
 export default class DefinitionMappingTable extends Component {
   constructor (props) {
@@ -23,14 +25,14 @@ export default class DefinitionMappingTable extends Component {
   }
 
   handleSourceDiagramButtonClick(){
-    console.log('handleSourceDiagramButtonClick ' + this.state.sourceDiagramshown)
+    console.log('handleSourceDiagramButtonClick sourceDiagramshown ' + this.state.sourceDiagramshown)
     this.setState({
 			sourceDiagramshown: !this.state.sourceDiagramshown
 		});
   }
 
   handleTargetDiagramButtonClick(){
-    console.log('handleTargetDiagramButtonClick ' + this.state.targetDiagramshown)
+    console.log('handleTargetDiagramButtonClick targetDiagramshown ' + this.state.targetDiagramshown)
     this.setState({
 			targetDiagramshown: !this.state.targetDiagramshown
 		});
@@ -64,7 +66,10 @@ export default class DefinitionMappingTable extends Component {
     console.log('TargetDropdown selected ', this.state.targetNodeStr);
   }
 
-  handleMapButtonClick(){
+  handleMapButtonClick(values){
+    console.log ("!!!!!!!!!!!!!!!!!!!!!!!!!!! handleMapButtonClick" + values);
+
+
     var currentNodeMapping = this.state.sourceNodeStr + ":" + this.state.targetNodeStr;
     console.log('handleMapButtonClick currentNodeMapping ', currentNodeMapping);
     if (this.state.allNodeMapping.length > 0)
@@ -122,6 +127,12 @@ export default class DefinitionMappingTable extends Component {
       <tr>
         <td>
           <table>
+          <thead>
+            <tr>
+              <th>Source Nodes</th>
+              <th>Target Nodes</th>
+            </tr>
+          </thead>
             <tbody>
               <tr>
                 <td>
@@ -151,6 +162,16 @@ export default class DefinitionMappingTable extends Component {
             Node Mapping result:
             <strong> {this.state.allNodeMapping} </strong>
           </div>
+
+          <Field name="mappings"
+          component="input"
+          type="text"
+                validate={constants.required}
+          >
+
+
+          </Field>
+          <constants.Error name="mappings"/>
         </td>
       </tr>
       <tr>

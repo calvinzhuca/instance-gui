@@ -5,6 +5,7 @@ import Wizard from "./Wizard"
 import Styles from './WizardFormStyles'
 
 import DefinitionTables from "./DefinitionTables";
+import DefinitionMappingTable from "./DefinitionMappingTable";
 
 
 export default class WizardForm extends Component {
@@ -14,14 +15,6 @@ export default class WizardForm extends Component {
     const onSubmit = async values => {
       await sleep(300)
       window.alert(JSON.stringify(values, 0, 2))
-    }
-
-    const load = async () => {
-      await sleep(2000)
-      return {
-        source_container_id: 'erikras',
-        target_container_id: 'Erik'
-      }
     }
 
     const Error = ({ name }) => (
@@ -42,44 +35,20 @@ export default class WizardForm extends Component {
         <h2>Wizard Form</h2>
 
         <Wizard
-          initialValues={{ name: "test plan", description: "",source_container_id: "evaluation_1.0.0-SNAPSHOT",target_container_id: "evaluation_2.0.0-SNAPSHOT",target_process_id: "evaluation" }}
+          initialValues={{ name: "test plan",
+            description: "test description",
+            source_container_id: "evaluation_1.0.0-SNAPSHOT",
+            target_container_id: "evaluation_2.0.0-SNAPSHOT",
+            target_process_id: "evaluation"
+          }}
           onSubmit={onSubmit}
         >
           <Wizard.Page>
-              <DefinitionTables/>
+            <DefinitionTables/>
           </Wizard.Page>
-          <Wizard.Page
-            validate={values => {
-              const errors = {}
-              if (!values.email) {
-                errors.email = 'Required'
-              }
-              if (!values.favoriteColor) {
-                errors.favoriteColor = 'Required'
-              }
-              return errors
-            }}
-          >
-            <div>
-              <label>Email</label>
-              <Field
-                name="email"
-                component="input"
-                type="email"
-                placeholder="Email"
-              />
-              <Error name="email" />
-            </div>
-            <div>
-              <label>Favorite Color</label>
-              <Field name="favoriteColor" component="select">
-                <option />
-                <option value="#ff0000">❤️ Red</option>
-                <option value="#00ff00">💚 Green</option>
-                <option value="#0000ff">💙 Blue</option>
-              </Field>
-              <Error name="favoriteColor" />
-            </div>
+
+          <Wizard.Page>
+              <DefinitionMappingTable />
           </Wizard.Page>
           <Wizard.Page
             validate={values => {

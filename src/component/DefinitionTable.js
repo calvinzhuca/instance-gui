@@ -23,7 +23,7 @@ export default class DefinitionTable extends Component {
       <table border="1" cellPadding="1">
         <thead>
           <tr>
-            <th colspan="2" >{this.props.tableHeader}</th>
+            <th colSpan="2" >{this.props.tableHeader}</th>
 
           </tr>
         </thead>

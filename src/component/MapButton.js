@@ -9,14 +9,13 @@ export default class MapButton extends Component {
   }
 
   handleClick() {
-    console.log('You click map button ')
     this.props.onMapButtonClick()
   }
 
     render () {
         return (
-          <button onClick={this.handleClick}>
-            Map these two
+          <button type="button" onClick={this.handleClick}>
+            Map these two nodes
           </button>
                 )
     }
