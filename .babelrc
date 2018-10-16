@@ -1,6 +1,16 @@
 {
   "presets": [
-    ["env", { "modules": false }],
-    "react"
+    [
+      "@babel/preset-env",
+      {
+        "targets": {
+          "node": "8.10"
+        }
+      }
+    ],
+    "@babel/preset-react"
+  ],
+  "plugins": [
+    "@babel/proposal-class-properties"
   ]
 }

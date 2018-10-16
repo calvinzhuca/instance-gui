@@ -5,7 +5,12 @@ import * as constants from './WizardConstants';
 import DefinitionTable from "./DefinitionTable";
 
 export default class DefinitionTables extends Component {
+    constructor (props) {
+      super(props);
+      this.state = {testStr: '11111111111111'
+                  };
 
+    }
 
   render() {
 
@@ -50,6 +55,7 @@ export default class DefinitionTables extends Component {
                     />
                     <constants.Error name="description"/>
                   </div>
+
 
               </td>
             </tr>

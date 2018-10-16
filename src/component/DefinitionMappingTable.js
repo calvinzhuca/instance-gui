@@ -11,7 +11,7 @@ import TestCompont from "./TestCompont";
 export default class DefinitionMappingTable extends Component {
   constructor (props) {
     super(props);
-    this.state = {allNodeMapping: '',
+    this.state = {
                   sourceNodeStr: '',
                   targetNodeStr: '',
                   sourceDiagramshown: false,
@@ -23,6 +23,7 @@ export default class DefinitionMappingTable extends Component {
     this.handleTargetDiagramButtonClick = this.handleTargetDiagramButtonClick.bind(this);
     this.handleMapButtonClick = this.handleMapButtonClick.bind(this);
   }
+
 
   handleSourceDiagramButtonClick(){
     console.log('handleSourceDiagramButtonClick sourceDiagramshown ' + this.state.sourceDiagramshown)
@@ -66,23 +67,31 @@ export default class DefinitionMappingTable extends Component {
     console.log('TargetDropdown selected ', this.state.targetNodeStr);
   }
 
-  handleMapButtonClick(values){
-    console.log ("!!!!!!!!!!!!!!!!!!!!!!!!!!! handleMapButtonClick" + values);
-
-
+  handleMapButtonClick(){
     var currentNodeMapping = this.state.sourceNodeStr + ":" + this.state.targetNodeStr;
-    console.log('handleMapButtonClick currentNodeMapping ', currentNodeMapping);
-    if (this.state.allNodeMapping.length > 0)
+    console.log("handleMapButtonClick currentNodeMapping ", currentNodeMapping);
+
+    var input = document.getElementById("nodeMappingHiddenField");
+    var currentInputValue = input.value;
+    //remove {} before add new node mapping values
+    currentInputValue = currentInputValue.replace(/{/g, '');
+    currentInputValue = currentInputValue.replace(/}/g, '');
+    if (currentInputValue.length > 0)
     {
-      var allMappingStr = this.state.allNodeMapping + "," + currentNodeMapping;
+      currentInputValue = currentInputValue + "," + currentNodeMapping;
     }else{
-      var allMappingStr = currentNodeMapping;
+      currentInputValue = currentNodeMapping;
     }
 
-    this.setState({
-      allNodeMapping: allMappingStr
-    });
-    console.log('handleMapButtonClick nodeMapping' + this.state.allNodeMapping)
+    currentInputValue = '{' + currentInputValue + '}';
+
+    var nativeInputValueSetter = Object.getOwnPropertyDescriptor(window.HTMLInputElement.prototype, "value").set;
+    nativeInputValueSetter.call(input, currentInputValue);
+
+    //once fired the event, this currentInputValue will be saved in the wizard form's values 
+    var ev2 = new Event('input', { bubbles: true});
+    input.dispatchEvent(ev2);
+
 
   }
 
@@ -157,21 +166,13 @@ export default class DefinitionMappingTable extends Component {
       </tr>
       <tr />
       <tr>
-        <td>
-          <div className="result">
-            Node Mapping result:
-            <strong> {this.state.allNodeMapping} </strong>
-          </div>
-
-          <Field name="mappings"
-          component="input"
-          type="text"
-                validate={constants.required}
-          >
-
-
-          </Field>
-          <constants.Error name="mappings"/>
+        <td hidden>
+                <Field
+                  name="mappings"
+                  component="input"
+                  type="text"
+                  id="nodeMappingHiddenField"
+                />
         </td>
       </tr>
       <tr>

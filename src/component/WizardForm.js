@@ -39,7 +39,8 @@ export default class WizardForm extends Component {
             description: "test description",
             source_container_id: "evaluation_1.0.0-SNAPSHOT",
             target_container_id: "evaluation_2.0.0-SNAPSHOT",
-            target_process_id: "evaluation"
+            target_process_id: "evaluation",
+            mappings:""
           }}
           onSubmit={onSubmit}
         >
