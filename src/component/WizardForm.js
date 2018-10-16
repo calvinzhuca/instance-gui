@@ -39,86 +39,18 @@ export default class WizardForm extends Component {
             description: "test description",
             source_container_id: "evaluation_1.0.0-SNAPSHOT",
             target_container_id: "evaluation_2.0.0-SNAPSHOT",
-            target_process_id: "evaluation",
-            mappings:""
+            target_process_id: "evaluation"
           }}
           onSubmit={onSubmit}
         >
           <Wizard.Page>
             <DefinitionTables/>
           </Wizard.Page>
-
           <Wizard.Page>
               <DefinitionMappingTable />
           </Wizard.Page>
-          <Wizard.Page
-            validate={values => {
-              const errors = {}
-              if (!values.toppings) {
-                errors.toppings = 'Required'
-              } else if (values.toppings.length < 2) {
-                errors.toppings = 'Choose more'
-              }
-              return errors
-            }}
-          >
-            <div>
-              <label>Employed?</label>
-              <Field name="employed" component="input" type="checkbox" />
-            </div>
-            <div>
-              <label>Toppings</label>
-              <Field name="toppings" component="select" multiple>
-                <option value="ham">🐷 Ham</option>
-                <option value="mushrooms">🍄 Mushrooms</option>
-                <option value="cheese">🧀 Cheese</option>
-                <option value="chicken">🐓 Chicken</option>
-                <option value="pineapple">🍍 Pinapple</option>
-              </Field>
-              <Error name="toppings" />
-            </div>
-          </Wizard.Page>
-          <Wizard.Page
-            validate={values => {
-              const errors = {}
-              if (!values.notes) {
-                errors.notes = 'Required'
-              }
-              return errors
-            }}
-          >
-            <div>
-              <label>Best Stooge?</label>
-              <div>
-                <label>
-                  <Field
-                    name="stooge"
-                    component="input"
-                    type="radio"
-                    value="larry"
-                  />{' '}
-                  Larry
-                </label>
-                <label>
-                  <Field name="stooge" component="input" type="radio" value="moe" />{' '}
-                  Moe
-                </label>
-                <label>
-                  <Field
-                    name="stooge"
-                    component="input"
-                    type="radio"
-                    value="curly"
-                  />{' '}
-                  Curly
-                </label>
-              </div>
-            </div>
-            <div>
-              <label>Notes</label>
-              <Field name="notes" component="textarea" placeholder="Notes" />
-              <Error name="notes" />
-            </div>
+          <Wizard.Page>
+              <h2>Please review this plan before submit to Process Instances Migration Service</h2>
           </Wizard.Page>
         </Wizard>
       </Styles>

@@ -40,7 +40,6 @@ export default class Wizard extends React.Component {
   }
 
   handleSubmit = values => {
-          console.log ("!!!!!!!!!!!!!!!!!!!!!!!!!!! handleSubmit2: " + values.name);
     const { children, onSubmit } = this.props
     const { page } = this.state
     const isLastPage = page === React.Children.count(children) - 1
@@ -51,12 +50,6 @@ export default class Wizard extends React.Component {
     }
   }
 
-  handleChange = values =>{
-      console.log ("!!!!!!!!!!!!!!!!!!!!!!!!!!! handleChange: " + values.name);
-  }
-
-
-
   render() {
     const { children } = this.props
     const { page, values } = this.state
@@ -66,7 +59,6 @@ export default class Wizard extends React.Component {
       <Form
         initialValues={values}
         validate={this.validate}
-        onChange={this.handleChange}
         onSubmit={this.handleSubmit}>
         {({ handleSubmit, submitting, values }) => (
           <form onSubmit={handleSubmit}>
@@ -84,8 +76,15 @@ export default class Wizard extends React.Component {
                 </button>
               )}
             </div>
-
-            <pre>{JSON.stringify(values, 0, 2)}</pre>
+            <table>
+                <tbody>
+                  <tr>
+                    <td>
+                      <pre>{JSON.stringify(values, 0, 2)}</pre>
+                    </td>
+                  </tr>
+                </tbody>
+            </table>
           </form>
         )}
       </Form>

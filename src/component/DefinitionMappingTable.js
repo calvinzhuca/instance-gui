@@ -68,29 +68,35 @@ export default class DefinitionMappingTable extends Component {
   }
 
   handleMapButtonClick(){
-    var currentNodeMapping = this.state.sourceNodeStr + ":" + this.state.targetNodeStr;
-    console.log("handleMapButtonClick currentNodeMapping ", currentNodeMapping);
 
-    var input = document.getElementById("nodeMappingHiddenField");
-    var currentInputValue = input.value;
-    //remove {} before add new node mapping values
-    currentInputValue = currentInputValue.replace(/{/g, '');
-    currentInputValue = currentInputValue.replace(/}/g, '');
-    if (currentInputValue.length > 0)
-    {
-      currentInputValue = currentInputValue + "," + currentNodeMapping;
-    }else{
-      currentInputValue = currentNodeMapping;
-    }
+      if (this.state.sourceNodeStr.length >0 && this.state.targetNodeStr.length >0 )
+      {
+          var currentNodeMapping = this.state.sourceNodeStr + ":" + this.state.targetNodeStr;
+          console.log("handleMapButtonClick currentNodeMapping ", currentNodeMapping);
 
-    currentInputValue = '{' + currentInputValue + '}';
+          var input = document.getElementById("nodeMappingHiddenField");
+          var currentInputValue = input.value;
+          //remove {} before add new node mapping values
+          currentInputValue = currentInputValue.replace(/{/g, '');
+          currentInputValue = currentInputValue.replace(/}/g, '');
+          if (currentInputValue.length > 0)
+          {
+            currentInputValue = currentInputValue + "," + currentNodeMapping;
+          }else{
+            currentInputValue = currentNodeMapping;
+          }
 
-    var nativeInputValueSetter = Object.getOwnPropertyDescriptor(window.HTMLInputElement.prototype, "value").set;
-    nativeInputValueSetter.call(input, currentInputValue);
+          currentInputValue = '{' + currentInputValue + '}';
 
-    //once fired the event, this currentInputValue will be saved in the wizard form's values 
-    var ev2 = new Event('input', { bubbles: true});
-    input.dispatchEvent(ev2);
+          var nativeInputValueSetter = Object.getOwnPropertyDescriptor(window.HTMLInputElement.prototype, "value").set;
+          nativeInputValueSetter.call(input, currentInputValue);
+
+          //once fired the event, this currentInputValue will be saved in the wizard form's values
+          var ev2 = new Event('input', { bubbles: true});
+          input.dispatchEvent(ev2);
+
+      }
+
 
 
   }
