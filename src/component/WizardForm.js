@@ -35,8 +35,8 @@ export default class WizardForm extends Component {
         <h2>Wizard Form</h2>
 
         <Wizard
-          initialValues={{ name: "test plan",
-            description: "test description",
+          initialValues={{ name: "",
+            description: "",
             source_container_id: "evaluation_1.0.0-SNAPSHOT",
             target_container_id: "evaluation_2.0.0-SNAPSHOT",
             target_process_id: "evaluation"

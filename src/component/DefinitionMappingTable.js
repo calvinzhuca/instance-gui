@@ -88,7 +88,7 @@ export default class DefinitionMappingTable extends Component {
 
           currentInputValue = '{' + currentInputValue + '}';
 
-          var nativeInputValueSetter = Object.getOwnPropertyDescriptor(window.HTMLInputElement.prototype, "value").set;
+          var nativeInputValueSetter = Object.getOwnPropertyDescriptor(window.HTMLTextAreaElement.prototype, "value").set;
           nativeInputValueSetter.call(input, currentInputValue);
 
           //once fired the event, this currentInputValue will be saved in the wizard form's values
@@ -172,11 +172,11 @@ export default class DefinitionMappingTable extends Component {
       </tr>
       <tr />
       <tr>
-        <td hidden>
+        <td >
+            Mappings:
                 <Field
                   name="mappings"
-                  component="input"
-                  type="text"
+                  component="textarea"
                   id="nodeMappingHiddenField"
                 />
         </td>
