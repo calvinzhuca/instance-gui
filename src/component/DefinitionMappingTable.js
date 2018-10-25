@@ -22,6 +22,10 @@ export default class DefinitionMappingTable extends Component {
     this.handleSourceDiagramButtonClick = this.handleSourceDiagramButtonClick.bind(this);
     this.handleTargetDiagramButtonClick = this.handleTargetDiagramButtonClick.bind(this);
     this.handleMapButtonClick = this.handleMapButtonClick.bind(this);
+
+    console.log("this.props.sourceInfo.nodesForDropdown " + this.props.sourceInfo.nodesForDropdown);
+    console.log("this.props.targetInfo.nodesForDropdown " + this.props.targetInfo.nodesForDropdown);
+
   }
 
 
@@ -105,32 +109,23 @@ export default class DefinitionMappingTable extends Component {
 
   render() {
 
-    const sourceProcessDefinitions = [
-      { name: 'Name', value: 'Evaluation' },
-      { name: 'Version', value: '1' },
-      { name: 'Project/Container ID', value: 'evaluation_1.0.0-SNAPSHOT' },
-    ];
 
-    const targetProcessDefinitions = [
-      { name: 'Name', value: 'Evaluation' },
-      { name: 'Version', value: '2' },
-      { name: 'Project/Container ID', value: 'evaluation_2.0.0-SNAPSHOT' },
-    ];
+   const values = this.props.sourceInfo.values;
+   const labels = this.props.sourceInfo.labels;
+   const sourceNode = [];
+   for (var i = 0; i < values.length; i++){
+       sourceNode.push({value:values[i],label:labels[i]});
+   }
 
+   //const sourceNode = [{value:'_D3E17247-1D94-47D8-93AD-D645E317B736',label:'Self Evaluation:_D3E17247-1D94-47D8-93AD-D645E317B736'},{value:'_E35438DF-03AF-4D7B-9DCB-30BC70E7E92E',label:'PM Evaluation:_E35438DF-03AF-4D7B-9DCB-30BC70E7E92E'},{value:'_AB431E82-86BC-460F-9D8B-7A7617565B36',label:'HR Evaluation:_AB431E82-86BC-460F-9D8B-7A7617565B36'},{value:'_B8E4DA1E-A62B-49C2-9A94-FEE5F5FD2B4E',label:'Input:_B8E4DA1E-A62B-49C2-9A94-FEE5F5FD2B4E'}];
+   //const targetNode = [{value:'_D3E17247-1D94-47D8-93AD-D645E317B736',label:'Self Evaluation:_D3E17247-1D94-47D8-93AD-D645E317B736'},{value:'_E35438DF-03AF-4D7B-9DCB-30BC70E7E92E',label:'PM Evaluation:_E35438DF-03AF-4D7B-9DCB-30BC70E7E92E'},{value:'_AB431E82-86BC-460F-9D8B-7A7617565B36',label:'HR Evaluation:_AB431E82-86BC-460F-9D8B-7A7617565B36'},{value:'_B8E4DA1E-A62B-49C2-9A94-FEE5F5FD2B4E',label:'Input:_B8E4DA1E-A62B-49C2-9A94-FEE5F5FD2B4E'}];
+   const targetValues = this.props.targetInfo.values;
+   const targetLabels = this.props.targetInfo.labels;
+   const targetNode = [];
+   for (var i = 0; i < values.length; i++){
+       targetNode.push({value:targetValues[i],label:targetLabels[i]});
+   }
 
-    const sourceNode = [
-      { value: '_D3E17247-1D94-47D8-93AD-D645E317B736', label: 'Self Evaluation:_D3E17247-1D94-47D8-93AD-D645E317B736' },
-      { value: '_E35438DF-03AF-4D7B-9DCB-30BC70E7E92E', label: 'PM Evaluation:_E35438DF-03AF-4D7B-9DCB-30BC70E7E92E' },
-      { value: '_AB431E82-86BC-460F-9D8B-7A7617565B36', label: 'HR Evaluation:_AB431E82-86BC-460F-9D8B-7A7617565B36'}
-
-    ];
-
-    const targetNode = [
-      { value: '_D3E17247-1D94-47D8-93AD-D645E317B736', label: 'Self Evaluation:_D3E17247-1D94-47D8-93AD-D645E317B736' },
-      { value: '_E35438DF-03AF-4D7B-9DCB-30BC70E7E92E', label: 'PM Evaluation:_E35438DF-03AF-4D7B-9DCB-30BC70E7E92E' },
-      { value: '_AB431E82-86BC-460F-9D8B-7A7617565B36', label: 'HR Evaluation:_AB431E82-86BC-460F-9D8B-7A7617565B36'},
-      { value: '_B8E4DA1E-A62B-49C2-9A94-FEE5F5FD2B4E', label: 'Input:_B8E4DA1E-A62B-49C2-9A94-FEE5F5FD2B4E'}
-    ];
 
     return (
 
@@ -195,6 +190,8 @@ export default class DefinitionMappingTable extends Component {
 
             sourceDiagramshown={this.state.sourceDiagramshown}
             targetDiagramshown={this.state.targetDiagramshown}
+
+            sourceInfo={this.props.sourceInfo} targetInfo={this.props.targetInfo}
           />
         </td>
       </tr>

@@ -1,16 +1,17 @@
 import React, { Component } from 'react';
-import { Field } from 'react-final-form'
+import { Field } from 'react-final-form';
+
 
 import * as constants from './WizardConstants';
 import DefinitionTable from "./DefinitionTable";
+import SearchInputTable from "./SearchInputTable";
 
 export default class DefinitionTables extends Component {
     constructor (props) {
       super(props);
-      this.state = {testStr: '11111111111111'
-                  };
-
     }
+
+
 
   render() {
 
@@ -59,9 +60,27 @@ export default class DefinitionTables extends Component {
 
               </td>
             </tr>
+
+
             <tr>
-              <td><DefinitionTable definitions={sourceProcessDefinitions} tableHeader="Source Process Definition" /></td>
-              <td><DefinitionTable definitions={targetProcessDefinitions} tableHeader="Target Process Definition"/></td>
+              <td>
+                    <SearchInputTable tableHeader="Source Process Definition"
+                        onClick={this.props.retriveSourceInfo}
+                    />
+              </td>
+              <td>
+                    <SearchInputTable tableHeader="Target Process Definition"
+                        onClick={this.props.retriveTargetInfo}
+                    />
+              </td>
+            </tr>
+            <tr>
+              <td>Source: </td>
+              <td>{this.props.sourceInfo.processId}</td>
+            </tr>
+            <tr>
+              <td>Target: </td>
+              <td>{this.props.targetInfo.processId}</td>
             </tr>
           </tbody>
         </table>

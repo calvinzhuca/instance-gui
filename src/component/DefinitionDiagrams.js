@@ -2,8 +2,6 @@ import React, { Component } from 'react';
 
 
 import DefinitionDiagramButton from './DefinitionDiagramButton'
-import svgcontents1 from '../svg/1.svg'
-import svgcontents2 from '../svg/2.svg'
 import SvgControllerPan from './SvgControllerPan'
 
 export default class DefinitionDiagrams extends Component {
@@ -30,6 +28,10 @@ export default class DefinitionDiagrams extends Component {
                 <td>
                   <table>
                     <tbody>
+                    <tr>
+                      <td>Source: {this.props.sourceInfo.processId}</td>
+                      <td>Target: {this.props.targetInfo.processId}</td>
+                    </tr>
                       <tr>
                         <td>
                           <DefinitionDiagramButton
@@ -54,14 +56,14 @@ export default class DefinitionDiagrams extends Component {
                 <td>
                   <h2 style={sourceShown}>
                     Source Process Definition Diagram
-                    <SvgControllerPan svgcontents={svgcontents1}
+                    <SvgControllerPan svgcontents={this.props.sourceInfo.svgFile}
                       previousSelector={this.props.sourcePreviousSelector}
                       currentSelector={this.props.sourceCurrentSelector}
                     />
                   </h2>
                   <h2 style={targetShown}>
                     Target Process Definition Diagram
-                    <SvgControllerPan svgcontents={svgcontents2}
+                    <SvgControllerPan svgcontents={this.props.targetInfo.svgFile}
                       previousSelector={this.props.targetPreviousSelector}
                       currentSelector={this.props.targetCurrentSelector}
                     />
