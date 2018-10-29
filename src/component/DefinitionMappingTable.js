@@ -45,7 +45,8 @@ export default class DefinitionMappingTable extends Component {
 
   handleSourceDropdownChange(option){
     let tmpPreviousSelector = this.state.sourceCurrentSelector;
-    let tmpCurrentSelector = "#"  + option.value + "undefined";
+    //let tmpCurrentSelector = "#"  + option.value + "undefined";
+    let tmpCurrentSelector = "#"  + option.value + "_shapeType_BACKGROUND";
     this.setState({
       sourceNodeStr: option.value,
       sourcePreviousSelector: tmpPreviousSelector,
@@ -60,7 +61,12 @@ export default class DefinitionMappingTable extends Component {
 
   handleTargetDropdownChange(option){
     let tmpPreviousSelector = this.state.targetCurrentSelector;
-    let tmpCurrentSelector = "#"  + option.value + "undefined";
+    let tmpCurrentSelector = "#"  + option.value + "_shapeType_BACKGROUND";
+    //let tmpCurrentSelector = "#"  + option.value;
+
+    //let tmpCurrentSelector = "[bpmn2nodeid=" + option.value + "]";
+    //console.log('TargetDropdown selected ', tmpCurrentSelector);
+
     this.setState({
       targetNodeStr: option.value,
       targetPreviousSelector: tmpPreviousSelector,
@@ -68,7 +74,7 @@ export default class DefinitionMappingTable extends Component {
       sourceDiagramshown: false,
       targetDiagramshown: true
     });
-    console.log('TargetDropdown selected ', this.state.targetNodeStr);
+
   }
 
   handleMapButtonClick(){

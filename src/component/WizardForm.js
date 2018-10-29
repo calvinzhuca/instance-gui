@@ -35,7 +35,7 @@ export default class WizardForm extends Component {
                 version: version
             }
         }).then (res => {
-            const sourceInfo = res.data;
+            var sourceInfo = res.data;
             this.setState({sourceInfo});
         })
 
