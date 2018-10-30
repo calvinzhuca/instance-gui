@@ -84,7 +84,7 @@ export default class PageMapping extends Component {
           var currentNodeMapping = this.state.sourceNodeStr + ":" + this.state.targetNodeStr;
           console.log("handleMapButtonClick currentNodeMapping ", currentNodeMapping);
 
-          var input = document.getElementById("nodeMappingHiddenField");
+          var input = document.getElementById("nodeMappingField");
           var currentInputValue = input.value;
           //remove {} before add new node mapping values
           currentInputValue = currentInputValue.replace(/{/g, '');
@@ -202,7 +202,7 @@ export default class PageMapping extends Component {
                 <Field
                   name="mappings"
                   component="textarea"
-                  id="nodeMappingHiddenField"
+                  id="nodeMappingField"
                 />
         </td>
       </tr>

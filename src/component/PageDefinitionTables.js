@@ -40,6 +40,14 @@ export default class PageDefinitionTables extends Component {
 
     handleSourceProcessIdChange(value){
         this.setState({sourceProcessId: value});
+
+        var input = document.getElementById("hiddenField_source_container_id");
+        var containerId = value + "_" + this.state.sourceVersion;
+        var nativeInputValueSetter = Object.getOwnPropertyDescriptor(window.HTMLInputElement.prototype, "value").set;
+        nativeInputValueSetter.call(input, containerId);
+        //once fired the event, this currentInputValue will be saved in the wizard form's values
+        var ev = new Event('input', { bubbles: true});
+        input.dispatchEvent(ev);
     }
 
     handleSourceGroupIdChange(value){
@@ -52,10 +60,36 @@ export default class PageDefinitionTables extends Component {
 
     handleSourceVersionChange(value){
         this.setState({sourceVersion: value});
+
+        var input = document.getElementById("hiddenField_source_container_id");
+        var containerId = this.state.sourceProcessId + "_" + value;
+        var nativeInputValueSetter = Object.getOwnPropertyDescriptor(window.HTMLInputElement.prototype, "value").set;
+        nativeInputValueSetter.call(input, containerId);
+        //once fired the event, this currentInputValue will be saved in the wizard form's values
+        var ev = new Event('input', { bubbles: true});
+        input.dispatchEvent(ev);
+
     }
 
     handleTargetProcessIdChange(value){
         this.setState({targetProcessId: value});
+
+        var input = document.getElementById("hiddenField_target_container_id");
+        var containerId = value + "_" + this.state.targetVersion;
+        var nativeInputValueSetter = Object.getOwnPropertyDescriptor(window.HTMLInputElement.prototype, "value").set;
+        nativeInputValueSetter.call(input, containerId);
+        //once fired the event, this currentInputValue will be saved in the wizard form's values
+        var ev = new Event('input', { bubbles: true});
+        input.dispatchEvent(ev);
+
+
+        input = document.getElementById("hiddenField_target_process_id");
+        var processId = value;
+        var nativeInputValueSetter = Object.getOwnPropertyDescriptor(window.HTMLInputElement.prototype, "value").set;
+        nativeInputValueSetter.call(input, processId);
+        //once fired the event, this currentInputValue will be saved in the wizard form's values
+        var ev = new Event('input', { bubbles: true});
+        input.dispatchEvent(ev);
     }
 
     handleTargetGroupIdChange(value){
@@ -68,10 +102,19 @@ export default class PageDefinitionTables extends Component {
 
     handleTargetVersionChange(value){
         this.setState({targetVersion: value});
+
+        var input = document.getElementById("hiddenField_target_container_id");
+        var containerId = this.state.targetProcessId + "_" + value;
+        var nativeInputValueSetter = Object.getOwnPropertyDescriptor(window.HTMLInputElement.prototype, "value").set;
+        nativeInputValueSetter.call(input, containerId);
+        //once fired the event, this currentInputValue will be saved in the wizard form's values
+        var ev = new Event('input', { bubbles: true});
+        input.dispatchEvent(ev);
     }
 
   render() {
 
+      const sourceShown = {display: "none"};
 
 
     return (
@@ -150,26 +193,27 @@ export default class PageDefinitionTables extends Component {
               <td>Retrived Target Process info: </td>
               <td colSpan="2">{this.props.targetInfo.containerId}</td>
             </tr>
-
-            <tr>
+{/*hide these fields, if want to show them, switch from 'none' to 'block' */}
+            <tr style={{display: 'none'}}>
                 <td>
-                <Field
-                  name="source_container_id"
-                  component="input"
-                  id="hiddenField_source_container_id"
-                />
-                <Field
-                  name="target_container_id"
-                  component="input"
-                  id="hiddenField_target_container_id"
-                />
-                <Field
-                  name="target_process_id"
-                  component="input"
-                  id="hiddenField_target_process_id"
-                />
+                    <Field
+                      name="source_container_id"
+                      component="input"
+                      id="hiddenField_source_container_id"
+                    />
+                    <Field
+                      name="target_container_id"
+                      component="input"
+                      id="hiddenField_target_container_id"
+                    />
+                    <Field
+                      name="target_process_id"
+                      component="input"
+                      id="hiddenField_target_process_id"
+                    />
                 </td>
             </tr>
+
           </tbody>
         </table>
       </div>
