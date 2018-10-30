@@ -8,8 +8,8 @@ import Wizard from "./Wizard"
 import Styles from './WizardFormStyles'
 
 
-import DefinitionTables from "./DefinitionTables";
-import DefinitionMappingTable from "./DefinitionMappingTable";
+import PageDefinitionTables from "./PageDefinitionTables";
+import PageMapping from "./PageMapping";
 
 
 export default class WizardForm extends Component {
@@ -93,13 +93,13 @@ export default class WizardForm extends Component {
           onSubmit={onSubmit}
         >
           <Wizard.Page>
-              <DefinitionTables
+              <PageDefinitionTables
                     retriveSourceInfo={this.retriveSourceInfo} retriveTargetInfo={this.retriveTargetInfo}
                     sourceInfo={this.state.sourceInfo} targetInfo={this.state.targetInfo}
               />
           </Wizard.Page>
           <Wizard.Page>
-              <DefinitionMappingTable
+              <PageMapping
                     sourceInfo={this.state.sourceInfo} targetInfo={this.state.targetInfo}
               />
           </Wizard.Page>

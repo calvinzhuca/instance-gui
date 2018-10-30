@@ -23,7 +23,7 @@ export default class SvgControllerPan extends Component {
                 <div>
                     <ReactSVGPanZoom
                       style={{border: "1px solid black"}}
-                      width={800} height={400} ref={Viewer => this.Viewer = Viewer}
+                      width={800} height={402} ref={Viewer => this.Viewer = Viewer}
                       onClick={event => console.log('click', event.x, event.y, event.originalEvent)}
                       onMouseUp={event => console.log('up', event.x, event.y)}
                       onMouseMove={event => console.log('move', event.x, event.y)}

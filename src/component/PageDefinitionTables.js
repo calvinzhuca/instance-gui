@@ -3,10 +3,10 @@ import { Field } from 'react-final-form';
 
 
 import * as constants from './WizardConstants';
-import DefinitionTable from "./DefinitionTable";
 import SearchInputTable from "./SearchInputTable";
+import SearchInputTable2 from "./SearchInputTable2";
 
-export default class DefinitionTables extends Component {
+export default class PageDefinitionTables extends Component {
     constructor (props) {
       super(props);
 
@@ -20,23 +20,21 @@ export default class DefinitionTables extends Component {
           targetArtifactId: 'mortgage-process',
           targetVersion: '1.0.0-SNAPSHOT'
       };
+      this.copySourceToTarget = this.copySourceToTarget.bind(this);
     }
 
 
+    copySourceToTarget(){
+        this.setState({
+            targetProcessId:  this.state.sourceProcessId,
+            targetGroupId: this.state.sourceGroupId,
+            targetArtifactId: this.state.sourceArtifactId,
+            targetVersion: this.state.sourceVersion
+        });
+    }
 
   render() {
 
-    const sourceProcessDefinitions = [
-      { name: 'Name', value: 'Evaluation' },
-      { name: 'Version', value: '1' },
-      { name: 'Container ID', value: 'evaluation_1.0.0-SNAPSHOT' },
-    ];
-
-    const targetProcessDefinitions = [
-      { name: 'Name', value: 'Evaluation' },
-      { name: 'Version', value: '2' },
-      { name: 'Container ID', value: 'evaluation_2.0.0-SNAPSHOT' },
-    ];
 
 
     return (
@@ -83,23 +81,50 @@ export default class DefinitionTables extends Component {
                         version={this.state.sourceVersion}
                     />
               </td>
+
               <td>
-                    <SearchInputTable tableHeader="Target Process Definition"
+                    <SearchInputTable2 tableHeader="Target Process Definition"
                         onClick={this.props.retriveTargetInfo}
+                        sourceProcessId={this.state.sourceProcessId}
+                        sourceGroupId={this.state.sourceGroupId}
+                        sourceArtifactId={this.state.sourceArtifactId}
+                        sourceVersion={this.state.sourceVersion}
                         processId={this.state.targetProcessId}
                         groupId={this.state.targetGroupId}
                         artifactId={this.state.targetArtifactId}
                         version={this.state.targetVersion}
+                        copySourceToTarget={this.copySourceToTarget}
                     />
               </td>
             </tr>
             <tr>
-              <td>Source: </td>
-              <td>{this.props.sourceInfo.processId}</td>
+              <td>Retrived Source Process info: </td>
+              <td colSpan="2">{this.props.sourceInfo.containerId}</td>
             </tr>
+
             <tr>
-              <td>Target: </td>
-              <td>{this.props.targetInfo.processId}</td>
+              <td>Retrived Target Process info: </td>
+              <td colSpan="2">{this.props.targetInfo.containerId}</td>
+            </tr>
+
+            <tr>
+                <td>
+                <Field
+                  name="source_container_id"
+                  component="input"
+                  id="hiddenField_source_container_id"
+                />
+                <Field
+                  name="target_container_id"
+                  component="input"
+                  id="hiddenField_target_container_id"
+                />
+                <Field
+                  name="target_process_id"
+                  component="input"
+                  id="hiddenField_target_process_id"
+                />
+                </td>
             </tr>
           </tbody>
         </table>

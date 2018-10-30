@@ -2,7 +2,7 @@ import React, { Component } from 'react';
 
 
 
-export default class SearchInputTable extends Component {
+export default class SearchInputTable2 extends Component {
     constructor (props) {
       super(props);
       this.state = {
@@ -35,6 +35,19 @@ export default class SearchInputTable extends Component {
         this.setState({version: event.target.value});
     }
 
+    handleCopy(event){
+        console.log('handleCopy');
+        this.props.copySourceToTarget();
+        console.log('handleCopy2' + this.props.sourceProcessId);
+        this.setState({
+            processId: this.props.sourceProcessId,
+            groupId: this.props.sourceGroupId,
+            artifactId: this.props.sourceArtifactId,
+            version: this.props.sourceVersion
+        }
+    );
+        console.log('handleCopy3' + this.state.processId);
+    }
 
   render() {
 
@@ -44,12 +57,13 @@ export default class SearchInputTable extends Component {
       <table border="0" cellPadding="1">
         <thead>
           <tr>
-            <th colSpan="2" >{this.props.tableHeader}</th>
+            <th colSpan="3" >{this.props.tableHeader}</th>
 
           </tr>
         </thead>
         <tbody>
             <tr>
+                <td/>
                 <td>
                     Process ID
                 </td>
@@ -60,6 +74,9 @@ export default class SearchInputTable extends Component {
             </tr>
             <tr>
                 <td>
+                      <button type="button" onClick={(e) => this.handleCopy(e)}> >>>> </button>
+                </td>
+                <td>
                     Group ID
                 </td>
                 <td>
@@ -68,6 +85,7 @@ export default class SearchInputTable extends Component {
                 </td>
             </tr>
             <tr>
+                <td/>
                 <td>
                     Artifact ID
                 </td>
@@ -77,6 +95,7 @@ export default class SearchInputTable extends Component {
                 </td>
             </tr>
             <tr>
+                <td/>
                 <td>
                     Version
                 </td>
@@ -87,6 +106,7 @@ export default class SearchInputTable extends Component {
             </tr>
 
             <tr>
+                <td/>
                 <td colSpan="2">
                     <button type="button" onClick={() => this.onclick()}>
                       retrive process info from backend

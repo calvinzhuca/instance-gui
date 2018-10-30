@@ -8,7 +8,7 @@ import DropdownNode from './DropdownNode'
 import * as constants from './WizardConstants';
 import TestCompont from "./TestCompont";
 
-export default class DefinitionMappingTable extends Component {
+export default class PageMapping extends Component {
   constructor (props) {
     super(props);
     this.state = {
@@ -172,16 +172,7 @@ export default class DefinitionMappingTable extends Component {
         </td>
       </tr>
       <tr />
-      <tr>
-        <td >
-            Mappings:
-                <Field
-                  name="mappings"
-                  component="textarea"
-                  id="nodeMappingHiddenField"
-                />
-        </td>
-      </tr>
+
       <tr>
         <td>
           <DefinitionDiagrams
@@ -199,6 +190,20 @@ export default class DefinitionMappingTable extends Component {
 
             sourceInfo={this.props.sourceInfo} targetInfo={this.props.targetInfo}
           />
+        </td>
+      </tr>
+      <tr>
+        <td >
+            Use below text field to update mappings directly, like delete a wrong mapping:
+        </td>
+      </tr>
+      <tr>
+        <td >
+                <Field
+                  name="mappings"
+                  component="textarea"
+                  id="nodeMappingHiddenField"
+                />
         </td>
       </tr>
     </tbody>
