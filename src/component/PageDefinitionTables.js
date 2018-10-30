@@ -1,10 +1,8 @@
 import React, { Component } from 'react';
 import { Field } from 'react-final-form';
 
-
 import * as constants from './WizardConstants';
 import SearchInputTable from "./SearchInputTable";
-import SearchInputTable2 from "./SearchInputTable2";
 
 export default class PageDefinitionTables extends Component {
     constructor (props) {
@@ -20,7 +18,14 @@ export default class PageDefinitionTables extends Component {
           targetArtifactId: 'mortgage-process',
           targetVersion: '1.0.0-SNAPSHOT'
       };
-      this.copySourceToTarget = this.copySourceToTarget.bind(this);
+      this.handleSourceProcessIdChange = this.handleSourceProcessIdChange.bind(this);
+      this.handleSourceGroupIdChange = this.handleSourceGroupIdChange.bind(this);
+      this.handleSourceArtifactIdChange = this.handleSourceArtifactIdChange.bind(this);
+      this.handleSourceVersionChange = this.handleSourceVersionChange.bind(this);
+      this.handleTargetProcessIdChange = this.handleTargetProcessIdChange.bind(this);
+      this.handleTargetGroupIdChange = this.handleTargetGroupIdChange.bind(this);
+      this.handleTargetArtifactIdChange = this.handleTargetArtifactIdChange.bind(this);
+      this.handleTargetVersionChange = this.handleTargetVersionChange.bind(this);
     }
 
 
@@ -31,6 +36,38 @@ export default class PageDefinitionTables extends Component {
             targetArtifactId: this.state.sourceArtifactId,
             targetVersion: this.state.sourceVersion
         });
+    }
+
+    handleSourceProcessIdChange(value){
+        this.setState({sourceProcessId: value});
+    }
+
+    handleSourceGroupIdChange(value){
+        this.setState({sourceGroupId: value});
+    }
+
+    handleSourceArtifactIdChange(value){
+        this.setState({sourceArtifactId: value});
+    }
+
+    handleSourceVersionChange(value){
+        this.setState({sourceVersion: value});
+    }
+
+    handleTargetProcessIdChange(value){
+        this.setState({targetProcessId: value});
+    }
+
+    handleTargetGroupIdChange(value){
+        this.setState({targetGroupId: value});
+    }
+
+    handleTargetArtifactIdChange(value){
+        this.setState({targetArtifactId: value});
+    }
+
+    handleTargetVersionChange(value){
+        this.setState({targetVersion: value});
     }
 
   render() {
@@ -74,26 +111,33 @@ export default class PageDefinitionTables extends Component {
             <tr>
               <td>
                     <SearchInputTable tableHeader="Source Process Definition"
-                        onClick={this.props.retriveSourceInfo}
                         processId={this.state.sourceProcessId}
                         groupId={this.state.sourceGroupId}
                         artifactId={this.state.sourceArtifactId}
                         version={this.state.sourceVersion}
+
+                        handleProcessIdChange={this.handleSourceProcessIdChange}
+                        handleGroupIdChange={this.handleSourceGroupIdChange}
+                        handleArtifactIdChange={this.handleSourceArtifactIdChange}
+                        handleVersionChange={this.handleSourceVersionChange}
+                        retriveInfo={this.props.retriveSourceInfo}
                     />
               </td>
-
               <td>
-                    <SearchInputTable2 tableHeader="Target Process Definition"
-                        onClick={this.props.retriveTargetInfo}
-                        sourceProcessId={this.state.sourceProcessId}
-                        sourceGroupId={this.state.sourceGroupId}
-                        sourceArtifactId={this.state.sourceArtifactId}
-                        sourceVersion={this.state.sourceVersion}
+                    <button type="button" onClick={(e) => this.copySourceToTarget(e)}> >>>> </button>
+              </td>
+              <td>
+                    <SearchInputTable tableHeader="Target Process Definition"
                         processId={this.state.targetProcessId}
                         groupId={this.state.targetGroupId}
                         artifactId={this.state.targetArtifactId}
                         version={this.state.targetVersion}
-                        copySourceToTarget={this.copySourceToTarget}
+
+                        handleProcessIdChange={this.handleTargetProcessIdChange}
+                        handleGroupIdChange={this.handleTargetGroupIdChange}
+                        handleArtifactIdChange={this.handleTargetArtifactIdChange}
+                        handleVersionChange={this.handleTargetVersionChange}
+                        retriveInfo={this.props.retriveTargetInfo}
                     />
               </td>
             </tr>
