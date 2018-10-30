@@ -29,12 +29,12 @@ export default class SvgControllerPan extends Component {
                       onMouseMove={event => console.log('move', event.x, event.y)}
                       onMouseDown={event => console.log('down', event.x, event.y)}>
 
-                          <svg width='1500' height='900'>
-                              <SvgLoader svgXML={this.props.svgcontents} style={{width:'100%', height:'20%', border:'solid 0px'}}>
-                                    <SvgProxy selector={this.props.previousSelector} fill="white"/>
-                                    <SvgProxy selector={this.props.currentSelector} fill="yellow"/>
-                              </SvgLoader>
-                          </svg>
+                      <svg width='2815' height='1415'>
+                          <SvgLoader svgXML={this.props.svgcontents} >
+                                <SvgProxy selector={this.props.previousSelector} fill="black"/>
+                                <SvgProxy selector={this.props.currentSelector} fill="yellow"/>
+                          </SvgLoader>
+                      </svg>
                       </ReactSVGPanZoom>
 
                 </div>

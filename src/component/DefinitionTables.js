@@ -9,6 +9,17 @@ import SearchInputTable from "./SearchInputTable";
 export default class DefinitionTables extends Component {
     constructor (props) {
       super(props);
+
+      this.state = {
+          sourceProcessId: 'evaluation',
+          sourceGroupId: 'evaluation',
+          sourceArtifactId: 'evaluation',
+          sourceVersion: '1.0.0-SNAPSHOT',
+          targetProcessId: 'Mortgage_Process.MortgageApprovalProcess',
+          targetGroupId: 'mortgage-process',
+          targetArtifactId: 'mortgage-process',
+          targetVersion: '1.0.0-SNAPSHOT'
+      };
     }
 
 
@@ -66,11 +77,19 @@ export default class DefinitionTables extends Component {
               <td>
                     <SearchInputTable tableHeader="Source Process Definition"
                         onClick={this.props.retriveSourceInfo}
+                        processId={this.state.sourceProcessId}
+                        groupId={this.state.sourceGroupId}
+                        artifactId={this.state.sourceArtifactId}
+                        version={this.state.sourceVersion}
                     />
               </td>
               <td>
                     <SearchInputTable tableHeader="Target Process Definition"
                         onClick={this.props.retriveTargetInfo}
+                        processId={this.state.targetProcessId}
+                        groupId={this.state.targetGroupId}
+                        artifactId={this.state.targetArtifactId}
+                        version={this.state.targetVersion}
                     />
               </td>
             </tr>

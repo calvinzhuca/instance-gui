@@ -7,10 +7,10 @@ export default class SearchInputTable extends Component {
     constructor (props) {
       super(props);
       this.state = {
-          processId: 'evaluation',
-          groupId: 'evaluation',
-          artifactId: 'evaluation',
-          version: '1.0.0-SNAPSHOT',
+          processId: this.props.processId,
+          groupId: this.props.groupId,
+          artifactId: this.props.artifactId,
+          version: this.props.version
       };
 
     }
