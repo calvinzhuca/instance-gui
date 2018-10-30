@@ -31,7 +31,7 @@ export default class SvgControllerPan extends Component {
 
                       <svg width='2815' height='1415'>
                           <SvgLoader svgXML={this.props.svgcontents} >
-                                <SvgProxy selector={this.props.previousSelector} fill="black"/>
+                                <SvgProxy selector={this.props.previousSelector} fill="white"/>
                                 <SvgProxy selector={this.props.currentSelector} fill="yellow"/>
                           </SvgLoader>
                       </svg>
