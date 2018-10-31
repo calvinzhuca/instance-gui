@@ -1,5 +1,6 @@
 import React, { Component } from 'react';
 import { Field } from 'react-final-form';
+import axios from 'axios';
 
 import * as constants from './WizardConstants';
 import SearchInputTable from "./SearchInputTable";
@@ -26,6 +27,7 @@ export default class PageDefinitionTables extends Component {
       this.handleTargetGroupIdChange = this.handleTargetGroupIdChange.bind(this);
       this.handleTargetArtifactIdChange = this.handleTargetArtifactIdChange.bind(this);
       this.handleTargetVersionChange = this.handleTargetVersionChange.bind(this);
+      this.retriveBothInfo = this.retriveBothInfo.bind(this);
     }
 
 
@@ -40,14 +42,6 @@ export default class PageDefinitionTables extends Component {
 
     handleSourceProcessIdChange(value){
         this.setState({sourceProcessId: value});
-
-        var input = document.getElementById("hiddenField_source_container_id");
-        var containerId = value + "_" + this.state.sourceVersion;
-        var nativeInputValueSetter = Object.getOwnPropertyDescriptor(window.HTMLInputElement.prototype, "value").set;
-        nativeInputValueSetter.call(input, containerId);
-        //once fired the event, this currentInputValue will be saved in the wizard form's values
-        var ev = new Event('input', { bubbles: true});
-        input.dispatchEvent(ev);
     }
 
     handleSourceGroupIdChange(value){
@@ -60,36 +54,10 @@ export default class PageDefinitionTables extends Component {
 
     handleSourceVersionChange(value){
         this.setState({sourceVersion: value});
-
-        var input = document.getElementById("hiddenField_source_container_id");
-        var containerId = this.state.sourceProcessId + "_" + value;
-        var nativeInputValueSetter = Object.getOwnPropertyDescriptor(window.HTMLInputElement.prototype, "value").set;
-        nativeInputValueSetter.call(input, containerId);
-        //once fired the event, this currentInputValue will be saved in the wizard form's values
-        var ev = new Event('input', { bubbles: true});
-        input.dispatchEvent(ev);
-
     }
 
     handleTargetProcessIdChange(value){
         this.setState({targetProcessId: value});
-
-        var input = document.getElementById("hiddenField_target_container_id");
-        var containerId = value + "_" + this.state.targetVersion;
-        var nativeInputValueSetter = Object.getOwnPropertyDescriptor(window.HTMLInputElement.prototype, "value").set;
-        nativeInputValueSetter.call(input, containerId);
-        //once fired the event, this currentInputValue will be saved in the wizard form's values
-        var ev = new Event('input', { bubbles: true});
-        input.dispatchEvent(ev);
-
-
-        input = document.getElementById("hiddenField_target_process_id");
-        var processId = value;
-        var nativeInputValueSetter = Object.getOwnPropertyDescriptor(window.HTMLInputElement.prototype, "value").set;
-        nativeInputValueSetter.call(input, processId);
-        //once fired the event, this currentInputValue will be saved in the wizard form's values
-        var ev = new Event('input', { bubbles: true});
-        input.dispatchEvent(ev);
     }
 
     handleTargetGroupIdChange(value){
@@ -102,55 +70,64 @@ export default class PageDefinitionTables extends Component {
 
     handleTargetVersionChange(value){
         this.setState({targetVersion: value});
-
-        var input = document.getElementById("hiddenField_target_container_id");
-        var containerId = this.state.targetProcessId + "_" + value;
-        var nativeInputValueSetter = Object.getOwnPropertyDescriptor(window.HTMLInputElement.prototype, "value").set;
-        nativeInputValueSetter.call(input, containerId);
-        //once fired the event, this currentInputValue will be saved in the wizard form's values
-        var ev = new Event('input', { bubbles: true});
-        input.dispatchEvent(ev);
     }
 
+    retriveBothInfo(){
+        console.log('this.state.sourceProcessId ' + this.state.sourceProcessId);
+        console.log('this.state.targetProcessId ' + this.state.targetProcessId);
+        axios.get('http://localhost:8080/backend/both', {
+            params: {
+                sourceProcessId: this.state.sourceProcessId,
+                sourceGroupId: this.state.sourceGroupId,
+                sourceArtifactId: this.state.sourceArtifactId,
+                sourceVersion: this.state.sourceVersion,
+                targetProcessId: this.state.targetProcessId,
+                targetGroupId: this.state.targetGroupId,
+                targetArtifactId: this.state.targetArtifactId,
+                targetVersion: this.state.targetVersion
+            }
+        }).then (res => {
+
+            this.props.setInfo(res.data.sourceInfo,res.data.targetInfo);
+
+            var input = document.getElementById("hiddenField_source_container_id");
+            var containerId = this.state.sourceProcessId + "_" + this.state.sourceVersion;
+            var nativeInputValueSetter = Object.getOwnPropertyDescriptor(window.HTMLInputElement.prototype, "value").set;
+            nativeInputValueSetter.call(input, containerId);
+            //once fired the event, this currentInputValue will be saved in the wizard form's values
+            var ev = new Event('input', { bubbles: true});
+            input.dispatchEvent(ev);
+
+            var input = document.getElementById("hiddenField_target_container_id");
+            var containerId = this.state.targetProcessId + "_" + this.state.targetVersion;
+            var nativeInputValueSetter = Object.getOwnPropertyDescriptor(window.HTMLInputElement.prototype, "value").set;
+            nativeInputValueSetter.call(input, containerId);
+            //once fired the event, this currentInputValue will be saved in the wizard form's values
+            var ev = new Event('input', { bubbles: true});
+            input.dispatchEvent(ev);
+
+
+            input = document.getElementById("hiddenField_target_process_id");
+            var processId = this.state.targetProcessId;
+            var nativeInputValueSetter = Object.getOwnPropertyDescriptor(window.HTMLInputElement.prototype, "value").set;
+            nativeInputValueSetter.call(input, processId);
+            //once fired the event, this currentInputValue will be saved in the wizard form's values
+            var ev = new Event('input', { bubbles: true});
+            input.dispatchEvent(ev);
+
+
+        });
+
+
+    }
+
+
   render() {
-
-      const sourceShown = {display: "none"};
-
 
     return (
       <div>
         <table border="0" cellPadding="1">
           <tbody>
-            <tr>
-              <td colSpan="2">
-                  <div>
-                    <label>Plan Name: </label>
-                    <Field
-                      name="name"
-                      component="input"
-                      type="text"
-                      placeholder="no more than 20 characters"
-                      validate={constants.required}
-                    />
-                    <constants.Error name="name"/>
-                  </div>
-                  <div>
-                    <label>Description: </label>
-                    <Field
-                      name="description"
-                      component="input"
-                      type="text"
-                      placeholder="no more than 1000 characters"
-                      validate={constants.required}
-                    />
-                    <constants.Error name="description"/>
-                  </div>
-
-
-              </td>
-            </tr>
-
-
             <tr>
               <td>
                     <SearchInputTable tableHeader="Source Process Definition"
@@ -163,7 +140,6 @@ export default class PageDefinitionTables extends Component {
                         handleGroupIdChange={this.handleSourceGroupIdChange}
                         handleArtifactIdChange={this.handleSourceArtifactIdChange}
                         handleVersionChange={this.handleSourceVersionChange}
-                        retriveInfo={this.props.retriveSourceInfo}
                     />
               </td>
               <td>
@@ -180,10 +156,20 @@ export default class PageDefinitionTables extends Component {
                         handleGroupIdChange={this.handleTargetGroupIdChange}
                         handleArtifactIdChange={this.handleTargetArtifactIdChange}
                         handleVersionChange={this.handleTargetVersionChange}
-                        retriveInfo={this.props.retriveTargetInfo}
                     />
               </td>
             </tr>
+
+            <tr>
+                <td/>
+                <td/>
+                <td>
+                    <button type="button" onClick={() => this.retriveBothInfo()}>
+                      retrive both info from backend
+                    </button>
+                </td>
+            </tr>
+
             <tr>
               <td>Retrived Source Process info: </td>
               <td colSpan="2">{this.props.sourceInfo.containerId}</td>
@@ -196,6 +182,7 @@ export default class PageDefinitionTables extends Component {
 {/*hide these fields, if want to show them, switch from 'none' to 'block' */}
             <tr style={{display: 'none'}}>
                 <td>
+
                     <Field
                       name="source_container_id"
                       component="input"
@@ -211,6 +198,7 @@ export default class PageDefinitionTables extends Component {
                       component="input"
                       id="hiddenField_target_process_id"
                     />
+
                 </td>
             </tr>
 

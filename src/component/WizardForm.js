@@ -2,13 +2,11 @@ import React, { Component } from 'react';
 import { render } from 'react-dom'
 import { Field } from 'react-final-form'
 
-import axios from 'axios';
-
 import Wizard from "./Wizard"
 import Styles from './WizardFormStyles'
 
-
 import PageDefinitionTables from "./PageDefinitionTables";
+import PagePlanName from "./PagePlanName";
 import PageMapping from "./PageMapping";
 
 
@@ -20,43 +18,18 @@ export default class WizardForm extends Component {
           sourceInfo: '',
           targetInfo: ''
                   };
-     this.retriveSourceInfo = this.retriveSourceInfo.bind(this);
-     this.retriveTargetInfo = this.retriveTargetInfo.bind(this);
+      this.setInfo = this.setInfo.bind(this);
     }
 
-    retriveSourceInfo(processId, groupId, artifactId, version){
-        //console.log("!!!!!!!!!!!!!retriveSourceInfo processId" + processId);
-
-        axios.get('http://localhost:8080/backend', {
-            params: {
-                processId: processId,
-                groupId: groupId,
-                artifactId: artifactId,
-                version: version
-            }
-        }).then (res => {
-            var sourceInfo = res.data;
-            this.setState({sourceInfo});
-        })
-
+    setInfo(sourceInfo, targetInfo){
+        console.log('setInfo sourceInfo ' + sourceInfo.processId + ' targetInfo ' + targetInfo.processId);
+        this.setState({
+            sourceInfo:sourceInfo,
+            targetInfo:targetInfo
+        });
     }
 
-    retriveTargetInfo(processId, groupId, artifactId, version){
-        //console.log("!!!!!!!!!!!!!retriveTargetInfo processId" + processId);
 
-        axios.get('http://localhost:8080/backend', {
-            params: {
-                processId: processId,
-                groupId: groupId,
-                artifactId: artifactId,
-                version: version
-            }
-        }).then (res => {
-            const targetInfo = res.data;
-            this.setState({targetInfo});
-        })
-
-    }
 
   render() {
     const sleep = ms => new Promise(resolve => setTimeout(resolve, ms))
@@ -85,18 +58,20 @@ export default class WizardForm extends Component {
 
         <Wizard
           initialValues={{ name: "test Plan",
-            description: "test description",
-            source_container_id: "evaluation_1.0.0-SNAPSHOT",
-            target_container_id: "evaluation_2.0.0-SNAPSHOT",
-            target_process_id: "evaluation"
+            description: "test description"
           }}
           onSubmit={onSubmit}
         >
+
           <Wizard.Page>
               <PageDefinitionTables
-                    retriveSourceInfo={this.retriveSourceInfo} retriveTargetInfo={this.retriveTargetInfo}
-                    sourceInfo={this.state.sourceInfo} targetInfo={this.state.targetInfo}
+                    sourceInfo={this.state.sourceInfo}
+                    targetInfo={this.state.targetInfo}
+                    setInfo={this.setInfo}
               />
+          </Wizard.Page>
+          <Wizard.Page>
+              <PagePlanName />
           </Wizard.Page>
           <Wizard.Page>
               <PageMapping
@@ -105,6 +80,7 @@ export default class WizardForm extends Component {
           </Wizard.Page>
           <Wizard.Page>
               <h2>Please review this plan before submit to Process Instances Migration Service</h2>
+              <a id="downloadAnchorElem" style={{display: 'none'}}></a>
           </Wizard.Page>
         </Wizard>
       </Styles>
@@ -115,7 +91,6 @@ export default class WizardForm extends Component {
 
       <div>
         <App />
-
       </div>
 
 

@@ -50,6 +50,15 @@ export default class Wizard extends React.Component {
     }
   }
 
+  onDownloadClick = values =>{
+      var dataStr = "data:text/json;charset=utf-8," + encodeURIComponent(values);
+      var dlAnchorElem = document.getElementById('downloadAnchorElem');
+      dlAnchorElem.setAttribute("href",     dataStr     );
+      dlAnchorElem.setAttribute("download", "migrationPlan.json");
+      dlAnchorElem.click();
+  }
+
+
   render() {
     const { children } = this.props
     const { page, values } = this.state
@@ -70,6 +79,11 @@ export default class Wizard extends React.Component {
                 </button>
               )}
               {!isLastPage && <button type="submit">Next »</button>}
+              {isLastPage  &&(
+                  <button type="button" disabled={submitting} onClick={(e) => this.onDownloadClick(JSON.stringify(values, 0, 2))}>
+                    Export Plan
+                  </button>
+              )}
               {isLastPage && (
                 <button type="submit" disabled={submitting}>
                   Submit

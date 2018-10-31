@@ -5,10 +5,6 @@ import React, { Component } from 'react';
 export default class SearchInputTable extends Component {
 
 
-    retriveInfo(option) {
-      this.props.retriveInfo(this.props.processId, this.props.groupId, this.props.artifactId, this.props.version);
-    }
-
     handleProcessIdChange(event){
         this.props.handleProcessIdChange(event.target.value);
     }
@@ -75,18 +71,6 @@ export default class SearchInputTable extends Component {
 
                 </td>
             </tr>
-
-            <tr>
-                <td colSpan="2">
-                    <button type="button" onClick={() => this.retriveInfo()}>
-                      retrive process info from backend
-                    </button>
-                </td>
-
-            </tr>
-
-
-
         </tbody>
       </table>
       </div>
