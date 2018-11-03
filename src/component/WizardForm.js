@@ -57,6 +57,8 @@ export default class WizardForm extends Component {
       plan = plan.replace('\}\"', '\}');
       console.log('plan3: ' + plan );
 
+
+
       const serviceUrl = 'http://localhost:8280/plans';
       axios.post(serviceUrl, plan, {headers: {
                 "Content-Type": "application/json"}
@@ -67,22 +69,8 @@ export default class WizardForm extends Component {
       .catch(function (error) {
         console.log('error: ' + error );
       });
-
+      window.alert("submitted this plan" + plan);
     }
-
-
-
-    const Error = ({ name }) => (
-      <Field
-        name={name}
-        subscribe={{ touched: true, error: true }}
-        render={({ meta: { touched, error } }) =>
-          touched && error ? <span>{error}</span> : null
-        }
-      />
-    )
-
-    const required = value => (value ? undefined : 'Required')
 
     const App = () => (
       <Styles>

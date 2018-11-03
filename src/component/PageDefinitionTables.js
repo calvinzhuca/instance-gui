@@ -187,16 +187,19 @@ export default class PageDefinitionTables extends Component {
                       name="source_container_id"
                       component="input"
                       id="hiddenField_source_container_id"
+                      validate={constants.required}
                     />
                     <Field
                       name="target_container_id"
                       component="input"
                       id="hiddenField_target_container_id"
+                      validate={constants.required}
                     />
                     <Field
                       name="target_process_id"
                       component="input"
                       id="hiddenField_target_process_id"
+                      validate={constants.required}
                     />
 
                 </td>
