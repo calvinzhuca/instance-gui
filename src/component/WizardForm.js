@@ -2,6 +2,7 @@ import React, { Component } from 'react';
 import { render } from 'react-dom'
 import { Field } from 'react-final-form'
 
+import axios from 'axios';
 import Wizard from "./Wizard"
 import Styles from './WizardFormStyles'
 
@@ -34,10 +35,42 @@ export default class WizardForm extends Component {
   render() {
     const sleep = ms => new Promise(resolve => setTimeout(resolve, ms))
 
+
     const onSubmit = async values => {
-      await sleep(300)
-      window.alert(JSON.stringify(values, 0, 2))
+
+
+      await sleep(300);
+      var plan = JSON.stringify(values,0,2);
+
+      //from nodemapping, default is string, not object, also it auto adds \ in front of "
+      //e.g: "mappings": "{\"_D3E17247-1D94-47D8-93AD-D645E317B736\":\"_011ED858-F841-4C44-B0F1-F3BE388ADDA5\"}"
+      //while the expected is: "mappings": {"_D3E17247-1D94-47D8-93AD-D645E317B736":"_011ED858-F841-4C44-B0F1-F3BE388ADDA5"}
+      //so need to take out the uncessary parts otherwise will fail in PIM serviceUrl
+
+      //step 1, replace all \" to "
+      plan = plan.replace(/\\\"/g, '\"');
+      console.log('plan1: ' + plan );
+      //step 2, replace "{ to {
+      plan = plan.replace('\"\{', '\{');
+      console.log('plan2: ' + plan );
+      //step3, replace }" to }
+      plan = plan.replace('\}\"', '\}');
+      console.log('plan3: ' + plan );
+
+      const serviceUrl = 'http://localhost:8280/plans';
+      axios.post(serviceUrl, plan, {headers: {
+                "Content-Type": "application/json"}
+      })
+      .then(function (response) {
+        console.log('response: ' + response.data );
+      })
+      .catch(function (error) {
+        console.log('error: ' + error );
+      });
+
     }
+
+
 
     const Error = ({ name }) => (
       <Field

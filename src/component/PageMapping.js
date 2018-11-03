@@ -6,7 +6,6 @@ import DefinitionDiagrams from "./DefinitionDiagrams";
 import MapButton from "./MapButton";
 import DropdownNode from './DropdownNode'
 import * as constants from './WizardConstants';
-import TestCompont from "./TestCompont";
 
 export default class PageMapping extends Component {
   constructor (props) {
@@ -81,8 +80,8 @@ export default class PageMapping extends Component {
 
       if (this.state.sourceNodeStr.length >0 && this.state.targetNodeStr.length >0 )
       {
-          var currentNodeMapping = this.state.sourceNodeStr + ":" + this.state.targetNodeStr;
-          console.log("handleMapButtonClick currentNodeMapping ", currentNodeMapping);
+          var currentNodeMapping = '"' + this.state.sourceNodeStr + '"' + ":" + '"' + this.state.targetNodeStr + '"';
+          console.log("handleMapButtonClick currentNodeMapping1 ", currentNodeMapping);
 
           var input = document.getElementById("nodeMappingField");
           var currentInputValue = input.value;
