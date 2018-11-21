@@ -1,7 +1,7 @@
 import React from "react";
 import { Row, Col } from 'patternfly-react';
-import WizardForm2 from './WizardForm2';
-import { mockWizardItems } from './mockWizardItems';
+import PfWizardForm from './PfWizardForm';
+import { CreatePlanWizardItems } from './CreatePlanWizardItems';
 
 export default class WizardPyMain extends React.Component {
 
@@ -13,7 +13,7 @@ export default class WizardPyMain extends React.Component {
         <div>
         <Row>
           <Col sm={12}>
-            <WizardForm2 steps={mockWizardItems} />
+            <PfWizardForm steps={CreatePlanWizardItems} />
           </Col>
         </Row>
         </div>

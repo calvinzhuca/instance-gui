@@ -2,9 +2,9 @@ import React from 'react';
 
 import {Wizard} from "patternfly-react"
 
-import { mockWizardFormContents } from './mockWizardItems';
-import MockWizardReviewStepsManager from './mockWizardReviewStepsManager';
-import MockWizardDeployContents from './mockWizardDeployContents';
+import { WizardFormContents } from './CreatePlanWizardItems';
+import PfWizardReviewStepsManager from './PfWizardReviewStepsManager';
+import PfWizardSubmitPlan from './PfWizardSubmitPlan';
 
 export const renderWizardSteps = (wizardSteps, activeStepIndex, activeSubStepIndex, onStepClick) => {
   const activeStep = wizardSteps[activeStepIndex];
@@ -67,7 +67,7 @@ export const renderWizardContents = (wizardSteps, activeStepIndex, activeSubStep
             activeStepIndex={activeStepIndex}
             activeSubStepIndex={activeSubStepIndex}
           >
-            {mockWizardFormContents(sub.contents.label1, sub.contents.label2)}
+            {WizardFormContents(sub.contents.label1, sub.contents.label2, sub.contents.label3, sub.contents.label4)}
           </Wizard.Contents>
         );
       } else if (stepIndex === 2 && subStepIndex === 0) {
@@ -80,7 +80,7 @@ export const renderWizardContents = (wizardSteps, activeStepIndex, activeSubStep
             activeStepIndex={activeStepIndex}
             activeSubStepIndex={activeSubStepIndex}
           >
-            <MockWizardReviewStepsManager steps={wizardSteps} />
+            <PfWizardReviewStepsManager steps={wizardSteps} />
           </Wizard.Contents>
         );
       } else if (stepIndex === 2 && subStepIndex === 1) {
@@ -93,7 +93,7 @@ export const renderWizardContents = (wizardSteps, activeStepIndex, activeSubStep
             activeStepIndex={activeStepIndex}
             activeSubStepIndex={activeSubStepIndex}
           >
-            <MockWizardDeployContents active={stepIndex === activeStepIndex && subStepIndex === activeSubStepIndex} />
+            <PfWizardSubmitPlan active={stepIndex === activeStepIndex && subStepIndex === activeSubStepIndex} />
           </Wizard.Contents>
         );
       }

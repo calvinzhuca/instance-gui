@@ -8,12 +8,12 @@ import { Wizard } from "patternfly-react";
 
 
 
-import { mockWizardItems } from './mockWizardItems';
-import MockWizardBase from './mockWizardBase';
-import { renderWizardSteps, renderSidebarItems, renderWizardContents } from './mockWizardRenderers';
+import { CreatePlanWizardItems } from './CreatePlanWizardItems';
+import PfWizardBase from './PfWizardBase';
+import { renderWizardSteps, renderSidebarItems, renderWizardContents } from './PfWizardRenderers';
 
 
-export default class WizardForm2 extends MockWizardBase {
+export default class PfWizardForm extends PfWizardBase {
 
   constructor(props) {
     super(props);
@@ -25,9 +25,7 @@ export default class WizardForm2 extends MockWizardBase {
     };
   }
 
-  open = () => {
-    this.setState({ showModal: true });
-  };
+
   close = () => {
     this.setState({ showModal: false });
   };
@@ -45,18 +43,18 @@ export default class WizardForm2 extends MockWizardBase {
           <Wizard.Header onClose={this.close} title="Wizard Title" />
           <Wizard.Body>
             <Wizard.Steps
-              steps={renderWizardSteps(mockWizardItems, activeStepIndex, activeSubStepIndex, this.onStepClick)}
+              steps={renderWizardSteps(CreatePlanWizardItems, activeStepIndex, activeSubStepIndex, this.onStepClick)}
             />
             <Wizard.Row>
               <Wizard.Sidebar
                 items={renderSidebarItems(
-                  mockWizardItems,
+                  CreatePlanWizardItems,
                   activeStepIndex,
                   activeSubStepIndex,
                   this.onSidebarItemClick
                 )}
               />
-              <Wizard.Main>{renderWizardContents(mockWizardItems, activeStepIndex, activeSubStepIndex)}</Wizard.Main>
+              <Wizard.Main>{renderWizardContents(CreatePlanWizardItems, activeStepIndex, activeSubStepIndex)}</Wizard.Main>
             </Wizard.Row>
           </Wizard.Body>
           <Wizard.Footer>
@@ -80,7 +78,7 @@ export default class WizardForm2 extends MockWizardBase {
             {activeStepIndex === 2 &&
               activeSubStepIndex === 0 && (
                 <Button bsStyle="primary" onClick={this.onNextButtonClick}>
-                  Deploy
+                  Submit Plan
                   <Icon type="fa" name="angle-right" />
                 </Button>
               )}

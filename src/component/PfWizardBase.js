@@ -1,7 +1,7 @@
 import React from 'react';
 import PropTypes from 'prop-types';
 
-class MockWizardBase extends React.Component {
+export default class PfWizardBase extends React.Component {
   constructor(props) {
     super(props);
     this.state = {
@@ -59,7 +59,7 @@ class MockWizardBase extends React.Component {
     return false;
   }
 }
-MockWizardBase.propTypes = {
+PfWizardBase.propTypes = {
   /** Initial step index */
   initialStepIndex: PropTypes.number,
   /** Initial sub step index */
@@ -67,8 +67,7 @@ MockWizardBase.propTypes = {
   /** Wizard steps */
   steps: PropTypes.array.isRequired
 };
-MockWizardBase.defaultProps = {
+PfWizardBase.defaultProps = {
   initialStepIndex: 0,
   initialSubStepIndex: 0
 };
-export default MockWizardBase;

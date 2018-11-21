@@ -2,7 +2,7 @@ import React from 'react';
 import PropTypes from 'prop-types';
 import {Wizard} from "patternfly-react"
 
-class MockWizardReviewStepsManager extends React.Component {
+export default class PfWizardReviewStepsManager extends React.Component {
   constructor(props) {
     super(props);
     this.state = {
@@ -69,8 +69,7 @@ class MockWizardReviewStepsManager extends React.Component {
     );
   }
 }
-MockWizardReviewStepsManager.propTypes = {
+PfWizardReviewStepsManager.propTypes = {
   /** Wizard steps */
   steps: PropTypes.array.isRequired
 };
-export default MockWizardReviewStepsManager;
