@@ -30,7 +30,7 @@ export default class PfWizardReviewStepsManager extends React.Component {
     return (
       <Wizard.ReviewSteps>
         {steps.map((step, stepIndex) => {
-          if (stepIndex === 2) {
+          if (stepIndex === 3) {
             return null;
           }
           return (

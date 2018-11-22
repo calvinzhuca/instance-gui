@@ -8,7 +8,7 @@ import { Wizard } from "patternfly-react";
 
 
 
-import { CreatePlanWizardItems } from './CreatePlanWizardItems';
+import { PfWizardCreatePlanItems } from './PfWizardCreatePlanItems';
 import PfWizardBase from './PfWizardBase';
 import { renderWizardSteps, renderSidebarItems, renderWizardContents } from './PfWizardRenderers';
 
@@ -40,21 +40,21 @@ export default class PfWizardForm extends PfWizardBase {
 
 
         <Wizard show={showModal} onHide={this.close}>
-          <Wizard.Header onClose={this.close} title="Wizard Title" />
+          <Wizard.Header onClose={this.close} title="Migration Plan Wizard" />
           <Wizard.Body>
             <Wizard.Steps
-              steps={renderWizardSteps(CreatePlanWizardItems, activeStepIndex, activeSubStepIndex, this.onStepClick)}
+              steps={renderWizardSteps(PfWizardCreatePlanItems, activeStepIndex, activeSubStepIndex, this.onStepClick)}
             />
             <Wizard.Row>
               <Wizard.Sidebar
                 items={renderSidebarItems(
-                  CreatePlanWizardItems,
+                  PfWizardCreatePlanItems,
                   activeStepIndex,
                   activeSubStepIndex,
                   this.onSidebarItemClick
                 )}
               />
-              <Wizard.Main>{renderWizardContents(CreatePlanWizardItems, activeStepIndex, activeSubStepIndex)}</Wizard.Main>
+              <Wizard.Main>{renderWizardContents(PfWizardCreatePlanItems, activeStepIndex, activeSubStepIndex)}</Wizard.Main>
             </Wizard.Row>
           </Wizard.Body>
           <Wizard.Footer>
@@ -69,20 +69,20 @@ export default class PfWizardForm extends PfWizardBase {
               <Icon type="fa" name="angle-left" />
               Back
             </Button>
-            {(activeStepIndex === 0 || activeStepIndex === 1) && (
+            {(activeStepIndex === 0 || activeStepIndex === 1 || activeStepIndex === 2) && (
               <Button bsStyle="primary" onClick={this.onNextButtonClick}>
                 Next
                 <Icon type="fa" name="angle-right" />
               </Button>
             )}
-            {activeStepIndex === 2 &&
+            {activeStepIndex === 3 &&
               activeSubStepIndex === 0 && (
                 <Button bsStyle="primary" onClick={this.onNextButtonClick}>
                   Submit Plan
                   <Icon type="fa" name="angle-right" />
                 </Button>
               )}
-            {activeStepIndex === 2 &&
+            {activeStepIndex === 3 &&
               activeSubStepIndex === 1 && (
                 <Button bsStyle="primary" onClick={this.close}>
                   Close

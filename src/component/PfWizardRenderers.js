@@ -2,7 +2,7 @@ import React from 'react';
 
 import {Wizard} from "patternfly-react"
 
-import { WizardFormContents } from './CreatePlanWizardItems';
+import { WizardFormContents } from './PfWizardCreatePlanItems';
 import PfWizardReviewStepsManager from './PfWizardReviewStepsManager';
 import PfWizardSubmitPlan from './PfWizardSubmitPlan';
 
@@ -24,7 +24,7 @@ export const renderWizardSteps = (wizardSteps, activeStepIndex, activeSubStepInd
         <Wizard.SubStep
           key={subStepIndex}
           subStep={sub.subStep}
-          title={sub.title}
+//          title={sub.title}
           activeSubStep={activeSubStep && activeSubStep.subStep}
         />
       ))}
@@ -57,7 +57,7 @@ export const renderSidebarItems = (wizardSteps, activeStepIndex, activeSubStepIn
 export const renderWizardContents = (wizardSteps, activeStepIndex, activeSubStepIndex) =>
   wizardSteps.map((step, stepIndex) =>
     step.subSteps.map((sub, subStepIndex) => {
-      if (stepIndex === 0 || stepIndex === 1) {
+      if (stepIndex === 0 || stepIndex === 1 || stepIndex === 2) {
         // render steps 1 and 2 mock contents
         return (
           <Wizard.Contents
@@ -70,7 +70,7 @@ export const renderWizardContents = (wizardSteps, activeStepIndex, activeSubStep
             {WizardFormContents(sub.contents.label1, sub.contents.label2, sub.contents.label3, sub.contents.label4)}
           </Wizard.Contents>
         );
-      } else if (stepIndex === 2 && subStepIndex === 0) {
+      } else if (stepIndex === 3 && subStepIndex === 0) {
         // render mock summary
         return (
           <Wizard.Contents
@@ -83,7 +83,7 @@ export const renderWizardContents = (wizardSteps, activeStepIndex, activeSubStep
             <PfWizardReviewStepsManager steps={wizardSteps} />
           </Wizard.Contents>
         );
-      } else if (stepIndex === 2 && subStepIndex === 1) {
+      } else if (stepIndex === 3 && subStepIndex === 1) {
         // render mock progress
         return (
           <Wizard.Contents

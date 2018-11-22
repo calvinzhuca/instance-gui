@@ -2,11 +2,11 @@ import React from 'react';
 
 
 
-export const CreatePlanWizardItems = [
+export const PfWizardCreatePlanItems = [
   {
     step: 1,
     label: '1',
-    title: 'First Step',
+    title: 'First Step: Plan Name',
     subSteps: [
       {
         subStep: '1.1',
@@ -16,10 +16,18 @@ export const CreatePlanWizardItems = [
           label1: 'Name',
           label2: 'Description'
         }
-      },
+      }
+    ]
+  },
+  {
+    step: '2',
+    label: '2',
+    title: 'Second Step: Process Definition',
+    subSteps: [
+
       {
-        subStep: '1.2',
-        label: '1B.',
+        subStep: '2.1',
+        label: '2A.',
         title: 'Source Process Definition',
         contents: {
           label1: 'processId',
@@ -29,8 +37,8 @@ export const CreatePlanWizardItems = [
         }
       },
       {
-        subStep: '1.3',
-        label: '1C.',
+        subStep: '2.2',
+        label: '2B.',
         title: 'Target Process Definition',
         contents: {
           label1: 'processId',
@@ -39,16 +47,17 @@ export const CreatePlanWizardItems = [
           label4: 'version'
         }
       }
+
     ]
   },
   {
-    step: '2',
-    label: '2',
-    title: 'Second Step',
+    step: '3',
+    label: '3',
+    title: 'Third Step: Node Mapping',
     subSteps: [
       {
-        subStep: '2.1',
-        label: '2A.',
+        subStep: '3.1',
+        label: '3A.',
         title: 'Mapping',
         contents: {
           label1: 'Aliquam',
@@ -59,19 +68,19 @@ export const CreatePlanWizardItems = [
     ]
   },
   {
-    step: 3,
-    label: '3',
-    title: 'Review',
+    step: 4,
+    label: '4',
+    title: 'Review & Submit',
     subSteps: [
       {
-        subStep: '3.1',
-        label: '3A.',
-        title: 'Summary'
+        subStep: '4.1',
+        label: '4A.',
+        title: 'Review'
       },
       {
-        subStep: 4,
-        label: '4A.',
-        title: 'Progress'
+        subStep: '4.2',
+        label: '4B.',
+        title: 'Submit'
       }
     ]
   }
