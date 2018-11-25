@@ -22,8 +22,8 @@ export default class PageMapping extends Component {
     this.handleTargetDiagramButtonClick = this.handleTargetDiagramButtonClick.bind(this);
     this.handleMapButtonClick = this.handleMapButtonClick.bind(this);
 
-    console.log("this.props.sourceInfo.nodesForDropdown " + this.props.sourceInfo.nodesForDropdown);
-    console.log("this.props.targetInfo.nodesForDropdown " + this.props.targetInfo.nodesForDropdown);
+    //console.log("this.props.sourceInfo.nodesForDropdown " + this.props.sourceInfo.nodesForDropdown);
+    //console.log("this.props.targetInfo.nodesForDropdown " + this.props.targetInfo.nodesForDropdown);
 
   }
 
@@ -118,97 +118,105 @@ export default class PageMapping extends Component {
    const sourceValues = this.props.sourceInfo.values;
    const sourceLabels = this.props.sourceInfo.labels;
    const sourceNode = [];
-   for (var i = 0; i < sourceValues.length; i++){
-       sourceNode.push({value:sourceValues[i],label:sourceLabels[i]});
-   }
+   if (this.props.sourceInfo !== null  && this.props.sourceInfo !== ''){
 
-   //const sourceNode = [{value:'_D3E17247-1D94-47D8-93AD-D645E317B736',label:'Self Evaluation:_D3E17247-1D94-47D8-93AD-D645E317B736'},{value:'_E35438DF-03AF-4D7B-9DCB-30BC70E7E92E',label:'PM Evaluation:_E35438DF-03AF-4D7B-9DCB-30BC70E7E92E'},{value:'_AB431E82-86BC-460F-9D8B-7A7617565B36',label:'HR Evaluation:_AB431E82-86BC-460F-9D8B-7A7617565B36'},{value:'_B8E4DA1E-A62B-49C2-9A94-FEE5F5FD2B4E',label:'Input:_B8E4DA1E-A62B-49C2-9A94-FEE5F5FD2B4E'}];
-   //const targetNode = [{value:'_D3E17247-1D94-47D8-93AD-D645E317B736',label:'Self Evaluation:_D3E17247-1D94-47D8-93AD-D645E317B736'},{value:'_E35438DF-03AF-4D7B-9DCB-30BC70E7E92E',label:'PM Evaluation:_E35438DF-03AF-4D7B-9DCB-30BC70E7E92E'},{value:'_AB431E82-86BC-460F-9D8B-7A7617565B36',label:'HR Evaluation:_AB431E82-86BC-460F-9D8B-7A7617565B36'},{value:'_B8E4DA1E-A62B-49C2-9A94-FEE5F5FD2B4E',label:'Input:_B8E4DA1E-A62B-49C2-9A94-FEE5F5FD2B4E'}];
-   const targetValues = this.props.targetInfo.values;
-   const targetLabels = this.props.targetInfo.labels;
-   const targetNode = [];
-   for (var i = 0; i < targetValues.length; i++){
-       targetNode.push({value:targetValues[i],label:targetLabels[i]});
-   }
+       for (var i = 0; i < sourceValues.length; i++){
+           sourceNode.push({value:sourceValues[i],label:sourceLabels[i]});
+       }
 
-
-    return (
-
+       //const sourceNode = [{value:'_D3E17247-1D94-47D8-93AD-D645E317B736',label:'Self Evaluation:_D3E17247-1D94-47D8-93AD-D645E317B736'},{value:'_E35438DF-03AF-4D7B-9DCB-30BC70E7E92E',label:'PM Evaluation:_E35438DF-03AF-4D7B-9DCB-30BC70E7E92E'},{value:'_AB431E82-86BC-460F-9D8B-7A7617565B36',label:'HR Evaluation:_AB431E82-86BC-460F-9D8B-7A7617565B36'},{value:'_B8E4DA1E-A62B-49C2-9A94-FEE5F5FD2B4E',label:'Input:_B8E4DA1E-A62B-49C2-9A94-FEE5F5FD2B4E'}];
+       //const targetNode = [{value:'_D3E17247-1D94-47D8-93AD-D645E317B736',label:'Self Evaluation:_D3E17247-1D94-47D8-93AD-D645E317B736'},{value:'_E35438DF-03AF-4D7B-9DCB-30BC70E7E92E',label:'PM Evaluation:_E35438DF-03AF-4D7B-9DCB-30BC70E7E92E'},{value:'_AB431E82-86BC-460F-9D8B-7A7617565B36',label:'HR Evaluation:_AB431E82-86BC-460F-9D8B-7A7617565B36'},{value:'_B8E4DA1E-A62B-49C2-9A94-FEE5F5FD2B4E',label:'Input:_B8E4DA1E-A62B-49C2-9A94-FEE5F5FD2B4E'}];
+       const targetValues = this.props.targetInfo.values;
+       const targetLabels = this.props.targetInfo.labels;
+       const targetNode = [];
+       for (var i = 0; i < targetValues.length; i++){
+           targetNode.push({value:targetValues[i],label:targetLabels[i]});
+       }
 
 
-<div>
-  <table border="0">
-    <tbody>
-      <tr>
-        <td>
-          <table>
-          <thead>
-            <tr>
-              <th>Source Nodes</th>
-              <th>Target Nodes</th>
-            </tr>
-          </thead>
-            <tbody>
+        return (
+
+        <div>
+        <table border="0">
+        <tbody>
+        <tr>
+          <td>
+            <table>
+            <thead>
               <tr>
-                <td>
-                  <DropdownNode
-                    options={sourceNode}
-                    onDropdownChange={this.handleSourceDropdownChange}
-                  />
-                </td>
-                <td>
-                  <DropdownNode
-                    options={targetNode}
-                    onDropdownChange={this.handleTargetDropdownChange}
-                  />
-                </td>
-                <td>
-                  <MapButton onMapButtonClick={this.handleMapButtonClick} />
-                </td>
+                <th>Source Nodes</th>
+                <th>Target Nodes</th>
               </tr>
-            </tbody>
-          </table>
-        </td>
-      </tr>
-      <tr />
+            </thead>
+              <tbody>
+                <tr>
+                  <td>
+                    <DropdownNode
+                      options={sourceNode}
+                      onDropdownChange={this.handleSourceDropdownChange}
+                    />
+                  </td>
+                  <td>
+                    <DropdownNode
+                      options={targetNode}
+                      onDropdownChange={this.handleTargetDropdownChange}
+                    />
+                  </td>
+                  <td>
+                    <MapButton onMapButtonClick={this.handleMapButtonClick} />
+                  </td>
+                </tr>
+              </tbody>
+            </table>
+          </td>
+        </tr>
+        <tr />
 
-      <tr>
-        <td>
-          <DefinitionDiagrams
-            sourceCurrentSelector={this.state.sourceCurrentSelector}
-            sourcePreviousSelector={this.state.sourcePreviousSelector}
+        <tr>
+          <td>
+            <DefinitionDiagrams
+              sourceCurrentSelector={this.state.sourceCurrentSelector}
+              sourcePreviousSelector={this.state.sourcePreviousSelector}
 
-            targetCurrentSelector={this.state.targetCurrentSelector}
-            targetPreviousSelector={this.state.targetPreviousSelector}
+              targetCurrentSelector={this.state.targetCurrentSelector}
+              targetPreviousSelector={this.state.targetPreviousSelector}
 
-            sourceDiagramButtonClick={this.handleSourceDiagramButtonClick}
-            targetDiagramButtonClick={this.handleTargetDiagramButtonClick}
+              sourceDiagramButtonClick={this.handleSourceDiagramButtonClick}
+              targetDiagramButtonClick={this.handleTargetDiagramButtonClick}
 
-            sourceDiagramshown={this.state.sourceDiagramshown}
-            targetDiagramshown={this.state.targetDiagramshown}
+              sourceDiagramshown={this.state.sourceDiagramshown}
+              targetDiagramshown={this.state.targetDiagramshown}
 
-            sourceInfo={this.props.sourceInfo} targetInfo={this.props.targetInfo}
-          />
-        </td>
-      </tr>
-      <tr>
-        <td >
-            Use below text field to update mappings directly, like delete a wrong mapping:
-        </td>
-      </tr>
-      <tr>
-        <td >
-                <Field
-                  name="mappings"
-                  component="textarea"
-                  id="nodeMappingField"
-                />
-        </td>
-      </tr>
-    </tbody>
-  </table>
-</div>
+              sourceInfo={this.props.sourceInfo} targetInfo={this.props.targetInfo}
+            />
+          </td>
+        </tr>
+        <tr>
+          <td >
+              Use below text field to update mappings directly, like delete a wrong mapping:
+          </td>
+        </tr>
+        <tr>
+          <td >
+                  <Field
+                    name="mappings"
+                    component="textarea"
+                    id="nodeMappingField"
+                  />
+          </td>
+        </tr>
+        </tbody>
+        </table>
+        </div>
 
-    );
+        );
+
+
+   }else{
+       //no process info retrived from backend yet, just display an empty tag to avoid error. 
+       return (<div/>);
+   }
+
+
   }
 }

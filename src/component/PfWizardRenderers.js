@@ -100,7 +100,9 @@ export const renderWizardContents = (wizardSteps, state, setInfo) => {
                   activeStepIndex={activeStepIndex}
                   activeSubStepIndex={activeSubStepIndex}
                 >
-
+                <PageMapping
+                      sourceInfo={sourceInfo} targetInfo={targetInfo}
+                />
                 </Wizard.Contents>
               );
       } else if (stepIndex === 3 && subStepIndex === 0) {
