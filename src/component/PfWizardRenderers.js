@@ -56,8 +56,9 @@ export const renderSidebarItems = (wizardSteps, activeStepIndex, activeSubStepIn
   ));
 };
 
-export const renderWizardContents = (wizardSteps, activeStepIndex, activeSubStepIndex) =>
-  wizardSteps.map((step, stepIndex) =>
+export const renderWizardContents = (wizardSteps, state, setInfo) => {
+  const { activeStepIndex, activeSubStepIndex, sourceInfo, targetInfo} = state;
+  return wizardSteps.map((step, stepIndex) =>
     step.subSteps.map((sub, subStepIndex) => {
       if (stepIndex === 0 ) {
         // render steps 1
@@ -82,7 +83,11 @@ export const renderWizardContents = (wizardSteps, activeStepIndex, activeSubStep
                   activeStepIndex={activeStepIndex}
                   activeSubStepIndex={activeSubStepIndex}
                 >
-                  {WizardFormContentsProcessDefintion(sub.contents.label1, sub.contents.label2, sub.contents.label3, sub.contents.label4)}
+                <PageDefinitionTables
+                      sourceInfo={sourceInfo}
+                      targetInfo={targetInfo}
+                      setInfo={setInfo}
+                />
                 </Wizard.Contents>
               );
       } else if (stepIndex === 2) {
@@ -128,3 +133,4 @@ export const renderWizardContents = (wizardSteps, activeStepIndex, activeSubStep
       return null;
     })
   );
+};

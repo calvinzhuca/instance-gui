@@ -15,16 +15,6 @@ import { renderWizardSteps, renderSidebarItems, renderWizardContents } from './P
 
 export default class PfWizardForm extends PfWizardBase {
 
-  constructor(props) {
-    super(props);
-    console.log('here in WizardForm2');
-    this.state = {
-      activeStepIndex: 0,
-      activeSubStepIndex: 0,
-      showModal: true
-    };
-  }
-
 
   close = () => {
     this.setState({ showModal: false });
@@ -54,7 +44,7 @@ export default class PfWizardForm extends PfWizardBase {
                   this.onSidebarItemClick
                 )}
               />
-              <Wizard.Main>{renderWizardContents(PfWizardCreatePlanItems, activeStepIndex, activeSubStepIndex)}</Wizard.Main>
+              <Wizard.Main>{renderWizardContents(PfWizardCreatePlanItems, this.state, this.setInfo)}</Wizard.Main>
             </Wizard.Row>
           </Wizard.Body>
           <Wizard.Footer>

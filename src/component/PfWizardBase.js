@@ -6,9 +6,21 @@ export default class PfWizardBase extends React.Component {
     super(props);
     this.state = {
       activeStepIndex: props.initialStepIndex || 0,
-      activeSubStepIndex: props.initialSubStepIndex || 0
+      activeSubStepIndex: props.initialSubStepIndex || 0,
+      showModal: true,
+      sourceInfo: '',
+      targetInfo: ''
     };
   }
+
+  setInfo = (sourceInfo, targetInfo) => {
+      console.log('setInfo sourceInfo ' + sourceInfo.processId + ' targetInfo ' + targetInfo.processId);
+      this.setState({
+          sourceInfo:sourceInfo,
+          targetInfo:targetInfo
+      });
+  }
+
   onBackButtonClick = () => {
     const { steps } = this.props;
     const { activeStepIndex, activeSubStepIndex } = this.state;
