@@ -28,18 +28,7 @@ export const PfWizardCreatePlanItems = [
       {
         subStep: '2.1',
         label: '2A.',
-        title: 'Source Process',
-        contents: {
-          label1: 'processId',
-          label2: 'groupId',
-          label3: 'artifactId',
-          label4: 'version'
-        }
-      },
-      {
-        subStep: '2.2',
-        label: '2B.',
-        title: 'Target Process',
+        title: 'Process Definition',
         contents: {
           label1: 'processId',
           label2: 'groupId',
@@ -47,7 +36,6 @@ export const PfWizardCreatePlanItems = [
           label4: 'version'
         }
       }
-
     ]
   },
   {
@@ -95,35 +83,6 @@ export const WizardFormContentsPlanName = (label1, label2) => (
     </div>
     <div className="form-group">
       <label className="col-sm-2 control-label">{label2}</label>
-      <div className="col-sm-10">
-        <textarea className="form-control" rows="2" />
-      </div>
-    </div>
-  </form>
-);
-
-export const WizardFormContentsProcessDefintion = (label1, label2, label3, label4) => (
-  <form className="form-horizontal">
-    <div className="form-group required">
-      <label className="col-sm-2 control-label">{label1}</label>
-      <div className="col-sm-10">
-        <input type="text" className="form-control" />
-      </div>
-    </div>
-    <div className="form-group">
-      <label className="col-sm-2 control-label">{label2}</label>
-      <div className="col-sm-10">
-        <textarea className="form-control" rows="2" />
-      </div>
-    </div>
-    <div className="form-group">
-      <label className="col-sm-2 control-label">{label3}</label>
-      <div className="col-sm-10">
-        <textarea className="form-control" rows="2" />
-      </div>
-    </div>
-    <div className="form-group">
-      <label className="col-sm-2 control-label">{label4}</label>
       <div className="col-sm-10">
         <textarea className="form-control" rows="2" />
       </div>

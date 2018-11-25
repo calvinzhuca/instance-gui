@@ -2,7 +2,7 @@ import React from 'react';
 
 import {Wizard} from "patternfly-react"
 
-import { WizardFormContentsPlanName, WizardFormContentsProcessDefintion } from './PfWizardCreatePlanItems';
+import { WizardFormContentsPlanName } from './PfWizardCreatePlanItems';
 import PfWizardReviewStepsManager from './PfWizardReviewStepsManager';
 import PfWizardSubmitPlan from './PfWizardSubmitPlan';
 import PageMapping from "./PageMapping";
@@ -100,7 +100,7 @@ export const renderWizardContents = (wizardSteps, state, setInfo) => {
                   activeStepIndex={activeStepIndex}
                   activeSubStepIndex={activeSubStepIndex}
                 >
-                {WizardFormContentsProcessDefintion(sub.contents.label1, sub.contents.label2, sub.contents.label3, sub.contents.label4)}
+
                 </Wizard.Contents>
               );
       } else if (stepIndex === 3 && subStepIndex === 0) {

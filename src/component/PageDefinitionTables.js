@@ -13,7 +13,7 @@ export default class PageDefinitionTables extends Component {
           sourceProcessId: 'evaluation',
           sourceGroupId: 'evaluation',
           sourceArtifactId: 'evaluation',
-          sourceVersion: '1.0.0-SNAPSHOT',
+          sourceVersion: '2.0.0-SNAPSHOT',
           targetProcessId: 'Mortgage_Process.MortgageApprovalProcess',
           targetGroupId: 'mortgage-process',
           targetArtifactId: 'mortgage-process',
@@ -125,12 +125,10 @@ export default class PageDefinitionTables extends Component {
   render() {
 
     return (
-      <div>
-        <table border="0" cellPadding="1">
-          <tbody>
-            <tr>
-              <td>
-                    <SearchInputTable tableHeader="Source Process Definition"
+      <form className="form-horizontal">
+
+
+                    <SearchInputTable tableHeader="Source "
                         processId={this.state.sourceProcessId}
                         groupId={this.state.sourceGroupId}
                         artifactId={this.state.sourceArtifactId}
@@ -141,12 +139,10 @@ export default class PageDefinitionTables extends Component {
                         handleArtifactIdChange={this.handleSourceArtifactIdChange}
                         handleVersionChange={this.handleSourceVersionChange}
                     />
-              </td>
-              <td>
-                    <button type="button" onClick={(e) => this.copySourceToTarget(e)}> >>>> </button>
-              </td>
-              <td>
-                    <SearchInputTable tableHeader="Target Process Definition"
+
+                    <button type="button" onClick={(e) => this.copySourceToTarget(e)}> COPY Source TO Target</button>
+
+                    <SearchInputTable tableHeader="Target "
                         processId={this.state.targetProcessId}
                         groupId={this.state.targetGroupId}
                         artifactId={this.state.targetArtifactId}
@@ -157,57 +153,24 @@ export default class PageDefinitionTables extends Component {
                         handleArtifactIdChange={this.handleTargetArtifactIdChange}
                         handleVersionChange={this.handleTargetVersionChange}
                     />
-              </td>
-            </tr>
 
-            <tr>
-                <td/>
-                <td/>
-                <td>
+
                     <button type="button" onClick={() => this.retriveBothInfo()}>
                       retrive both info from backend
                     </button>
-                </td>
-            </tr>
 
-            <tr>
-              <td>Retrived Source Process info: </td>
-              <td colSpan="2">{this.props.sourceInfo.containerId}</td>
-            </tr>
+                    <div className="form-group">
+                        <label className="col-sm-2 control-label">{this.props.sourceInfo.containerId}</label>
+                        <label className="col-sm-2 control-label">{this.props.targetInfo.containerId}</label>
+                    </div>
 
-            <tr>
-              <td>Retrived Target Process info: </td>
-              <td colSpan="2">{this.props.targetInfo.containerId}</td>
-            </tr>
-{/*hide these fields, if want to show them, switch from 'none' to 'block' */}
-            <tr style={{display: 'none'}}>
-                <td>
+                    <input type="text" className="form-control" name="source_container_id" id="hiddenField_source_container_id" rows="2" />
+                    <input type="text" className="form-control" name="target_container_id" id="hiddenField_target_container_id" rows="2" />
+                    <input type="text" className="form-control" name="target_process_id" id="hiddenField_target_process_id" rows="2" />
 
-                    <Field
-                      name="source_container_id"
-                      component="input"
-                      id="hiddenField_source_container_id"
-                      validate={constants.required}
-                    />
-                    <Field
-                      name="target_container_id"
-                      component="input"
-                      id="hiddenField_target_container_id"
-                      validate={constants.required}
-                    />
-                    <Field
-                      name="target_process_id"
-                      component="input"
-                      id="hiddenField_target_process_id"
-                      validate={constants.required}
-                    />
 
-                </td>
-            </tr>
 
-          </tbody>
-        </table>
-      </div>
+      </form>
     );
   }
 }
