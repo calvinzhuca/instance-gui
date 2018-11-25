@@ -2,9 +2,11 @@ import React from 'react';
 
 import {Wizard} from "patternfly-react"
 
-import { WizardFormContents } from './PfWizardCreatePlanItems';
+import { WizardFormContentsPlanName, WizardFormContentsProcessDefintion } from './PfWizardCreatePlanItems';
 import PfWizardReviewStepsManager from './PfWizardReviewStepsManager';
 import PfWizardSubmitPlan from './PfWizardSubmitPlan';
+import PageMapping from "./PageMapping";
+import PageDefinitionTables from "./PageDefinitionTables";
 
 export const renderWizardSteps = (wizardSteps, activeStepIndex, activeSubStepIndex, onStepClick) => {
   const activeStep = wizardSteps[activeStepIndex];
@@ -57,8 +59,8 @@ export const renderSidebarItems = (wizardSteps, activeStepIndex, activeSubStepIn
 export const renderWizardContents = (wizardSteps, activeStepIndex, activeSubStepIndex) =>
   wizardSteps.map((step, stepIndex) =>
     step.subSteps.map((sub, subStepIndex) => {
-      if (stepIndex === 0 || stepIndex === 1 || stepIndex === 2) {
-        // render steps 1 and 2 mock contents
+      if (stepIndex === 0 ) {
+        // render steps 1
         return (
           <Wizard.Contents
             key={subStepIndex}
@@ -67,11 +69,37 @@ export const renderWizardContents = (wizardSteps, activeStepIndex, activeSubStep
             activeStepIndex={activeStepIndex}
             activeSubStepIndex={activeSubStepIndex}
           >
-            {WizardFormContents(sub.contents.label1, sub.contents.label2, sub.contents.label3, sub.contents.label4)}
+            {WizardFormContentsPlanName(sub.contents.label1, sub.contents.label2)}
           </Wizard.Contents>
         );
+      } else if (stepIndex === 1 ) {
+              // render steps 2
+              return (
+                <Wizard.Contents
+                  key={subStepIndex}
+                  stepIndex={stepIndex}
+                  subStepIndex={subStepIndex}
+                  activeStepIndex={activeStepIndex}
+                  activeSubStepIndex={activeSubStepIndex}
+                >
+                  {WizardFormContentsProcessDefintion(sub.contents.label1, sub.contents.label2, sub.contents.label3, sub.contents.label4)}
+                </Wizard.Contents>
+              );
+      } else if (stepIndex === 2) {
+              // render steps 3
+              return (
+                <Wizard.Contents
+                  key={subStepIndex}
+                  stepIndex={stepIndex}
+                  subStepIndex={subStepIndex}
+                  activeStepIndex={activeStepIndex}
+                  activeSubStepIndex={activeSubStepIndex}
+                >
+                {WizardFormContentsProcessDefintion(sub.contents.label1, sub.contents.label2, sub.contents.label3, sub.contents.label4)}
+                </Wizard.Contents>
+              );
       } else if (stepIndex === 3 && subStepIndex === 0) {
-        // render mock summary
+        // render review
         return (
           <Wizard.Contents
             key={subStepIndex}

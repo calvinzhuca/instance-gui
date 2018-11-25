@@ -40,7 +40,7 @@ export default class PfWizardForm extends PfWizardBase {
 
 
         <Wizard show={showModal} onHide={this.close}>
-          <Wizard.Header onClose={this.close} title="Migration Plan Wizard" />
+          <Wizard.Header onClose={this.close} title="Create Migration Plan Wizard" />
           <Wizard.Body>
             <Wizard.Steps
               steps={renderWizardSteps(PfWizardCreatePlanItems, activeStepIndex, activeSubStepIndex, this.onStepClick)}
