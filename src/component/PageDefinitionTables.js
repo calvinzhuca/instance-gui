@@ -164,9 +164,9 @@ export default class PageDefinitionTables extends Component {
                         <label className="col-sm-2 control-label">{this.props.targetInfo.containerId}</label>
                     </div>
 
-                    <input type="text" className="form-control" name="source_container_id" id="hiddenField_source_container_id" rows="2" />
-                    <input type="text" className="form-control" name="target_container_id" id="hiddenField_target_container_id" rows="2" />
-                    <input type="text" className="form-control" name="target_process_id" id="hiddenField_target_process_id" rows="2" />
+                    <input type="text" className="form-control" name="source_container_id" id="hiddenField_source_container_id" />
+                    <input type="text" className="form-control" name="target_container_id" id="hiddenField_target_container_id" />
+                    <input type="text" className="form-control" name="target_process_id" id="hiddenField_target_process_id" />
 
 
 

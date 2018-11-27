@@ -29,8 +29,8 @@ export default class DefinitionDiagrams extends Component {
                   <table>
                     <tbody>
                     <tr>
-                      <td>Source: {this.props.sourceInfo.processId}</td>
-                      <td>Target: {this.props.targetInfo.processId}</td>
+                      <label className="col-sm-2 control-label">Source: {this.props.sourceInfo.processId}</label>
+                      <label className="col-sm-2 control-label">Target: {this.props.targetInfo.processId}</label>
                     </tr>
                       <tr>
                         <td>

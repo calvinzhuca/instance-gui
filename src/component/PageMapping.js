@@ -1,11 +1,13 @@
 import React, { Component } from 'react';
 import { BrowserRouter as Router, Route, Link } from "react-router-dom";
-import { Field } from 'react-final-form'
 
 import DefinitionDiagrams from "./DefinitionDiagrams";
 import MapButton from "./MapButton";
 import DropdownNode from './DropdownNode'
 import * as constants from './WizardConstants';
+
+
+
 
 export default class PageMapping extends Component {
   constructor (props) {
@@ -137,43 +139,20 @@ export default class PageMapping extends Component {
         return (
 
         <div>
-        <table border="0">
-        <tbody>
-        <tr>
-          <td>
-            <table>
-            <thead>
-              <tr>
-                <th>Source Nodes</th>
-                <th>Target Nodes</th>
-              </tr>
-            </thead>
-              <tbody>
-                <tr>
-                  <td>
+                    <div className="form-group">
                     <DropdownNode
                       options={sourceNode}
+                      title='Source Nodes'
                       onDropdownChange={this.handleSourceDropdownChange}
                     />
-                  </td>
-                  <td>
                     <DropdownNode
                       options={targetNode}
+                      title='Target Nodes'
                       onDropdownChange={this.handleTargetDropdownChange}
                     />
-                  </td>
-                  <td>
-                    <MapButton onMapButtonClick={this.handleMapButtonClick} />
-                  </td>
-                </tr>
-              </tbody>
-            </table>
-          </td>
-        </tr>
-        <tr />
 
-        <tr>
-          <td>
+                    <MapButton onMapButtonClick={this.handleMapButtonClick} />
+                    </div>
             <DefinitionDiagrams
               sourceCurrentSelector={this.state.sourceCurrentSelector}
               sourcePreviousSelector={this.state.sourcePreviousSelector}
@@ -189,31 +168,18 @@ export default class PageMapping extends Component {
 
               sourceInfo={this.props.sourceInfo} targetInfo={this.props.targetInfo}
             />
-          </td>
-        </tr>
-        <tr>
-          <td >
-              Use below text field to update mappings directly, like delete a wrong mapping:
-          </td>
-        </tr>
-        <tr>
-          <td >
-                  <Field
-                    name="mappings"
-                    component="textarea"
-                    id="nodeMappingField"
-                  />
-          </td>
-        </tr>
-        </tbody>
-        </table>
+
+              <label className="col-sm-2 control-label">Use below text field to update mappings directly, like delete a wrong mapping:</label>
+
+              <textarea className="form-control" name="mappings" id="nodeMappingField" rows="2" />
+
         </div>
 
         );
 
 
    }else{
-       //no process info retrived from backend yet, just display an empty tag to avoid error. 
+       //no process info retrived from backend yet, just display an empty tag to avoid error.
        return (<div/>);
    }
 
