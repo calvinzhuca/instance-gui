@@ -16,7 +16,6 @@ export default class DropdownNode extends React.Component {
   }
 
   handleChange(option) {
-    console.log('You selected ', option);
     const newTitle = this.props.title + ":" + option;
     this.setState({title: newTitle});
     this.props.onDropdownChange(option);

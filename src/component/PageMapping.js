@@ -1,8 +1,8 @@
 import React, { Component } from 'react';
-import { BrowserRouter as Router, Route, Link } from "react-router-dom";
+import { Button } from "patternfly-react";
+
 
 import DefinitionDiagrams from "./DefinitionDiagrams";
-import MapButton from "./MapButton";
 import DropdownNode from './DropdownNode'
 import * as constants from './WizardConstants';
 
@@ -47,9 +47,9 @@ export default class PageMapping extends Component {
   handleSourceDropdownChange(option){
     let tmpPreviousSelector = this.state.sourceCurrentSelector;
     //let tmpCurrentSelector = "#"  + option.value + "undefined";
-    let tmpCurrentSelector = "#"  + option.value + "_shapeType_BACKGROUND";
+    let tmpCurrentSelector = "#"  + option + "_shapeType_BACKGROUND";
     this.setState({
-      sourceNodeStr: option.value,
+      sourceNodeStr: option,
       sourcePreviousSelector: tmpPreviousSelector,
       sourceCurrentSelector: tmpCurrentSelector,
       sourceDiagramshown: true,
@@ -62,14 +62,14 @@ export default class PageMapping extends Component {
 
   handleTargetDropdownChange(option){
     let tmpPreviousSelector = this.state.targetCurrentSelector;
-    let tmpCurrentSelector = "#"  + option.value + "_shapeType_BACKGROUND";
+    let tmpCurrentSelector = "#"  + option + "_shapeType_BACKGROUND";
     //let tmpCurrentSelector = "#"  + option.value;
 
     //let tmpCurrentSelector = "[bpmn2nodeid=" + option.value + "]";
     //console.log('TargetDropdown selected ', tmpCurrentSelector);
 
     this.setState({
-      targetNodeStr: option.value,
+      targetNodeStr: option,
       targetPreviousSelector: tmpPreviousSelector,
       targetCurrentSelector: tmpCurrentSelector,
       sourceDiagramshown: false,
@@ -79,7 +79,6 @@ export default class PageMapping extends Component {
   }
 
   handleMapButtonClick(){
-
       if (this.state.sourceNodeStr.length >0 && this.state.targetNodeStr.length >0 )
       {
           var currentNodeMapping = '"' + this.state.sourceNodeStr + '"' + ":" + '"' + this.state.targetNodeStr + '"';
@@ -112,9 +111,14 @@ export default class PageMapping extends Component {
 
   }
 
+  MappingButton (){
+      return <Button bsStyle="primary" onClick={this.handleMapButtonClick}>Map these two nodes</Button>;
+  };
+
 
 
   render() {
+
 
 
    const sourceValues = this.props.sourceInfo.values;
@@ -138,21 +142,32 @@ export default class PageMapping extends Component {
 
         return (
 
-        <div>
-                    <div className="form-group">
+        <form className="form-horizontal">
+            <div className="form-group">
+              <label>Source: {this.props.sourceInfo.processId}</label>
                     <DropdownNode
                       options={sourceNode}
-                      title='Source Nodes'
+                      title='Source Nodes '
                       onDropdownChange={this.handleSourceDropdownChange}
                     />
+
+                    <label>Target: {this.props.targetInfo.processId}</label>
                     <DropdownNode
                       options={targetNode}
-                      title='Target Nodes'
+                      title='Target Nodes '
                       onDropdownChange={this.handleTargetDropdownChange}
                     />
+                    {this.MappingButton()}
+            </div>
 
-                    <MapButton onMapButtonClick={this.handleMapButtonClick} />
-                    </div>
+            <div className="form-group">
+                    <label >Use below text field to update mappings directly, like delete a wrong mapping:</label>
+
+                    <textarea className="form-control" name="mappings" id="nodeMappingField" rows="2" />
+
+
+            </div>
+
             <DefinitionDiagrams
               sourceCurrentSelector={this.state.sourceCurrentSelector}
               sourcePreviousSelector={this.state.sourcePreviousSelector}
@@ -169,11 +184,8 @@ export default class PageMapping extends Component {
               sourceInfo={this.props.sourceInfo} targetInfo={this.props.targetInfo}
             />
 
-              <label className="col-sm-2 control-label">Use below text field to update mappings directly, like delete a wrong mapping:</label>
 
-              <textarea className="form-control" name="mappings" id="nodeMappingField" rows="2" />
-
-        </div>
+        </form>
 
         );
 

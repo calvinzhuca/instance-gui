@@ -1,12 +1,13 @@
 import React, { Component } from 'react';
+import { Button } from "patternfly-react";
 
-
-import DefinitionDiagramButton from './DefinitionDiagramButton'
 import SvgControllerPan from './SvgControllerPan'
 
 export default class DefinitionDiagrams extends Component {
 
-
+    displayDiagramButton(onclickAction, displayText){
+        return <Button bsStyle="info" onClick={onclickAction}>{displayText}</Button>;
+    }
 
     render () {
       const sourceShown = {
@@ -22,38 +23,12 @@ export default class DefinitionDiagrams extends Component {
       const targetDisplayText= this.props.targetDiagramshown ? "Hide Target Diagram" : "Show Target Diagram";
 
         return (
-          <table border="0">
-            <tbody>
-              <tr>
-                <td>
-                  <table>
-                    <tbody>
-                    <tr>
-                      <label className="col-sm-2 control-label">Source: {this.props.sourceInfo.processId}</label>
-                      <label className="col-sm-2 control-label">Target: {this.props.targetInfo.processId}</label>
-                    </tr>
-                      <tr>
-                        <td>
-                          <DefinitionDiagramButton
-                            onButtonClick={this.props.sourceDiagramButtonClick}
-                            displayText={sourceDisplayText}
-                            sourceDiagramshown={this.props.sourceDiagramshown}
-                          />
-                        </td>
-                        <td>
-                          <DefinitionDiagramButton
-                            onButtonClick={this.props.targetDiagramButtonClick}
-                            displayText={targetDisplayText}
-                            isShown={targetShown}
-                          />
-                        </td>
-                      </tr>
-                    </tbody>
-                  </table>
-                </td>
-              </tr>
-              <tr>
-                <td>
+            <div className="form-group">
+
+                    {this.displayDiagramButton(this.props.sourceDiagramButtonClick, sourceDisplayText)}
+                    
+                    {this.displayDiagramButton(this.props.targetDiagramButtonClick, targetDisplayText)}
+
                   <h2 style={sourceShown}>
                     Source Process Definition Diagram
                     <SvgControllerPan svgcontents={this.props.sourceInfo.svgFile}
@@ -68,16 +43,8 @@ export default class DefinitionDiagrams extends Component {
                       currentSelector={this.props.targetCurrentSelector}
                     />
                   </h2>
-
-
-
-                </td>
-              </tr>
-
-            </tbody>
-          </table>
-
-                )
+            </div>
+        )
     }
 
 
