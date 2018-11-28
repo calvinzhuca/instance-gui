@@ -1,6 +1,8 @@
 import React from 'react';
 import PropTypes from 'prop-types';
 
+import axios from 'axios';
+
 export default class PfWizardBase extends React.Component {
   constructor(props) {
     super(props);
@@ -15,13 +17,13 @@ export default class PfWizardBase extends React.Component {
       source_container_id:'',
       target_container_id:'',
       target_process_id:'',
-      nodeMapping:'',
+      mappings:'',
       migrationPlanJsonStr:''
     };
   }
 
   setInfo = (sourceInfo, targetInfo) => {
-      console.log('setInfo sourceInfo ' + sourceInfo.processId + ' targetInfo ' + targetInfo.processId);
+
       this.setState({
           sourceInfo:sourceInfo,
           targetInfo:targetInfo
@@ -29,7 +31,34 @@ export default class PfWizardBase extends React.Component {
   }
 
 
+  onSubmit = () => {
+      var plan = this.state.migrationPlanJsonStr;
+      console.log('!!!!!!!!!!!!!!!!!!!submit plan' + plan);
 
+      //step 1, replace all \" to "
+      plan = plan.replace(/\\\"/g, '\"');
+      console.log('!!!!!!!!!!!!!!!!!!!submit plan1: ' + plan);
+      //step 2, replace "{ to {
+      plan = plan.replace('\"\{', '\{');
+      console.log('plan2: ' + plan );
+      //step3, replace }" to }
+      plan = plan.replace('\}\"', '\}');
+      console.log('plan3: ' + plan );      
+
+      const serviceUrl = 'http://localhost:8280/plans';
+      axios.post(serviceUrl, plan, {headers: {
+                "Content-Type": "application/json"}
+      })
+      .then(function (response) {
+        console.log('response: ' + response.data );
+      })
+      .catch(function (error) {
+        console.log('error: ' + error );
+      });
+      window.alert("submitted this plan" + plan);
+
+    this.onNextButtonClick();
+  }
 
   onBackButtonClick = () => {
     const { steps } = this.props;

@@ -2,7 +2,6 @@ import React, { Component } from 'react';
 import { Field } from 'react-final-form';
 import axios from 'axios';
 
-import * as constants from './WizardConstants';
 import SearchInputTable from "./SearchInputTable";
 
 export default class PageDefinitionTables extends Component {
@@ -163,11 +162,11 @@ export default class PageDefinitionTables extends Component {
                         <label className="col-sm-2 control-label">{this.props.sourceInfo.containerId}</label>
                         <label className="col-sm-2 control-label">{this.props.targetInfo.containerId}</label>
                     </div>
-
-                    <input type="text" className="form-control" name="source_container_id" id="hiddenField_source_container_id" />
-                    <input type="text" className="form-control" name="target_container_id" id="hiddenField_target_container_id" />
-                    <input type="text" className="form-control" name="target_process_id" id="hiddenField_target_process_id" />
-
+                    <div style={{display: 'none'}}>
+                        <input type="text" className="form-control" name="source_container_id" id="hiddenField_source_container_id" />
+                        <input type="text" className="form-control" name="target_container_id" id="hiddenField_target_container_id" />
+                        <input type="text" className="form-control" name="target_process_id" id="hiddenField_target_process_id" />
+                    </div>
 
 
       </div>

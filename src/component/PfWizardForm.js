@@ -27,8 +27,8 @@ export default class PfWizardForm extends PfWizardBase {
             this.setState({target_container_id: e.target.value});
         }else if (e.target.name == 'target_process_id'){
             this.setState({target_process_id: e.target.value});
-        }else if (e.target.name == 'nodeMapping'){
-            this.setState({nodeMapping: e.target.value});
+        }else if (e.target.name == 'mappings'){
+            this.setState({mappings: e.target.value});
         }
     }
 
@@ -41,7 +41,7 @@ export default class PfWizardForm extends PfWizardBase {
               source_container_id: this.state.source_container_id,
               target_container_id: this.state.target_container_id,
               target_process_id: this.state.target_process_id,
-              nodeMapping: this.state.nodeMapping
+              mappings: this.state.mappings
           };
 
           const jsonStr = JSON.stringify(formData, null, 2);
@@ -100,7 +100,7 @@ export default class PfWizardForm extends PfWizardBase {
             )}
             {activeStepIndex === 3 &&
               activeSubStepIndex === 0 && (
-                <Button bsStyle="primary" onClick={this.onNextButtonClick}>
+                <Button bsStyle="primary" onClick={this.onSubmit}>
                   Submit Plan
                   <Icon type="fa" name="angle-right" />
                 </Button>

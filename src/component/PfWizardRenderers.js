@@ -3,7 +3,6 @@ import React from 'react';
 import {Wizard} from "patternfly-react"
 
 import { WizardFormContentsPlanName } from './PfWizardCreatePlanItems';
-import PfWizardReviewStepsManager from './PfWizardReviewStepsManager';
 import PfWizardSubmitPlan from './PfWizardSubmitPlan';
 import PageMapping from "./PageMapping";
 import PageDefinitionTables from "./PageDefinitionTables";

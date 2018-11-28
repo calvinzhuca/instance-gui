@@ -1,7 +1,7 @@
 import React, { Component } from 'react';
 import { Button } from "patternfly-react";
 
-export default class PagePlanName extends Component {
+export default class PageReview extends Component {
     onClick(e){
 
     }

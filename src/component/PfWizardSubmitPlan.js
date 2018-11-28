@@ -37,9 +37,6 @@ export default class PfWizardSubmitPlan extends React.Component {
         <p className="blank-slate-pf-secondary-action">
           .................
         </p>
-        <button type="button" className="btn btn-lg btn-primary">
-          TODO: Export Plan
-        </button>
       </div>
     );
   }
