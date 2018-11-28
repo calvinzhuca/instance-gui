@@ -9,7 +9,13 @@ export default class PfWizardBase extends React.Component {
       activeSubStepIndex: props.initialSubStepIndex || 0,
       showModal: true,
       sourceInfo: '',
-      targetInfo: ''
+      targetInfo: '',
+      name:'',
+      description:'',
+      source_container_id:'',
+      target_container_id:'',
+      target_process_id:''
+
     };
   }
 
@@ -20,6 +26,9 @@ export default class PfWizardBase extends React.Component {
           targetInfo:targetInfo
       });
   }
+
+
+
 
   onBackButtonClick = () => {
     const { steps } = this.props;
@@ -36,6 +45,7 @@ export default class PfWizardBase extends React.Component {
       }));
     }
   };
+
   onNextButtonClick = () => {
     const { steps } = this.props;
     const { activeStepIndex, activeSubStepIndex } = this.state;
@@ -52,6 +62,9 @@ export default class PfWizardBase extends React.Component {
       }));
     }
   };
+
+
+
   onSidebarItemClick = (stepIndex, subStepIndex) => {
     this.setState({
       activeStepIndex: stepIndex,

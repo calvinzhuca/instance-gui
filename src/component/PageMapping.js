@@ -142,7 +142,7 @@ export default class PageMapping extends Component {
 
         return (
 
-        <form className="form-horizontal">
+        <div className="form-horizontal">
             <div className="form-group">
               <label>Source: {this.props.sourceInfo.processId}</label>
                     <DropdownNode
@@ -185,7 +185,7 @@ export default class PageMapping extends Component {
             />
 
 
-        </form>
+        </div>
 
         );
 

@@ -7,6 +7,7 @@ import PfWizardReviewStepsManager from './PfWizardReviewStepsManager';
 import PfWizardSubmitPlan from './PfWizardSubmitPlan';
 import PageMapping from "./PageMapping";
 import PageDefinitionTables from "./PageDefinitionTables";
+import PagePlanName from "./PagePlanName";
 
 export const renderWizardSteps = (wizardSteps, activeStepIndex, activeSubStepIndex, onStepClick) => {
   const activeStep = wizardSteps[activeStepIndex];
@@ -70,7 +71,7 @@ export const renderWizardContents = (wizardSteps, state, setInfo) => {
             activeStepIndex={activeStepIndex}
             activeSubStepIndex={activeSubStepIndex}
           >
-            {WizardFormContentsPlanName(sub.contents.label1, sub.contents.label2)}
+            <PagePlanName />
           </Wizard.Contents>
         );
       } else if (stepIndex === 1 ) {

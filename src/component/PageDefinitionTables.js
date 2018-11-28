@@ -125,7 +125,7 @@ export default class PageDefinitionTables extends Component {
   render() {
 
     return (
-      <form className="form-horizontal">
+      <div className="form-horizontal">
 
 
                     <SearchInputTable tableHeader="Source "
@@ -170,7 +170,7 @@ export default class PageDefinitionTables extends Component {
 
 
 
-      </form>
+      </div>
     );
   }
 }
