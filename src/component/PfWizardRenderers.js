@@ -8,6 +8,7 @@ import PfWizardSubmitPlan from './PfWizardSubmitPlan';
 import PageMapping from "./PageMapping";
 import PageDefinitionTables from "./PageDefinitionTables";
 import PagePlanName from "./PagePlanName";
+import PageReview from "./PageReview";
 
 export const renderWizardSteps = (wizardSteps, activeStepIndex, activeSubStepIndex, onStepClick) => {
   const activeStep = wizardSteps[activeStepIndex];
@@ -58,7 +59,7 @@ export const renderSidebarItems = (wizardSteps, activeStepIndex, activeSubStepIn
 };
 
 export const renderWizardContents = (wizardSteps, state, setInfo) => {
-  const { activeStepIndex, activeSubStepIndex, sourceInfo, targetInfo} = state;
+  const { activeStepIndex, activeSubStepIndex, sourceInfo, targetInfo, migrationPlanJsonStr} = state;
   return wizardSteps.map((step, stepIndex) =>
     step.subSteps.map((sub, subStepIndex) => {
       if (stepIndex === 0 ) {
@@ -116,7 +117,7 @@ export const renderWizardContents = (wizardSteps, state, setInfo) => {
             activeStepIndex={activeStepIndex}
             activeSubStepIndex={activeSubStepIndex}
           >
-            <PfWizardReviewStepsManager steps={wizardSteps} />
+            <PageReview migrationPlanJsonStr={migrationPlanJsonStr}/>
           </Wizard.Contents>
         );
       } else if (stepIndex === 3 && subStepIndex === 1) {

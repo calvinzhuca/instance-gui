@@ -14,8 +14,9 @@ export default class PfWizardBase extends React.Component {
       description:'',
       source_container_id:'',
       target_container_id:'',
-      target_process_id:''
-
+      target_process_id:'',
+      nodeMapping:'',
+      migrationPlanJsonStr:''
     };
   }
 
@@ -61,6 +62,7 @@ export default class PfWizardBase extends React.Component {
         activeSubStepIndex: 0
       }));
     }
+    this.convertFormDataToJson();
   };
 
 

@@ -163,7 +163,7 @@ export default class PageMapping extends Component {
             <div className="form-group">
                     <label >Use below text field to update mappings directly, like delete a wrong mapping:</label>
 
-                    <textarea className="form-control" name="mappings" id="nodeMappingField" rows="2" />
+                    <textarea className="form-control" name="nodeMapping" id="nodeMappingField" rows="2" />
 
 
             </div>

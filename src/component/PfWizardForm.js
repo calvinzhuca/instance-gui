@@ -18,23 +18,18 @@ export default class PfWizardForm extends PfWizardBase {
     handleFormChange = (e) => {
 
         if (e.target.name == 'name'){
-            console.log('!!!!!!!!!!!!!!!!!!!!!set name: ' + e.target.value);
             this.setState({name: e.target.value});
         }else if (e.target.name == 'description'){
-            console.log('!!!!!!!!!!!!!!!!!!!!!set description: ' + e.target.value);
             this.setState({description: e.target.value});
         }else if (e.target.name == 'source_container_id'){
-            console.log('!!!!!!!!!!!!!!!!!!!!!set source_container_id: ' + e.target.value);
             this.setState({source_container_id: e.target.value});
         }else if (e.target.name == 'target_container_id'){
-            console.log('!!!!!!!!!!!!!!!!!!!!!set target_container_id: ' + e.target.value);
             this.setState({target_container_id: e.target.value});
         }else if (e.target.name == 'target_process_id'){
-            console.log('!!!!!!!!!!!!!!!!!!!!!set target_process_id: ' + e.target.value);
             this.setState({target_process_id: e.target.value});
+        }else if (e.target.name == 'nodeMapping'){
+            this.setState({nodeMapping: e.target.value});
         }
-
-        
     }
 
 
@@ -45,10 +40,14 @@ export default class PfWizardForm extends PfWizardBase {
               description: this.state.description,
               source_container_id: this.state.source_container_id,
               target_container_id: this.state.target_container_id,
-              target_process_id: this.state.target_process_id
+              target_process_id: this.state.target_process_id,
+              nodeMapping: this.state.nodeMapping
           };
-          console.log(formData);
-          console.log("!!!!!!!!!!!!!!!!!!!!!!!!!!JsonStr: " + JSON.stringify(formData));
+
+          const jsonStr = JSON.stringify(formData, null, 2);
+
+          this.setState({migrationPlanJsonStr: jsonStr});
+
           //console.log("!!!!!!!!!!!!! dataContainer" + dataContainer.textContent);
       }
 
