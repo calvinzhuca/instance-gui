@@ -1,5 +1,5 @@
 import React, { Component } from 'react';
-import { Field } from 'react-final-form';
+import { Button } from "patternfly-react";
 import axios from 'axios';
 
 import SearchInputTable from "./SearchInputTable";
@@ -139,7 +139,7 @@ export default class PageDefinitionTables extends Component {
                         handleVersionChange={this.handleSourceVersionChange}
                     />
 
-                    <button type="button" onClick={(e) => this.copySourceToTarget(e)}> COPY Source TO Target</button>
+                    <Button onClick={(e) => this.copySourceToTarget(e)}> Copy Source To Target</Button>
 
                     <SearchInputTable tableHeader="Target "
                         processId={this.state.targetProcessId}
@@ -154,9 +154,7 @@ export default class PageDefinitionTables extends Component {
                     />
 
 
-                    <button type="button" onClick={() => this.retriveBothInfo()}>
-                      retrive both info from backend
-                    </button>
+                    <Button bsStyle="default" onClick={() => this.retriveBothInfo()}>Retrive definition from backend</Button>
 
                     <div className="form-group">
                         <label className="col-sm-2 control-label">{this.props.sourceInfo.containerId}</label>

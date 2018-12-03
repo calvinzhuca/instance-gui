@@ -5,7 +5,7 @@ module.exports = {
   context: path.join(__dirname, "src"),
   entry: ["./index.js"],
   output: {
-    path: path.join(__dirname, "www"),
+    path: path.join(__dirname, ""),
     filename: "bundle.js"
   },
   module: {

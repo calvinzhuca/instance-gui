@@ -43,7 +43,6 @@ export default class PfWizardBase extends React.Component {
       console.log('plan2: ' + plan );
       //step3, replace }" to }
       plan = plan.replace('\}\"', '\}');
-      console.log('plan3: ' + plan );      
 
       const serviceUrl = 'http://localhost:8280/plans';
       axios.post(serviceUrl, plan, {headers: {
@@ -55,7 +54,7 @@ export default class PfWizardBase extends React.Component {
       .catch(function (error) {
         console.log('error: ' + error );
       });
-      window.alert("submitted this plan" + plan);
+      //window.alert("submitted this plan" + plan);
 
     this.onNextButtonClick();
   }
@@ -95,13 +94,6 @@ export default class PfWizardBase extends React.Component {
   };
 
 
-
-  onSidebarItemClick = (stepIndex, subStepIndex) => {
-    this.setState({
-      activeStepIndex: stepIndex,
-      activeSubStepIndex: subStepIndex
-    });
-  };
   onStepClick = stepIndex => {
     if (stepIndex === this.state.activeStepIndex) {
       return;

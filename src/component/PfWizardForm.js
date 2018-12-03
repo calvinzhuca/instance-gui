@@ -8,7 +8,7 @@ import { Wizard } from "patternfly-react";
 
 import { PfWizardCreatePlanItems } from './PfWizardCreatePlanItems';
 import PfWizardBase from './PfWizardBase';
-import { renderWizardSteps, renderSidebarItems, renderWizardContents } from './PfWizardRenderers';
+import { renderWizardSteps, renderWizardContents } from './PfWizardRenderers';
 
 
 export default class PfWizardForm extends PfWizardBase {
@@ -69,14 +69,6 @@ export default class PfWizardForm extends PfWizardBase {
               steps={renderWizardSteps(PfWizardCreatePlanItems, activeStepIndex, activeSubStepIndex, this.onStepClick)}
             />
             <Wizard.Row>
-              <Wizard.Sidebar
-                items={renderSidebarItems(
-                  PfWizardCreatePlanItems,
-                  activeStepIndex,
-                  activeSubStepIndex,
-                  this.onSidebarItemClick
-                )}
-              />
               <Wizard.Main>{renderWizardContents(PfWizardCreatePlanItems, this.state, this.setInfo)}</Wizard.Main>
             </Wizard.Row>
           </Wizard.Body>
