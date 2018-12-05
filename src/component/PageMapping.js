@@ -2,7 +2,7 @@ import React, { Component } from 'react';
 import { Button } from "patternfly-react";
 
 
-import DefinitionDiagrams from "./DefinitionDiagrams";
+import PageMappingDiagrams from "./PageMappingDiagrams";
 import DropdownNode from './DropdownNode'
 
 
@@ -165,7 +165,7 @@ export default class PageMapping extends Component {
 
             </div>
 
-            <DefinitionDiagrams
+            <PageMappingDiagrams
               sourceCurrentSelector={this.state.sourceCurrentSelector}
               sourcePreviousSelector={this.state.sourcePreviousSelector}
 

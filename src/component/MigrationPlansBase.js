@@ -3,7 +3,7 @@ import PropTypes from 'prop-types';
 
 import axios from 'axios';
 
-export default class PfWizardBase extends React.Component {
+export default class MigrationPlansBase extends React.Component {
   constructor(props) {
     super(props);
     this.state = {
@@ -22,18 +22,16 @@ export default class PfWizardBase extends React.Component {
       plans:[]
     };
     this.retriveAllPlans();
+
   }
 
   retriveAllPlans(){
-
       axios.get('http://localhost:8280/plans', {
       }).then (res => {
           const plans = res.data;
-          console.log('get all plans: ' + plans);
           this.setState({ plans });
+          console.log('retriveAllPlans ');
     });
-          console.log('finish  get all plans: ');
-
   }
 
   setInfo = (sourceInfo, targetInfo) => {
@@ -44,19 +42,44 @@ export default class PfWizardBase extends React.Component {
       });
   }
 
+  deletePlan = (id) => {
+      if (window.confirm('Would you like to delete this plan?')) {
+          console.log('confirmed deletion id: ' + id);
+
+          const serviceUrl = 'http://localhost:8280/plans/' + id;
+          console.log('delete url: ' + serviceUrl);
+          //need to create a temp variable "self" to store this, so I can invoke this.retriveAllPlans() inside axios call 
+          const self = this;
+          axios.delete(serviceUrl,  {headers: {
+                    "Content-Type": "application/json"}
+          })
+          .then(function (response) {
+            console.log('response: ' + response.data );
+            self.retriveAllPlans();
+          })
+          .catch(function (error) {
+            console.log('error: ' + error );
+          });
+
+
+
+      }
+  }
 
   onSubmit = () => {
       var plan = this.state.migrationPlanJsonStr;
-      console.log('!!!!!!!!!!!!!!!!!!!submit plan' + plan);
+      if (plan !== null && plan !== '' ){
+          //console.log('!!!!!!!!!!!!!!!!!!!submit plan' + plan);
 
-      //step 1, replace all \" to "
-      plan = plan.replace(/\\\"/g, '\"');
-      console.log('!!!!!!!!!!!!!!!!!!!submit plan1: ' + plan);
-      //step 2, replace "{ to {
-      plan = plan.replace('\"\{', '\{');
-      console.log('plan2: ' + plan );
-      //step3, replace }" to }
-      plan = plan.replace('\}\"', '\}');
+          //step 1, replace all \" to "
+          plan = plan.replace(/\\\"/g, '\"');
+          //console.log('!!!!!!!!!!!!!!!!!!!submit plan1: ' + plan);
+          //step 2, replace "{ to {
+          plan = plan.replace('\"\{', '\{');
+          console.log('plan2: ' + plan );
+          //step3, replace }" to }
+          plan = plan.replace('\}\"', '\}');
+      }
 
       const serviceUrl = 'http://localhost:8280/plans';
       axios.post(serviceUrl, plan, {headers: {
@@ -121,7 +144,7 @@ export default class PfWizardBase extends React.Component {
     return false;
   }
 }
-PfWizardBase.propTypes = {
+MigrationPlansBase.propTypes = {
   /** Initial step index */
   initialStepIndex: PropTypes.number,
   /** Initial sub step index */
@@ -129,7 +152,7 @@ PfWizardBase.propTypes = {
   /** Wizard steps */
   steps: PropTypes.array.isRequired
 };
-PfWizardBase.defaultProps = {
+MigrationPlansBase.defaultProps = {
   initialStepIndex: 0,
   initialSubStepIndex: 0
 };

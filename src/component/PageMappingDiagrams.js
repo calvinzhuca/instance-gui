@@ -1,9 +1,9 @@
 import React, { Component } from 'react';
 import { Button } from "patternfly-react";
 
-import SvgControllerPan from './SvgControllerPan'
+import PageMappingDiagramsSvgPan from './PageMappingDiagramsSvgPan'
 
-export default class DefinitionDiagrams extends Component {
+export default class PageMappingDiagrams extends Component {
 
     displayDiagramButton(onclickAction, displayText){
         return <Button bsStyle="info" onClick={onclickAction}>{displayText}</Button>;
@@ -26,19 +26,19 @@ export default class DefinitionDiagrams extends Component {
             <div className="form-group">
 
                     {this.displayDiagramButton(this.props.sourceDiagramButtonClick, sourceDisplayText)}
-                    
+
                     {this.displayDiagramButton(this.props.targetDiagramButtonClick, targetDisplayText)}
 
                   <h2 style={sourceShown}>
                     Source Process Definition Diagram
-                    <SvgControllerPan svgcontents={this.props.sourceInfo.svgFile}
+                    <PageMappingDiagramsSvgPan svgcontents={this.props.sourceInfo.svgFile}
                       previousSelector={this.props.sourcePreviousSelector}
                       currentSelector={this.props.sourceCurrentSelector}
                     />
                   </h2>
                   <h2 style={targetShown}>
                     Target Process Definition Diagram
-                    <SvgControllerPan svgcontents={this.props.targetInfo.svgFile}
+                    <PageMappingDiagramsSvgPan svgcontents={this.props.targetInfo.svgFile}
                       previousSelector={this.props.targetPreviousSelector}
                       currentSelector={this.props.targetCurrentSelector}
                     />

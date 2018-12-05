@@ -2,7 +2,7 @@ import React, { Component } from 'react';
 
 
 
-export default class SearchInputTable extends Component {
+export default class PageDefinitionSearchTable extends Component {
 
 
     handleProcessIdChange(event){

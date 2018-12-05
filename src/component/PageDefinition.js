@@ -2,9 +2,9 @@ import React, { Component } from 'react';
 import { Button } from "patternfly-react";
 import axios from 'axios';
 
-import SearchInputTable from "./SearchInputTable";
+import PageDefinitionSearchTable from "./PageDefinitionSearchTable";
 
-export default class PageDefinitionTables extends Component {
+export default class PageDefinition extends Component {
     constructor (props) {
       super(props);
 
@@ -127,7 +127,7 @@ export default class PageDefinitionTables extends Component {
       <div className="form-horizontal">
 
 
-                    <SearchInputTable tableHeader="Source "
+                    <PageDefinitionSearchTable tableHeader="Source "
                         processId={this.state.sourceProcessId}
                         groupId={this.state.sourceGroupId}
                         artifactId={this.state.sourceArtifactId}
@@ -141,7 +141,7 @@ export default class PageDefinitionTables extends Component {
 
                     <Button onClick={(e) => this.copySourceToTarget(e)}> Copy Source To Target</Button>
 
-                    <SearchInputTable tableHeader="Target "
+                    <PageDefinitionSearchTable tableHeader="Target "
                         processId={this.state.targetProcessId}
                         groupId={this.state.targetGroupId}
                         artifactId={this.state.targetArtifactId}

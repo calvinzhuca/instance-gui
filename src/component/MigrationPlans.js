@@ -6,18 +6,14 @@ import { Table } from 'patternfly-react';
 import { Button } from "patternfly-react";
 import { Icon } from "patternfly-react";
 import { Wizard } from "patternfly-react";
-
-
-
-import { planBootstrapColumns } from './planBootstrapColumns';
-
+import { actionHeaderCellFormatter, MenuItem } from 'patternfly-react';
 
 import { PfWizardCreatePlanItems } from './PfWizardCreatePlanItems';
-import PfWizardBase from './PfWizardBase';
+import MigrationPlansBase from './MigrationPlansBase';
 import { renderWizardSteps, renderWizardContents } from './PfWizardRenderers';
 
 
-export default class PfWizardAndPlanTable extends PfWizardBase {
+export default class MigrationPlans extends MigrationPlansBase {
 
 
     handleFormChange = (e) => {
@@ -63,10 +59,105 @@ export default class PfWizardAndPlanTable extends PfWizardBase {
     };
     close = () => {
       this.setState({ showModal: false });
+      this.retriveAllPlans();      
     };
 
   render() {
       const { showModal, activeStepIndex, activeSubStepIndex } = this.state;
+      const headerFormat = value => <Table.Heading>{value}</Table.Heading>;
+      const cellFormat = value => <Table.Cell>{value}</Table.Cell>;
+      const headerFormatRightAlign = value => <Table.Heading align="right">{value}</Table.Heading>;
+      const cellFormatRightAlign = value => <Table.Cell align="right">{value}</Table.Cell>;
+
+
+      const planBootstrapColumns = [
+        {
+          header: {
+            label: 'ID',
+            formatters: [headerFormat]
+          },
+          cell: {
+            formatters: [cellFormat]
+          },
+          property: 'id'
+        },
+        {
+          header: {
+            label: 'Plan Name',
+            formatters: [headerFormat]
+          },
+          cell: {
+            formatters: [cellFormat]
+          },
+          property: 'name'
+        },
+        {
+          header: {
+            label: 'Description',
+            formatters: [headerFormat]
+          },
+          cell: {
+            formatters: [cellFormat]
+          },
+          property: 'description'
+        },
+        {
+          header: {
+            label: 'Source Container ID',
+            formatters: [headerFormat]
+          },
+          cell: {
+            formatters: [cellFormat]
+          },
+          property: 'source_container_id'
+        },
+        {
+          header: {
+            label: 'Target Container ID',
+            formatters: [headerFormat]
+          },
+          cell: {
+            formatters: [cellFormat]
+          },
+          property: 'target_container_id'
+        },
+        {
+          header: {
+            label: 'Target Process ID',
+            formatters: [headerFormat]
+          },
+          cell: {
+            formatters: [cellFormat]
+          },
+          property: 'target_process_id'
+        },
+        {
+          header: {
+            label: 'Actions',
+            props: {
+              rowSpan: 1,
+              colSpan: 3
+            },
+            formatters: [actionHeaderCellFormatter]
+          },
+          cell: {
+              formatters: [
+                (value, { rowData }) => [
+                  <Table.Actions key="0">
+                    <Table.Button onClick={() => alert(`Execute ${rowData.name}`)}>Execute</Table.Button>
+                  </Table.Actions>,
+                  <Table.Actions key="1">
+                    <Table.Button onClick={() => alert(`Edit ${rowData.target_container_id}`)}>Edit</Table.Button>
+                  </Table.Actions>,
+                  <Table.Actions key="2">
+                    <Table.Button onClick={() => this.deletePlan(rowData.id)}>Delete</Table.Button>
+                  </Table.Actions>
+                ]
+              ]
+          },
+          property: 'action'
+        }
+      ];
 
     return (
         <div>

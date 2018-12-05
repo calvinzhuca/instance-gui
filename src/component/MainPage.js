@@ -2,11 +2,11 @@ import React from "react";
 import { Row, Col } from 'patternfly-react';
 
 
-import PfWizardAndPlanTable from './PfWizardAndPlanTable';
+import MigrationPlans from './MigrationPlans';
 import { PfWizardCreatePlanItems } from './PfWizardCreatePlanItems';
 
 
-export default class MigrationPlanMain extends React.Component {
+export default class MainPage extends React.Component {
 
 
   render() {
@@ -18,7 +18,7 @@ export default class MigrationPlanMain extends React.Component {
 
         <Row>
           <Col sm={12}>
-            <PfWizardAndPlanTable steps={PfWizardCreatePlanItems} />
+            <MigrationPlans steps={PfWizardCreatePlanItems} />
           </Col>
         </Row>
         </div>

@@ -4,7 +4,7 @@ import {ReactSVGPanZoom} from 'react-svg-pan-zoom';
 import { SvgLoader, SvgProxy } from 'react-svgmt';
 
 
-export default class SvgControllerPan extends Component {
+export default class PageMappingDiagramsSvgPan extends Component {
 
   constructor(props, context) {
     super(props, context);

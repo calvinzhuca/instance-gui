@@ -5,7 +5,7 @@ import {Wizard} from "patternfly-react"
 import { WizardFormContentsPlanName } from './PfWizardCreatePlanItems';
 import PfWizardSubmitPlan from './PfWizardSubmitPlan';
 import PageMapping from "./PageMapping";
-import PageDefinitionTables from "./PageDefinitionTables";
+import PageDefinition from "./PageDefinition";
 import PagePlanName from "./PagePlanName";
 import PageReview from "./PageReview";
 
@@ -35,27 +35,7 @@ export const renderWizardSteps = (wizardSteps, activeStepIndex, activeSubStepInd
   ));
 };
 
-export const renderSidebarItems = (wizardSteps, activeStepIndex, activeSubStepIndex, onSidebarItemClick) => {
-  const activeStep = wizardSteps[activeStepIndex];
-  const activeSubStep = activeStep.subSteps[activeSubStepIndex];
 
-  return wizardSteps.map((step, stepIndex) => (
-    <Wizard.SidebarGroup key={stepIndex} step={step.step} activeStep={activeStep.step}>
-      {step.subSteps.map((sub, subStepIndex) => (
-        <Wizard.SidebarGroupItem
-          key={subStepIndex}
-          stepIndex={stepIndex}
-          subStepIndex={subStepIndex}
-          subStep={sub.subStep}
-          label={sub.label}
-          title={sub.title}
-          activeSubStep={activeSubStep.subStep}
-          onClick={onSidebarItemClick}
-        />
-      ))}
-    </Wizard.SidebarGroup>
-  ));
-};
 
 export const renderWizardContents = (wizardSteps, state, setInfo) => {
   const { activeStepIndex, activeSubStepIndex, sourceInfo, targetInfo, migrationPlanJsonStr} = state;
@@ -84,7 +64,7 @@ export const renderWizardContents = (wizardSteps, state, setInfo) => {
                   activeStepIndex={activeStepIndex}
                   activeSubStepIndex={activeSubStepIndex}
                 >
-                <PageDefinitionTables
+                <PageDefinition
                       sourceInfo={sourceInfo}
                       targetInfo={targetInfo}
                       setInfo={setInfo}
