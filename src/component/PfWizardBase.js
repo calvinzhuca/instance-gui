@@ -9,7 +9,7 @@ export default class PfWizardBase extends React.Component {
     this.state = {
       activeStepIndex: props.initialStepIndex || 0,
       activeSubStepIndex: props.initialSubStepIndex || 0,
-      showModal: true,
+      showModal: false,
       sourceInfo: '',
       targetInfo: '',
       name:'',
@@ -18,8 +18,22 @@ export default class PfWizardBase extends React.Component {
       target_container_id:'',
       target_process_id:'',
       mappings:'',
-      migrationPlanJsonStr:''
+      migrationPlanJsonStr:'',
+      plans:[]
     };
+    this.retriveAllPlans();
+  }
+
+  retriveAllPlans(){
+
+      axios.get('http://localhost:8280/plans', {
+      }).then (res => {
+          const plans = res.data;
+          console.log('get all plans: ' + plans);
+          this.setState({ plans });
+    });
+          console.log('finish  get all plans: ');
+
   }
 
   setInfo = (sourceInfo, targetInfo) => {
