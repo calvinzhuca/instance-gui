@@ -19,7 +19,9 @@ export default class MigrationPlansBase extends React.Component {
       target_process_id:'',
       mappings:'',
       migrationPlanJsonStr:'',
-      plans:[]
+      plans:[],
+      showDeleteConfirmation:false,
+      deletePlanId:''
     };
     this.retriveAllPlans();
 
@@ -42,13 +44,48 @@ export default class MigrationPlansBase extends React.Component {
       });
   }
 
-  deletePlan = (id) => {
+  showDeleteDialog = (id) =>{
+      this.setState({
+          showDeleteConfirmation: true,
+          deletePlanId: id
+      });
+      console.log('deletePlanId ' + id);
+  }
+
+  hideDeleteDialog = () =>{
+      this.setState({
+          showDeleteConfirmation: false
+      });
+  }
+
+  deletePlan = () => {
+      console.log('confirmed deletion id: ' + this.state.deletePlanId);
+
+      const serviceUrl = 'http://localhost:8280/plans/' + this.state.deletePlanId;
+      console.log('delete url: ' + serviceUrl);
+      //need to create a temp variable "self" to store this, so I can invoke this.retriveAllPlans() inside axios call
+      const self = this;
+      axios.delete(serviceUrl,  {headers: {
+                "Content-Type": "application/json"}
+      })
+      .then(function (response) {
+        console.log('response: ' + response.data );
+        self.retriveAllPlans();
+        self.hideDeleteDialog();
+      })
+      .catch(function (error) {
+        console.log('error: ' + error );
+      });
+
+  }
+
+  deletePlan1 = (id) => {
       if (window.confirm('Would you like to delete this plan?')) {
           console.log('confirmed deletion id: ' + id);
 
           const serviceUrl = 'http://localhost:8280/plans/' + id;
           console.log('delete url: ' + serviceUrl);
-          //need to create a temp variable "self" to store this, so I can invoke this.retriveAllPlans() inside axios call 
+          //need to create a temp variable "self" to store this, so I can invoke this.retriveAllPlans() inside axios call
           const self = this;
           axios.delete(serviceUrl,  {headers: {
                     "Content-Type": "application/json"}

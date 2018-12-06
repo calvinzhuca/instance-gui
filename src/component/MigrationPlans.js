@@ -6,7 +6,7 @@ import { Table } from 'patternfly-react';
 import { Button } from "patternfly-react";
 import { Icon } from "patternfly-react";
 import { Wizard } from "patternfly-react";
-import { actionHeaderCellFormatter, MenuItem } from 'patternfly-react';
+import { actionHeaderCellFormatter, MenuItem, MessageDialog } from 'patternfly-react';
 
 import { PfWizardCreatePlanItems } from './PfWizardCreatePlanItems';
 import MigrationPlansBase from './MigrationPlansBase';
@@ -59,7 +59,7 @@ export default class MigrationPlans extends MigrationPlansBase {
     };
     close = () => {
       this.setState({ showModal: false });
-      this.retriveAllPlans();      
+      this.retriveAllPlans();
     };
 
   render() {
@@ -69,6 +69,10 @@ export default class MigrationPlans extends MigrationPlansBase {
       const headerFormatRightAlign = value => <Table.Heading align="right">{value}</Table.Heading>;
       const cellFormatRightAlign = value => <Table.Cell align="right">{value}</Table.Cell>;
 
+      //for MessageDialogDeleteConfirmation
+      const primaryContent = <p className="lead">Please confirm you will delete this migration plan {this.state.deletePlanId}</p>;
+      const secondaryContent = <p></p>;
+      const icon = <Icon type="pf" name="error-circle-o" />;
 
       const planBootstrapColumns = [
         {
@@ -144,13 +148,13 @@ export default class MigrationPlans extends MigrationPlansBase {
               formatters: [
                 (value, { rowData }) => [
                   <Table.Actions key="0">
-                    <Table.Button onClick={() => alert(`Execute ${rowData.name}`)}>Execute</Table.Button>
+                        <Table.Button bsStyle="default" onClick={() => alert(`Execute ${rowData.name}`)}>Execute</Table.Button>
                   </Table.Actions>,
                   <Table.Actions key="1">
-                    <Table.Button onClick={() => alert(`Edit ${rowData.target_container_id}`)}>Edit</Table.Button>
+                        <Table.Button bsStyle="default" onClick={() => alert(`Edit ${rowData.target_container_id}`)}>Edit</Table.Button>
                   </Table.Actions>,
                   <Table.Actions key="2">
-                    <Table.Button onClick={() => this.deletePlan(rowData.id)}>Delete</Table.Button>
+                        <Table.Button bsStyle="default" onClick={() => this.showDeleteDialog(rowData.id)}>Delete</Table.Button>
                   </Table.Actions>
                 ]
               ]
@@ -161,6 +165,22 @@ export default class MigrationPlans extends MigrationPlansBase {
 
     return (
         <div>
+              <MessageDialog
+                show={this.state.showDeleteConfirmation}
+                onHide={this.hideDeleteDialog}
+                primaryAction={this.deletePlan}
+                secondaryAction={this.hideDeleteDialog}
+                primaryActionButtonContent="Delete"
+                secondaryActionButtonContent="Cancel"
+                primaryActionButtonBsStyle="danger"
+                title="Delete Migration Plan"
+                icon={icon}
+                primaryContent={primaryContent}
+                secondaryContent={secondaryContent}
+                accessibleName="deleteConfirmationDialog"
+                accessibleDescription="deleteConfirmationDialogContent"
+              />
+
             <Button bsStyle="primary" bsSize="large" onClick={this.open}>
               Add Plan
             </Button>
