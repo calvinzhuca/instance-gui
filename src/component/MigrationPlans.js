@@ -41,9 +41,12 @@ export default class MigrationPlans extends MigrationPlansBase {
               description: this.state.description,
               source_container_id: this.state.source_container_id,
               target_container_id: this.state.target_container_id,
-              target_process_id: this.state.target_process_id,
-              mappings: this.state.mappings
+              target_process_id: this.state.target_process_id
           };
+
+          if (this.state.mappings !== null && this.state.mappings !==''){
+              formData.mappings = this.state.mappings;
+          }
 
           const jsonStr = JSON.stringify(formData, null, 2);
 
