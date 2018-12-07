@@ -11,7 +11,7 @@ import { actionHeaderCellFormatter, MenuItem, MessageDialog } from 'patternfly-r
 import { PfWizardCreatePlanItems } from './PfWizardCreatePlanItems';
 import MigrationPlansBase from './MigrationPlansBase';
 import { renderWizardSteps, renderWizardContents } from './PfWizardRenderers';
-
+import MigrationPlansMoDalManager from './MigrationPlansMoDalManager';
 
 export default class MigrationPlans extends MigrationPlansBase {
 
@@ -151,7 +151,7 @@ export default class MigrationPlans extends MigrationPlansBase {
                         <Table.Button bsStyle="default" onClick={() => alert(`Execute ${rowData.name}`)}>Execute</Table.Button>
                   </Table.Actions>,
                   <Table.Actions key="1">
-                        <Table.Button bsStyle="default" onClick={() => alert(`Edit ${rowData.target_container_id}`)}>Edit</Table.Button>
+                        <MigrationPlansMoDalManager title="Edit Migration Plan" buttonName="Edit" content={JSON.stringify(rowData)}/>
                   </Table.Actions>,
                   <Table.Actions key="2">
                         <Table.Button bsStyle="default" onClick={() => this.showDeleteDialog(rowData.id)}>Delete</Table.Button>
@@ -165,6 +165,7 @@ export default class MigrationPlans extends MigrationPlansBase {
 
     return (
         <div>
+
               <MessageDialog
                 show={this.state.showDeleteConfirmation}
                 onHide={this.hideDeleteDialog}
@@ -181,9 +182,17 @@ export default class MigrationPlans extends MigrationPlansBase {
                 accessibleDescription="deleteConfirmationDialogContent"
               />
 
-            <Button bsStyle="primary" bsSize="large" onClick={this.open}>
-              Add Plan
-            </Button>
+
+                <MigrationPlansMoDalManager
+                  title="Import Migration Plan"
+                  buttonName="Import Plan"
+                />
+
+                <Button bsStyle="primary" onClick={this.open}>
+                  Add Plan
+                </Button>
+
+
             <Table.PfProvider striped bordered hover columns={planBootstrapColumns}>
               <caption>Migration Plans</caption>
               <Table.Header />
