@@ -3,7 +3,7 @@ import { Button } from "patternfly-react";
 
 
 import PageMappingDiagrams from "./PageMappingDiagrams";
-import DropdownNode from './DropdownNode'
+import PageMappingDropdownNode from './PageMappingDropdownNode'
 
 
 export default class PageMapping extends Component {
@@ -142,14 +142,14 @@ export default class PageMapping extends Component {
         <div className="form-horizontal">
             <div className="form-group">
               <label>Source: {this.props.sourceInfo.processId}</label>
-                    <DropdownNode
+                    <PageMappingDropdownNode
                       options={sourceNode}
                       title='Source Nodes '
                       onDropdownChange={this.handleSourceDropdownChange}
                     />
 
                     <label>Target: {this.props.targetInfo.processId}</label>
-                    <DropdownNode
+                    <PageMappingDropdownNode
                       options={targetNode}
                       title='Target Nodes '
                       onDropdownChange={this.handleTargetDropdownChange}

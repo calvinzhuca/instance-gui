@@ -20,6 +20,7 @@ export default class MigrationPlansBase extends React.Component {
       mappings:'',
       migrationPlanJsonStr:'',
       plans:[],
+      filteredPlans:[],
       showDeleteConfirmation:false,
       deletePlanId:''
     };
@@ -28,11 +29,15 @@ export default class MigrationPlansBase extends React.Component {
 
   }
 
+
+
   retrieveAllPlans = () => {
       axios.get('http://localhost:8280/plans', {
       }).then (res => {
           const plans = res.data;
-          this.setState({ plans });
+          this.setState({ plans,
+              filteredPlans: plans
+           });
           console.log('retrieveAllPlans is done ');
     });
   }

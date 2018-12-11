@@ -11,6 +11,7 @@ import { PfWizardCreatePlanItems } from './PfWizardCreatePlanItems';
 import MigrationPlansBase from './MigrationPlansBase';
 import { renderWizardSteps, renderWizardContents } from './PfWizardRenderers';
 import MigrationPlansEditPopup from './MigrationPlansEditPopup';
+import MigrationPlanListFilter from './MigrationPlanListFilter'
 
 export default class MigrationPlans extends MigrationPlansBase {
 
@@ -81,6 +82,22 @@ export default class MigrationPlans extends MigrationPlansBase {
       this.setState({ showPlanWizard: false });
       this.retriveAllPlans();
     };
+
+    onFilterChange = (planFilter) =>{
+        console.log('onFilterChange: ' + planFilter);
+
+        let filteredPlans = this.state.plans
+        filteredPlans = filteredPlans.filter((plan) => {
+          let sourceContainterId = plan.source_container_id.toLowerCase()
+          return sourceContainterId.indexOf(
+            planFilter.toLowerCase()) !== -1
+        })
+        this.setState({
+          filteredPlans
+        })
+    }
+
+
 
   render() {
       const { showPlanWizard, activeStepIndex, activeSubStepIndex } = this.state;
@@ -211,6 +228,10 @@ export default class MigrationPlans extends MigrationPlansBase {
               />
 
 
+              <MigrationPlanListFilter
+                onChange={this.onFilterChange}
+              />
+
                 <MigrationPlansEditPopup
                   title="Import Migration Plan"
                   actionName="Import Plan"
@@ -226,7 +247,7 @@ export default class MigrationPlans extends MigrationPlansBase {
             <Table.PfProvider striped bordered hover columns={planBootstrapColumns}>
               <caption>Migration Plans</caption>
               <Table.Header />
-              <Table.Body rows={this.state.plans} rowKey="id" />
+              <Table.Body rows={this.state.filteredPlans} rowKey="id" />
             </Table.PfProvider>
 
 
