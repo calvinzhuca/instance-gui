@@ -10,7 +10,7 @@ import { actionHeaderCellFormatter, MenuItem, MessageDialog } from 'patternfly-r
 import { PfWizardCreatePlanItems } from './PfWizardCreatePlanItems';
 import MigrationPlansBase from './MigrationPlansBase';
 import { renderWizardSteps, renderWizardContents } from './PfWizardRenderers';
-import MigrationPlansMoDalManager from './MigrationPlansMoDalManager';
+import MigrationPlansEditPopup from './MigrationPlansEditPopup';
 
 export default class MigrationPlans extends MigrationPlansBase {
 
@@ -171,10 +171,13 @@ export default class MigrationPlans extends MigrationPlansBase {
                         <Table.Button bsStyle="default" onClick={() => alert(`Execute ${rowData.name}`)}>Execute</Table.Button>
                   </Table.Actions>,
                   <Table.Actions key="1">
-                        <MigrationPlansMoDalManager
+                        <MigrationPlansEditPopup
                           title="Edit Migration Plan"
                           actionName="Edit"
                           content={JSON.stringify(rowData)}
+                          retrieveAllPlans={this.retrieveAllPlans}
+                          updatePlan={this.editPlan}
+                          planId={rowData.id}
                         />
 
                   </Table.Actions>,
@@ -208,11 +211,11 @@ export default class MigrationPlans extends MigrationPlansBase {
               />
 
 
-                <MigrationPlansMoDalManager
+                <MigrationPlansEditPopup
                   title="Import Migration Plan"
                   actionName="Import Plan"
                   retrieveAllPlans={this.retrieveAllPlans}
-                  addPlan={this.addPlan}
+                  updatePlan={this.addPlan}
                 />
 
                 <Button bsStyle="primary" onClick={this.openAddPlanWizard}>

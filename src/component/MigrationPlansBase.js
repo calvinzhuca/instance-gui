@@ -87,7 +87,7 @@ export default class MigrationPlansBase extends React.Component {
       this.onNextButtonClick();
   }
 
-  addPlan = (plan, retrieveFlag) => {
+  addPlan = (plan) => {
       if (plan !== null && plan !== '' ){
           //console.log('!!!!!!!!!!!!!!!!!!!submit plan' + plan);
 
@@ -110,16 +110,33 @@ export default class MigrationPlansBase extends React.Component {
       })
       .then(function (response) {
         console.log('addPlan response: ' + response.data );
-
-        if (retrieveFlag == 'true'){
-            console.log('addPlan is done, need to retrieve all plans: ' );
-            self.retrieveAllPlans();
-        }
-
-
+        self.retrieveAllPlans();
       })
       .catch(function (error) {
         console.log('addPlan error: ' + error );
+      });
+      //window.alert("submitted this plan" + plan);
+
+  }
+
+
+  editPlan = (plan, planId) => {
+      console.log('editPlan planId: ' + planId );
+      //need to create a temp variable "self" to store this, so I can invoke this inside axios call
+      const self = this;
+
+      const serviceUrl = 'http://localhost:8280/plans/' + planId;
+      axios.put(serviceUrl, plan, {headers: {
+                "Content-Type": "application/json"}
+      })
+      .then(function (response) {
+        console.log('editPlan response: ' + response.data );
+
+        self.retrieveAllPlans();
+
+      })
+      .catch(function (error) {
+        console.log('editPlan error: ' + error );
       });
       //window.alert("submitted this plan" + plan);
 

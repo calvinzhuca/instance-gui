@@ -3,7 +3,7 @@ import PropTypes from 'prop-types';
 import { Button } from "patternfly-react";
 import { Modal } from "patternfly-react";
 
-export default class MigrationPlansMoDalManager extends React.Component {
+export default class MigrationPlansEditPopup extends React.Component {
 
 
   constructor() {
@@ -21,15 +21,11 @@ export default class MigrationPlansMoDalManager extends React.Component {
   submit = () => {
       var input = document.getElementById("planEditArea");
       var value = input.value;
-      console.log("planEditArea value: " + value);
-      if (this.props.actionName == "Edit"){
-          console.log("Edit button is clicked");
-      }else if (this.props.actionName.includes("Import")){
-          console.log("Import button is clicked");
-          this.props.addPlan(value, 'true');
-          this.props.retrieveAllPlans();
-      }
+      //console.log("planEditArea value: " + value);
 
+      //could be addPlan or editPlan, the planId is only needed for editPlan
+      this.props.updatePlan(value, this.props.planId);
+      this.props.retrieveAllPlans();
       this.setState({ showEditPlanPopup: false });
   }
 
