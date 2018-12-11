@@ -1,6 +1,5 @@
 import React from "react";
 import classNames from 'classnames';
-import axios from 'axios';
 
 import { Table } from 'patternfly-react';
 import { Button } from "patternfly-react";
@@ -57,16 +56,34 @@ export default class MigrationPlans extends MigrationPlansBase {
 
 
 
-    open = () => {
-      this.setState({ showModal: true });
+    openAddPlanWizard = () => {
+        //clean all states before open add plan wizard, otherwise the wizard-form might have last add-plan's values and steps
+      this.setState({
+          activeStepIndex: 0,
+          activeSubStepIndex: 0,
+          showPlanWizard: true,
+          sourceInfo: '',
+          targetInfo: '',
+          name:'',
+          description:'',
+          source_container_id:'',
+          target_container_id:'',
+          target_process_id:'',
+          mappings:'',
+          migrationPlanJsonStr:'',
+          showDeleteConfirmation:false,
+          deletePlanId:''
+      });
     };
-    close = () => {
-      this.setState({ showModal: false });
+
+
+    closeAddPlanWizard = () => {
+      this.setState({ showPlanWizard: false });
       this.retriveAllPlans();
     };
 
   render() {
-      const { showModal, activeStepIndex, activeSubStepIndex } = this.state;
+      const { showPlanWizard, activeStepIndex, activeSubStepIndex } = this.state;
       const headerFormat = value => <Table.Heading>{value}</Table.Heading>;
       const cellFormat = value => <Table.Cell>{value}</Table.Cell>;
       const headerFormatRightAlign = value => <Table.Heading align="right">{value}</Table.Heading>;
@@ -154,7 +171,12 @@ export default class MigrationPlans extends MigrationPlansBase {
                         <Table.Button bsStyle="default" onClick={() => alert(`Execute ${rowData.name}`)}>Execute</Table.Button>
                   </Table.Actions>,
                   <Table.Actions key="1">
-                        <MigrationPlansMoDalManager title="Edit Migration Plan" buttonName="Edit" content={JSON.stringify(rowData)}/>
+                        <MigrationPlansMoDalManager
+                          title="Edit Migration Plan"
+                          actionName="Edit"
+                          content={JSON.stringify(rowData)}
+                        />
+
                   </Table.Actions>,
                   <Table.Actions key="2">
                         <Table.Button bsStyle="default" onClick={() => this.showDeleteDialog(rowData.id)}>Delete</Table.Button>
@@ -188,10 +210,12 @@ export default class MigrationPlans extends MigrationPlansBase {
 
                 <MigrationPlansMoDalManager
                   title="Import Migration Plan"
-                  buttonName="Import Plan"
+                  actionName="Import Plan"
+                  retrieveAllPlans={this.retrieveAllPlans}
+                  addPlan={this.addPlan}
                 />
 
-                <Button bsStyle="primary" onClick={this.open}>
+                <Button bsStyle="primary" onClick={this.openAddPlanWizard}>
                   Add Plan
                 </Button>
 
@@ -204,8 +228,8 @@ export default class MigrationPlans extends MigrationPlansBase {
 
 
             <form className="form-horizontal" name="form_migration_plan" onChange={this.handleFormChange}>
-              <Wizard show={showModal} onHide={this.close}>
-                <Wizard.Header onClose={this.close} title="Create Migration Plan Wizard" />
+              <Wizard show={showPlanWizard} onHide={this.closeAddPlanWizard}>
+                <Wizard.Header onClose={this.closeAddPlanWizard} title="Create Migration Plan Wizard" />
                 <Wizard.Body>
                   <Wizard.Steps
                     steps={renderWizardSteps(PfWizardCreatePlanItems, activeStepIndex, activeSubStepIndex, this.onStepClick)}
@@ -215,7 +239,7 @@ export default class MigrationPlans extends MigrationPlansBase {
                   </Wizard.Row>
                 </Wizard.Body>
                 <Wizard.Footer>
-                  <Button bsStyle="default" className="btn-cancel" onClick={this.close}>
+                  <Button bsStyle="default" className="btn-cancel" onClick={this.closeAddPlanWizard}>
                     Cancel
                   </Button>
                   <Button
@@ -241,7 +265,7 @@ export default class MigrationPlans extends MigrationPlansBase {
                     )}
                   {activeStepIndex === 3 &&
                     activeSubStepIndex === 1 && (
-                      <Button bsStyle="primary" onClick={this.close}>
+                      <Button bsStyle="primary" onClick={this.closeAddPlanWizard}>
                         Close
                         <Icon type="fa" name="angle-right" />
                       </Button>

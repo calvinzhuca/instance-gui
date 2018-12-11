@@ -9,7 +9,7 @@ export default class MigrationPlansBase extends React.Component {
     this.state = {
       activeStepIndex: props.initialStepIndex || 0,
       activeSubStepIndex: props.initialSubStepIndex || 0,
-      showModal: false,
+      showPlanWizard: false,
       sourceInfo: '',
       targetInfo: '',
       name:'',
@@ -23,16 +23,17 @@ export default class MigrationPlansBase extends React.Component {
       showDeleteConfirmation:false,
       deletePlanId:''
     };
-    this.retriveAllPlans();
+    console.log('MigrationPlansBase constructor '  );
+    this.retrieveAllPlans();
 
   }
 
-  retriveAllPlans(){
+  retrieveAllPlans = () => {
       axios.get('http://localhost:8280/plans', {
       }).then (res => {
           const plans = res.data;
           this.setState({ plans });
-          console.log('retriveAllPlans ');
+          console.log('retrieveAllPlans is done ');
     });
   }
 
@@ -63,14 +64,14 @@ export default class MigrationPlansBase extends React.Component {
 
       const serviceUrl = 'http://localhost:8280/plans/' + this.state.deletePlanId;
       console.log('delete url: ' + serviceUrl);
-      //need to create a temp variable "self" to store this, so I can invoke this.retriveAllPlans() inside axios call
+      //need to create a temp variable "self" to store this, so I can invoke this inside axios call
       const self = this;
       axios.delete(serviceUrl,  {headers: {
                 "Content-Type": "application/json"}
       })
       .then(function (response) {
-        console.log('response: ' + response.data );
-        self.retriveAllPlans();
+        console.log('delete response: ' + response.data );
+        self.retrieveAllPlans();
         self.hideDeleteDialog();
       })
       .catch(function (error) {
@@ -79,32 +80,14 @@ export default class MigrationPlansBase extends React.Component {
 
   }
 
-  deletePlan1 = (id) => {
-      if (window.confirm('Would you like to delete this plan?')) {
-          console.log('confirmed deletion id: ' + id);
-
-          const serviceUrl = 'http://localhost:8280/plans/' + id;
-          console.log('delete url: ' + serviceUrl);
-          //need to create a temp variable "self" to store this, so I can invoke this.retriveAllPlans() inside axios call
-          const self = this;
-          axios.delete(serviceUrl,  {headers: {
-                    "Content-Type": "application/json"}
-          })
-          .then(function (response) {
-            console.log('response: ' + response.data );
-            self.retriveAllPlans();
-          })
-          .catch(function (error) {
-            console.log('error: ' + error );
-          });
-
-
-
-      }
-  }
 
   onSubmit = () => {
       var plan = this.state.migrationPlanJsonStr;
+      this.addPlan(plan);
+      this.onNextButtonClick();
+  }
+
+  addPlan = (plan, retrieveFlag) => {
       if (plan !== null && plan !== '' ){
           //console.log('!!!!!!!!!!!!!!!!!!!submit plan' + plan);
 
@@ -118,19 +101,28 @@ export default class MigrationPlansBase extends React.Component {
           plan = plan.replace('\}\"', '\}');
       }
 
+      //need to create a temp variable "self" to store this, so I can invoke this inside axios call
+      const self = this;
+
       const serviceUrl = 'http://localhost:8280/plans';
       axios.post(serviceUrl, plan, {headers: {
                 "Content-Type": "application/json"}
       })
       .then(function (response) {
-        console.log('response: ' + response.data );
+        console.log('addPlan response: ' + response.data );
+
+        if (retrieveFlag == 'true'){
+            console.log('addPlan is done, need to retrieve all plans: ' );
+            self.retrieveAllPlans();
+        }
+
+
       })
       .catch(function (error) {
-        console.log('error: ' + error );
+        console.log('addPlan error: ' + error );
       });
       //window.alert("submitted this plan" + plan);
 
-    this.onNextButtonClick();
   }
 
   onBackButtonClick = () => {

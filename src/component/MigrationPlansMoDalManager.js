@@ -8,18 +8,34 @@ export default class MigrationPlansMoDalManager extends React.Component {
 
   constructor() {
     super();
-    this.state = { showModal: false };
-    this.open = this.open.bind(this);
-    this.close = this.close.bind(this);
+    this.state = { showEditPlanPopup: false };
+
   }
-  close() {
-    this.setState({ showModal: false });
+  closeEditPlanPopup = () => {
+    this.setState({ showEditPlanPopup: false });
   }
-  open() {
-    this.setState({ showModal: true });
+  openEditPlanPopup = ()=>  {
+    this.setState({ showEditPlanPopup: true });
   }
+
+  submit = () => {
+      var input = document.getElementById("planEditArea");
+      var value = input.value;
+      console.log("planEditArea value: " + value);
+      if (this.props.actionName == "Edit"){
+          console.log("Edit button is clicked");
+      }else if (this.props.actionName.includes("Import")){
+          console.log("Import button is clicked");
+          this.props.addPlan(value, 'true');
+          this.props.retrieveAllPlans();
+      }
+
+      this.setState({ showEditPlanPopup: false });
+  }
+
+
   render() {
-    const { children, rightSide } = this.props;
+
     const defaultBody = (
       <form className="form-horizontal">
         <div className="form-group">
@@ -27,7 +43,7 @@ export default class MigrationPlansMoDalManager extends React.Component {
             Migration Plan
           </label>
           <div className="col-sm-9">
-            <textarea className="form-control" name="description" rows="10" defaultValue={this.props.content}></textarea>
+            <textarea className="form-control" id="planEditArea" name="planEditArea" rows="10" defaultValue={this.props.content}></textarea>
           </div>
         </div>
       </form>
@@ -35,22 +51,22 @@ export default class MigrationPlansMoDalManager extends React.Component {
 
     return (
       <div>
-        <Button bsStyle="default" onClick={this.open}>
-          {this.props.buttonName}
+        <Button bsStyle="default" onClick={this.openEditPlanPopup}>
+          {this.props.actionName}
         </Button>
 
-        <Modal show={this.state.showModal} onHide={this.close} className={rightSide ? 'right-side-modal-pf' : ''}>
+        <Modal show={this.state.showEditPlanPopup} onHide={this.closeEditPlanPopup} >
           <Modal.Header>
-            <Modal.CloseButton onClick={this.close} />
+            <Modal.CloseButton onClick={this.closeEditPlanPopup} />
             <Modal.Title>{this.props.title}</Modal.Title>
           </Modal.Header>
-          <Modal.Body>{children || defaultBody}</Modal.Body>
+          <Modal.Body>{defaultBody}</Modal.Body>
           <Modal.Footer>
-            <Button bsStyle="default" className="btn-cancel" onClick={this.close}>
+            <Button bsStyle="default" className="btn-cancel" onClick={this.closeEditPlanPopup}>
               Cancel
             </Button>
-            <Button bsStyle="primary" onClick={this.close}>
-              Save
+            <Button bsStyle="primary" onClick={this.submit}>
+              Submit
             </Button>
           </Modal.Footer>
         </Modal>
