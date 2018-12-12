@@ -228,24 +228,30 @@ export default class MigrationPlans extends MigrationPlansBase {
               />
 
 
-              <MigrationPlanListFilter
-                onChange={this.onFilterChange}
-              />
-
-                <MigrationPlansEditPopup
-                  title="Import Migration Plan"
-                  actionName="Import Plan"
-                  retrieveAllPlans={this.retrieveAllPlans}
-                  updatePlan={this.addPlan}
-                />
-
-                <Button bsStyle="primary" onClick={this.openAddPlanWizard}>
-                  Add Plan
-                </Button>
+            <table border="0" width="100%">
+              <tr>
+                <td>
+                  <MigrationPlanListFilter onChange={this.onFilterChange} />
+                </td>
+                <td  align="right">
+                  <MigrationPlansEditPopup
+                    title="Import Migration Plan"
+                    actionName="Import Plan"
+                    retrieveAllPlans={this.retrieveAllPlans}
+                    updatePlan={this.addPlan}
+                  />
+                </td>
+                <td  align="left">
+                  <Button bsStyle="primary" onClick={this.openAddPlanWizard}>
+                    Add Plan
+                  </Button>
+                </td>
+              </tr>
+            </table>
 
 
             <Table.PfProvider striped bordered hover columns={planBootstrapColumns}>
-              <caption>Migration Plans</caption>
+
               <Table.Header />
               <Table.Body rows={this.state.filteredPlans} rowKey="id" />
             </Table.PfProvider>
