@@ -37,7 +37,7 @@ export const renderWizardSteps = (wizardSteps, activeStepIndex, activeSubStepInd
 
 
 
-export const renderWizardContents = (wizardSteps, state, setInfo) => {
+export const renderCreatePlanWizardContents = (wizardSteps, state, setInfo) => {
   const { activeStepIndex, activeSubStepIndex, sourceInfo, targetInfo, migrationPlanJsonStr} = state;
   return wizardSteps.map((step, stepIndex) =>
     step.subSteps.map((sub, subStepIndex) => {
@@ -100,6 +100,74 @@ export const renderWizardContents = (wizardSteps, state, setInfo) => {
           </Wizard.Contents>
         );
       } else if (stepIndex === 3 && subStepIndex === 1) {
+        // render mock progress
+        return (
+          <Wizard.Contents
+            key={subStepIndex}
+            stepIndex={stepIndex}
+            subStepIndex={subStepIndex}
+            activeStepIndex={activeStepIndex}
+            activeSubStepIndex={activeSubStepIndex}
+          >
+            <PfWizardSubmitPlan active={stepIndex === activeStepIndex && subStepIndex === activeSubStepIndex} />
+          </Wizard.Contents>
+        );
+      }
+      return null;
+    })
+  );
+};
+
+
+
+export const renderExecuteMigrationWizardContents = (wizardSteps, state, setInfo) => {
+  const { activeStepIndex, activeSubStepIndex, sourceInfo, targetInfo, migrationPlanJsonStr} = state;
+  return wizardSteps.map((step, stepIndex) =>
+    step.subSteps.map((sub, subStepIndex) => {
+      if (stepIndex === 0 ) {
+        // render steps 1
+        return (
+          <Wizard.Contents
+            key={subStepIndex}
+            stepIndex={stepIndex}
+            subStepIndex={subStepIndex}
+            activeStepIndex={activeStepIndex}
+            activeSubStepIndex={activeSubStepIndex}
+          >
+            <PagePlanName />
+          </Wizard.Contents>
+        );
+      } else if (stepIndex === 1 ) {
+              // render steps 2
+              return (
+                <Wizard.Contents
+                  key={subStepIndex}
+                  stepIndex={stepIndex}
+                  subStepIndex={subStepIndex}
+                  activeStepIndex={activeStepIndex}
+                  activeSubStepIndex={activeSubStepIndex}
+                >
+                <PageDefinition
+                      sourceInfo={sourceInfo}
+                      targetInfo={targetInfo}
+                      setInfo={setInfo}
+                />
+                </Wizard.Contents>
+              );
+      } else if (stepIndex === 2 && subStepIndex === 0) {
+        // render review
+        return (
+          <Wizard.Contents
+            key={subStepIndex}
+            stepIndex={stepIndex}
+            subStepIndex={subStepIndex}
+            activeStepIndex={activeStepIndex}
+            activeSubStepIndex={activeSubStepIndex}
+          >
+            <PageReview migrationPlanJsonStr={migrationPlanJsonStr}/>
+          </Wizard.Contents>
+        );
+    } else if (stepIndex === 2 && subStepIndex === 1) {
         // render mock progress
         return (
           <Wizard.Contents

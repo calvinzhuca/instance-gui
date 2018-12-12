@@ -9,7 +9,6 @@ export default class MigrationPlansBase extends React.Component {
     this.state = {
       activeStepIndex: props.initialStepIndex || 0,
       activeSubStepIndex: props.initialSubStepIndex || 0,
-      showPlanWizard: false,
       sourceInfo: '',
       targetInfo: '',
       name:'',
@@ -22,9 +21,11 @@ export default class MigrationPlansBase extends React.Component {
       plans:[],
       filteredPlans:[],
       showDeleteConfirmation:false,
+      showMigrationWizard:false,
+      showPlanWizard: false,
       deletePlanId:''
     };
-    console.log('MigrationPlansBase constructor '  );
+
     this.retrieveAllPlans();
 
   }

@@ -8,15 +8,16 @@ import { Wizard } from "patternfly-react";
 import { actionHeaderCellFormatter, MenuItem, MessageDialog } from 'patternfly-react';
 
 import { PfWizardCreatePlanItems } from './PfWizardCreatePlanItems';
+import { PfWizardexecuteMigrationItems } from './PfWizardexecuteMigrationItems';
 import MigrationPlansBase from './MigrationPlansBase';
-import { renderWizardSteps, renderWizardContents } from './PfWizardRenderers';
+import { renderWizardSteps, renderCreatePlanWizardContents, renderExecuteMigrationWizardContents } from './PfWizardRenderers';
 import MigrationPlansEditPopup from './MigrationPlansEditPopup';
 import MigrationPlanListFilter from './MigrationPlanListFilter'
 
 export default class MigrationPlans extends MigrationPlansBase {
 
 
-    handleFormChange = (e) => {
+    handleAddPlanFormChange = (e) => {
 
         if (e.target.name == 'name'){
             this.setState({name: e.target.value});
@@ -56,13 +57,21 @@ export default class MigrationPlans extends MigrationPlansBase {
       }
 
 
+    openMigrationWizard = () =>{
+        this.resetAllStates();
+        this.setState({showMigrationWizard: true});
+    }
 
     openAddPlanWizard = () => {
+        this.resetAllStates();
+        this.setState({showPlanWizard: true});
+    }
+
+    resetAllStates = ()=> {
         //clean all states before open add plan wizard, otherwise the wizard-form might have last add-plan's values and steps
       this.setState({
           activeStepIndex: 0,
           activeSubStepIndex: 0,
-          showPlanWizard: true,
           sourceInfo: '',
           targetInfo: '',
           name:'',
@@ -73,10 +82,16 @@ export default class MigrationPlans extends MigrationPlansBase {
           mappings:'',
           migrationPlanJsonStr:'',
           showDeleteConfirmation:false,
+          showMigrationWizard:false,
+          showPlanWizard: false,
           deletePlanId:''
       });
     };
 
+    closeMigrationWizard = () => {
+      this.setState({ showMigrationWizard: false });
+      this.retriveAllPlans();
+    };
 
     closeAddPlanWizard = () => {
       this.setState({ showPlanWizard: false });
@@ -100,7 +115,7 @@ export default class MigrationPlans extends MigrationPlansBase {
 
 
   render() {
-      const { showPlanWizard, activeStepIndex, activeSubStepIndex } = this.state;
+      const { showPlanWizard, showMigrationWizard, activeStepIndex, activeSubStepIndex } = this.state;
       const headerFormat = value => <Table.Heading>{value}</Table.Heading>;
       const cellFormat = value => <Table.Cell>{value}</Table.Cell>;
       const headerFormatRightAlign = value => <Table.Heading align="right">{value}</Table.Heading>;
@@ -185,7 +200,7 @@ export default class MigrationPlans extends MigrationPlansBase {
               formatters: [
                 (value, { rowData }) => [
                   <Table.Actions key="0">
-                        <Table.Button bsStyle="default" onClick={() => alert(`Execute ${rowData.name}`)}>Execute</Table.Button>
+                        <Table.Button bsStyle="default" onClick={() => this.openMigrationWizard(rowData.id)}>Execute</Table.Button>
                   </Table.Actions>,
                   <Table.Actions key="1">
                         <MigrationPlansEditPopup
@@ -196,7 +211,6 @@ export default class MigrationPlans extends MigrationPlansBase {
                           updatePlan={this.editPlan}
                           planId={rowData.id}
                         />
-
                   </Table.Actions>,
                   <Table.Actions key="2">
                         <Table.Button bsStyle="default" onClick={() => this.showDeleteDialog(rowData.id)}>Delete</Table.Button>
@@ -229,6 +243,7 @@ export default class MigrationPlans extends MigrationPlansBase {
 
 
             <table border="0" width="100%">
+            <tbody>
               <tr>
                 <td>
                   <MigrationPlanListFilter onChange={this.onFilterChange} />
@@ -247,6 +262,7 @@ export default class MigrationPlans extends MigrationPlansBase {
                   </Button>
                 </td>
               </tr>
+             </tbody>
             </table>
 
 
@@ -257,7 +273,7 @@ export default class MigrationPlans extends MigrationPlansBase {
             </Table.PfProvider>
 
 
-            <form className="form-horizontal" name="form_migration_plan" onChange={this.handleFormChange}>
+            <form className="form-horizontal" name="form_migration_plan" onChange={this.handleAddPlanFormChange}>
               <Wizard show={showPlanWizard} onHide={this.closeAddPlanWizard}>
                 <Wizard.Header onClose={this.closeAddPlanWizard} title="Create Migration Plan Wizard" />
                 <Wizard.Body>
@@ -265,7 +281,7 @@ export default class MigrationPlans extends MigrationPlansBase {
                     steps={renderWizardSteps(PfWizardCreatePlanItems, activeStepIndex, activeSubStepIndex, this.onStepClick)}
                   />
                   <Wizard.Row>
-                    <Wizard.Main>{renderWizardContents(PfWizardCreatePlanItems, this.state, this.setInfo)}</Wizard.Main>
+                    <Wizard.Main>{renderCreatePlanWizardContents(PfWizardCreatePlanItems, this.state, this.setInfo)}</Wizard.Main>
                   </Wizard.Row>
                 </Wizard.Body>
                 <Wizard.Footer>
@@ -305,7 +321,54 @@ export default class MigrationPlans extends MigrationPlansBase {
           </form>
 
 
-        </div>
+          <form className="form-horizontal" name="form_migration" >
+            <Wizard show={showMigrationWizard} onHide={this.closeMigrationWizard}>
+              <Wizard.Header onClose={this.closeMigrationWizard} title="Execute Migration Plan Wizard" />
+              <Wizard.Body>
+                <Wizard.Steps
+                  steps={renderWizardSteps(PfWizardexecuteMigrationItems, activeStepIndex, activeSubStepIndex, this.onStepClick)}
+                />
+                <Wizard.Row>
+                  <Wizard.Main>{renderExecuteMigrationWizardContents(PfWizardexecuteMigrationItems, this.state, this.setInfo)}</Wizard.Main>
+                </Wizard.Row>
+              </Wizard.Body>
+              <Wizard.Footer>
+                <Button bsStyle="default" className="btn-cancel" onClick={this.closeMigrationWizard}>
+                  Cancel
+                </Button>
+                <Button
+                  bsStyle="default"
+                  disabled={activeStepIndex === 0 && activeSubStepIndex === 0}
+                  onClick={this.onBackButtonClick}
+                >
+                  <Icon type="fa" name="angle-left" />
+                  Back
+                </Button>
+                {(activeStepIndex === 0 || activeStepIndex === 1 ) && (
+                  <Button bsStyle="primary" onClick={this.onNextButtonClick}>
+                    Next
+                    <Icon type="fa" name="angle-right" />
+                  </Button>
+                )}
+                {activeStepIndex === 2 &&
+                  activeSubStepIndex === 0 && (
+                    <Button bsStyle="primary" onClick={this.onSubmit}>
+                      Submit Plan
+                      <Icon type="fa" name="angle-right" />
+                    </Button>
+                  )}
+                {activeStepIndex === 2 &&
+                  activeSubStepIndex === 1 && (
+                    <Button bsStyle="primary" onClick={this.closeMigrationWizard}>
+                      Close
+                      <Icon type="fa" name="angle-right" />
+                    </Button>
+                  )}
+              </Wizard.Footer>
+            </Wizard>
+        </form>
+
+    </div>
 
     );
   }
