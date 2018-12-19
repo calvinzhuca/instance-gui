@@ -20,7 +20,6 @@ export const PfWizardCreatePlanItems = [
     label: '2',
     title: 'Process Definition',
     subSteps: [
-
       {
         subStep: '2.1',
         label: '2A.',

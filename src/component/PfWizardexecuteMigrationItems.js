@@ -42,7 +42,7 @@ export const PfWizardexecuteMigrationItems = [
       },
       {
         subStep: '3.2',
-        label: '4B.',
+        label: '3B.',
         title: 'Submit'
       }
     ]

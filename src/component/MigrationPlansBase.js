@@ -23,7 +23,8 @@ export default class MigrationPlansBase extends React.Component {
       showDeleteConfirmation:false,
       showMigrationWizard:false,
       showPlanWizard: false,
-      deletePlanId:''
+      deletePlanId:'',
+      runningInstances:[]
     };
 
     this.retrieveAllPlans();
@@ -36,6 +37,7 @@ export default class MigrationPlansBase extends React.Component {
       axios.get('http://localhost:8280/plans', {
       }).then (res => {
           const plans = res.data;
+          //console.log('retrieveAllPlans ' + JSON.stringify(plans));
           this.setState({ plans,
               filteredPlans: plans
            });
@@ -66,7 +68,7 @@ export default class MigrationPlansBase extends React.Component {
   }
 
   deletePlan = () => {
-      console.log('confirmed deletion id: ' + this.state.deletePlanId);
+      //console.log('confirmed deletion id: ' + this.state.deletePlanId);
 
       const serviceUrl = 'http://localhost:8280/plans/' + this.state.deletePlanId;
       console.log('delete url: ' + serviceUrl);
@@ -87,7 +89,7 @@ export default class MigrationPlansBase extends React.Component {
   }
 
 
-  onSubmit = () => {
+  onSubmitMigrationPlan = () => {
       var plan = this.state.migrationPlanJsonStr;
       this.addPlan(plan);
       this.onNextButtonClick();
@@ -147,6 +149,8 @@ export default class MigrationPlansBase extends React.Component {
       //window.alert("submitted this plan" + plan);
 
   }
+
+
 
   onBackButtonClick = () => {
     const { steps } = this.props;

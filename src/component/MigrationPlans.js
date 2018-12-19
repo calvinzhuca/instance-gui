@@ -1,5 +1,6 @@
 import React from "react";
 import classNames from 'classnames';
+import axios from 'axios';
 
 import { Table } from 'patternfly-react';
 import { Button } from "patternfly-react";
@@ -57,15 +58,6 @@ export default class MigrationPlans extends MigrationPlansBase {
       }
 
 
-    openMigrationWizard = () =>{
-        this.resetAllStates();
-        this.setState({showMigrationWizard: true});
-    }
-
-    openAddPlanWizard = () => {
-        this.resetAllStates();
-        this.setState({showPlanWizard: true});
-    }
 
     resetAllStates = ()=> {
         //clean all states before open add plan wizard, otherwise the wizard-form might have last add-plan's values and steps
@@ -84,9 +76,37 @@ export default class MigrationPlans extends MigrationPlansBase {
           showDeleteConfirmation:false,
           showMigrationWizard:false,
           showPlanWizard: false,
-          deletePlanId:''
+          deletePlanId:'',
+          runningInstances:[]
       });
     };
+
+
+
+    openMigrationWizard = (containerId) =>{
+      console.log("openMigrationWizard containerId " + containerId)
+
+      axios.get('http://localhost:8080/backend/instances', {
+          params: {
+              containerId: containerId,
+          }
+      }).then (res => {
+          const instances = res.data;
+          //console.log('running instances: ' + JSON.stringify(instances));
+
+        this.setState({
+            runningInstances: instances,
+            showMigrationWizard: true
+        });
+
+    });
+
+    }
+
+    openAddPlanWizard = () => {
+      this.resetAllStates();
+      this.setState({showPlanWizard: true});
+    }
 
     closeMigrationWizard = () => {
       this.setState({ showMigrationWizard: false });
@@ -200,7 +220,7 @@ export default class MigrationPlans extends MigrationPlansBase {
               formatters: [
                 (value, { rowData }) => [
                   <Table.Actions key="0">
-                        <Table.Button bsStyle="default" onClick={() => this.openMigrationWizard(rowData.id)}>Execute</Table.Button>
+                        <Table.Button bsStyle="default" onClick={() => this.openMigrationWizard(rowData.source_container_id)}>Execute</Table.Button>
                   </Table.Actions>,
                   <Table.Actions key="1">
                         <MigrationPlansEditPopup
@@ -267,7 +287,6 @@ export default class MigrationPlans extends MigrationPlansBase {
 
 
             <Table.PfProvider striped bordered hover columns={planBootstrapColumns}>
-
               <Table.Header />
               <Table.Body rows={this.state.filteredPlans} rowKey="id" />
             </Table.PfProvider>
@@ -304,7 +323,7 @@ export default class MigrationPlans extends MigrationPlansBase {
                   )}
                   {activeStepIndex === 3 &&
                     activeSubStepIndex === 0 && (
-                      <Button bsStyle="primary" onClick={this.onSubmit}>
+                      <Button bsStyle="primary" onClick={this.onSubmitMigrationPlan}>
                         Submit Plan
                         <Icon type="fa" name="angle-right" />
                       </Button>
@@ -352,8 +371,8 @@ export default class MigrationPlans extends MigrationPlansBase {
                 )}
                 {activeStepIndex === 2 &&
                   activeSubStepIndex === 0 && (
-                    <Button bsStyle="primary" onClick={this.onSubmit}>
-                      Submit Plan
+                    <Button bsStyle="primary" onClick={this.onSubmitMigrationPlan}>
+                      Execute Plan
                       <Icon type="fa" name="angle-right" />
                     </Button>
                   )}
