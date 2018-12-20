@@ -8,7 +8,8 @@ import PageMapping from "./PageMapping";
 import PageDefinition from "./PageDefinition";
 import PagePlanName from "./PagePlanName";
 //import MockClientPaginationTable from "./MockClientPaginationTable";
-import PageRunningInstances from "./PageRunningInstances";
+import PageMigrationRunningInstances from "./PageMigrationRunningInstances";
+import PageMigrationScheduler from "./PageMigrationScheduler";
 import PageReview from "./PageReview";
 
 export const renderWizardSteps = (wizardSteps, activeStepIndex, activeSubStepIndex, onStepClick) => {
@@ -136,7 +137,7 @@ export const renderExecuteMigrationWizardContents = (wizardSteps, state, setInfo
             activeStepIndex={activeStepIndex}
             activeSubStepIndex={activeSubStepIndex}
           >
-            <PageRunningInstances runningInstances={runningInstances}/>
+            <PageMigrationRunningInstances runningInstances={runningInstances}/>
           </Wizard.Contents>
         );
       } else if (stepIndex === 1 ) {
@@ -149,10 +150,7 @@ export const renderExecuteMigrationWizardContents = (wizardSteps, state, setInfo
                   activeStepIndex={activeStepIndex}
                   activeSubStepIndex={activeSubStepIndex}
                 >
-                <PageDefinition
-                      sourceInfo={sourceInfo}
-                      targetInfo={targetInfo}
-                      setInfo={setInfo}
+                <PageMigrationScheduler
                 />
                 </Wizard.Contents>
               );

@@ -26,7 +26,7 @@ import { mockRows } from './mockRows';
  * https://reactabular.js.org/#/data/sorting
  */
 
-export default class PageRunningInstances extends React.Component {
+export default class PageMigrationRunningInstances extends React.Component {
   static deselectRow(row) {
     return Object.assign({}, row, { selected: false });
   }
@@ -262,7 +262,7 @@ export default class PageRunningInstances extends React.Component {
     if (checked) {
       const updatedSelections = [...new Set([...currentRows.map(r => r.id), ...selectedRows])];
       const updatedRows = rows.map(
-        r => (updatedSelections.indexOf(r.id) > -1 ? PageRunningInstances.selectRow(r) : r)
+        r => (updatedSelections.indexOf(r.id) > -1 ? PageMigrationRunningInstances.selectRow(r) : r)
       );
       this.setState({
         // important: you must update rows to force a re-render and trigger onRow hook
@@ -273,7 +273,7 @@ export default class PageRunningInstances extends React.Component {
       const ids = currentRows.map(r => r.id);
       const updatedSelections = selectedRows.filter(r => !(ids.indexOf(r) > -1));
       const updatedRows = rows.map(
-        r => (updatedSelections.indexOf(r.id) > -1 ? r : PageRunningInstances.deselectRow(r))
+        r => (updatedSelections.indexOf(r.id) > -1 ? r : PageMigrationRunningInstances.deselectRow(r))
       );
       this.setState({
         rows: updatedRows,
@@ -289,11 +289,11 @@ export default class PageRunningInstances extends React.Component {
       let updatedRow;
       if (row.selected) {
         updatedSelectedRows = selectedRows.filter(r => !(r === row.id));
-        updatedRow = PageRunningInstances.deselectRow(row);
+        updatedRow = PageMigrationRunningInstances.deselectRow(row);
       } else {
         selectedRows.push(row.id);
         updatedSelectedRows = selectedRows;
-        updatedRow = PageRunningInstances.selectRow(row);
+        updatedRow = PageMigrationRunningInstances.selectRow(row);
       }
       rows[selectedRowIndex] = updatedRow;
       this.setState({
