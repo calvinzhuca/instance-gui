@@ -269,6 +269,7 @@ export default class PageMigrationRunningInstances extends React.Component {
         rows: updatedRows,
         selectedRows: updatedSelections
       });
+      this.updateSelectedProcessIds(rows, updatedSelections);
     } else {
       const ids = currentRows.map(r => r.id);
       const updatedSelections = selectedRows.filter(r => !(ids.indexOf(r) > -1));
@@ -279,8 +280,28 @@ export default class PageMigrationRunningInstances extends React.Component {
         rows: updatedRows,
         selectedRows: updatedSelections
       });
+      this.updateSelectedProcessIds(rows, updatedSelections);
     }
   };
+
+  updateSelectedProcessIds = (rows, updatedSelectedRows) => {
+      var i;
+      var ids='';
+      for (i = 0; i < updatedSelectedRows.length; i ++){
+          const rowId = updatedSelectedRows[i];
+//          console.log('onSelectRow rowId: ' + rowId);
+//          console.log('onSelectRow processInstanceId: ' + rows[rowId-1].processInstanceId);
+          if (ids === ''){
+              ids = rows[rowId-1].processInstanceId;
+          }else{
+              ids = ids + "," + rows[rowId-1].processInstanceId;
+          }
+      }
+      console.log('onSelectRow ids: ' + ids);
+    }
+
+
+
   onSelectRow = (event, row) => {
     const { rows, selectedRows } = this.state;
     const selectedRowIndex = rows.findIndex(r => r.id === row.id);
@@ -300,8 +321,11 @@ export default class PageMigrationRunningInstances extends React.Component {
         rows,
         selectedRows: updatedSelectedRows
       });
+      this.updateSelectedProcessIds(rows, updatedSelectedRows);
     }
   };
+
+
   onSubmit = () => {
     this.setPage(this.state.pageChangeValue);
   };
