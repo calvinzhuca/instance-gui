@@ -9,11 +9,13 @@ import { Wizard } from "patternfly-react";
 import { actionHeaderCellFormatter, MenuItem, MessageDialog } from 'patternfly-react';
 
 import { PfWizardCreatePlanItems } from './PfWizardCreatePlanItems';
-import { PfWizardexecuteMigrationItems } from './PfWizardexecuteMigrationItems';
+import { WizardexecuteMigrationItems } from './WizardexecuteMigrationItems';
 import MigrationPlansBase from './MigrationPlansBase';
-import { renderWizardSteps, renderCreatePlanWizardContents, renderExecuteMigrationWizardContents } from './PfWizardRenderers';
+import { renderWizardSteps, renderCreatePlanWizardContents } from './PfWizardRenderers';
 import MigrationPlansEditPopup from './MigrationPlansEditPopup';
 import MigrationPlanListFilter from './MigrationPlanListFilter'
+
+import WizardExecuteMigration from './WizardExecuteMigration';
 
 export default class MigrationPlans extends MigrationPlansBase {
 
@@ -81,37 +83,38 @@ export default class MigrationPlans extends MigrationPlansBase {
       });
     };
 
-
-
     openMigrationWizard = (containerId) =>{
-      console.log("openMigrationWizard containerId " + containerId)
+          console.log("openMigrationWizard containerId " + containerId)
 
-      axios.get('http://localhost:8080/backend/instances', {
-          params: {
-              containerId: containerId,
-          }
-      }).then (res => {
-          const instances = res.data;
-          //console.log('running instances: ' + JSON.stringify(instances));
+          axios.get('http://localhost:8080/backend/instances', {
+              params: {
+                  containerId: containerId,
+              }
+          }).then (res => {
+              const instances = res.data;
+              //console.log('running instances: ' + JSON.stringify(instances));
 
-        this.setState({
-            runningInstances: instances,
-            showMigrationWizard: true
+            this.setState({
+                runningInstances: instances,
+                showMigrationWizard: true
+            });
+
         });
-
-    });
-
     }
+
+    closeMigrationWizard = () => {
+      this.setState({ showMigrationWizard: false });
+      //TODO: this.retriveAllPlans();
+    };
+
+
 
     openAddPlanWizard = () => {
       this.resetAllStates();
       this.setState({showPlanWizard: true});
     }
 
-    closeMigrationWizard = () => {
-      this.setState({ showMigrationWizard: false });
-      this.retriveAllPlans();
-    };
+
 
     closeAddPlanWizard = () => {
       this.setState({ showPlanWizard: false });
@@ -135,7 +138,7 @@ export default class MigrationPlans extends MigrationPlansBase {
 
 
   render() {
-      const { showPlanWizard, showMigrationWizard, activeStepIndex, activeSubStepIndex } = this.state;
+      const { showPlanWizard, showMigrationWizard, activeStepIndex, activeSubStepIndex, runningInstances } = this.state;
       const headerFormat = value => <Table.Heading>{value}</Table.Heading>;
       const cellFormat = value => <Table.Cell>{value}</Table.Cell>;
       const headerFormatRightAlign = value => <Table.Heading align="right">{value}</Table.Heading>;
@@ -340,52 +343,12 @@ export default class MigrationPlans extends MigrationPlansBase {
           </form>
 
 
-          <form className="form-horizontal" name="form_migration" >
-            <Wizard show={showMigrationWizard} onHide={this.closeMigrationWizard}>
-              <Wizard.Header onClose={this.closeMigrationWizard} title="Execute Migration Plan Wizard" />
-              <Wizard.Body>
-                <Wizard.Steps
-                  steps={renderWizardSteps(PfWizardexecuteMigrationItems, activeStepIndex, activeSubStepIndex, this.onStepClick)}
-                />
-                <Wizard.Row>
-                  <Wizard.Main>{renderExecuteMigrationWizardContents(PfWizardexecuteMigrationItems, this.state, this.setInfo)}</Wizard.Main>
-                </Wizard.Row>
-              </Wizard.Body>
-              <Wizard.Footer>
-                <Button bsStyle="default" className="btn-cancel" onClick={this.closeMigrationWizard}>
-                  Cancel
-                </Button>
-                <Button
-                  bsStyle="default"
-                  disabled={activeStepIndex === 0 && activeSubStepIndex === 0}
-                  onClick={this.onBackButtonClick}
-                >
-                  <Icon type="fa" name="angle-left" />
-                  Back
-                </Button>
-                {(activeStepIndex === 0 || activeStepIndex === 1 ) && (
-                  <Button bsStyle="primary" onClick={this.onNextButtonClick}>
-                    Next
-                    <Icon type="fa" name="angle-right" />
-                  </Button>
-                )}
-                {activeStepIndex === 2 &&
-                  activeSubStepIndex === 0 && (
-                    <Button bsStyle="primary" onClick={this.onSubmitMigrationPlan}>
-                      Execute Plan
-                      <Icon type="fa" name="angle-right" />
-                    </Button>
-                  )}
-                {activeStepIndex === 2 &&
-                  activeSubStepIndex === 1 && (
-                    <Button bsStyle="primary" onClick={this.closeMigrationWizard}>
-                      Close
-                      <Icon type="fa" name="angle-right" />
-                    </Button>
-                  )}
-              </Wizard.Footer>
-            </Wizard>
-        </form>
+          <WizardExecuteMigration
+            showMigrationWizard={showMigrationWizard}
+            closeMigrationWizard={this.closeMigrationWizard}
+            runningInstances={runningInstances}
+            steps={WizardexecuteMigrationItems}
+          />
 
     </div>
 

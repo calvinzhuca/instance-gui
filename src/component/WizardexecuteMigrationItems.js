@@ -1,6 +1,6 @@
 import React from 'react';
 
-export const PfWizardexecuteMigrationItems = [
+export const WizardexecuteMigrationItems = [
   {
     step: 1,
     label: '1',
