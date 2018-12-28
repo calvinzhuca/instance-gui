@@ -183,7 +183,7 @@ export default class WizardAddPlan extends WizardBase {
 
         <form className="form-horizontal" name="form_migration_plan" onChange={this.handleAddPlanFormChange}>
           <Wizard show={this.props.showPlanWizard} onHide={this.props.closeAddPlanWizard}>
-            <Wizard.Header onClose={this.props.closeAddPlanWizard} title="Create Migration Plan Wizard" />
+            <Wizard.Header onClose={this.props.closeAddPlanWizard} title="Add Migration Plan Wizard" />
             <Wizard.Body>
               <Wizard.Steps
                 steps={renderWizardSteps(AddPlanItems, activeStepIndex, activeSubStepIndex, this.onStepClick)}

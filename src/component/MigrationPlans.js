@@ -2,17 +2,16 @@ import React from "react";
 import classNames from 'classnames';
 import axios from 'axios';
 
-import { Table } from 'patternfly-react';
 import { Button } from "patternfly-react";
 import { Icon } from "patternfly-react";
-import { Wizard } from "patternfly-react";
-import { actionHeaderCellFormatter, MenuItem, MessageDialog } from 'patternfly-react';
+import { MessageDialog } from 'patternfly-react';
 
 
 import MigrationPlansBase from './MigrationPlansBase';
-
-import MigrationPlansEditPopup from './MigrationPlansEditPopup';
+import MigrationPlansTable from './MigrationPlansTable';
 import MigrationPlanListFilter from './MigrationPlanListFilter'
+import MigrationPlansEditPopup from './MigrationPlansEditPopup';
+
 
 import WizardAddPlan from './WizardAddPlan';
 import WizardExecuteMigration from './WizardExecuteMigration';
@@ -21,11 +20,6 @@ import { AddPlanItems } from './WizardItems';
 import { ExecuteMigrationItems } from './WizardItems';
 
 export default class MigrationPlans extends MigrationPlansBase {
-
-
-
-
-
 
 
     resetAllStates = ()=> {
@@ -95,115 +89,17 @@ export default class MigrationPlans extends MigrationPlansBase {
 
   render() {
       const { showPlanWizard, showMigrationWizard, runningInstances } = this.state;
-      const headerFormat = value => <Table.Heading>{value}</Table.Heading>;
-      const cellFormat = value => <Table.Cell>{value}</Table.Cell>;
-      const headerFormatRightAlign = value => <Table.Heading align="right">{value}</Table.Heading>;
-      const cellFormatRightAlign = value => <Table.Cell align="right">{value}</Table.Cell>;
 
       //for MessageDialogDeleteConfirmation
       const primaryContent = <p className="lead">Please confirm you will delete this migration plan {this.state.deletePlanId}</p>;
       const secondaryContent = <p></p>;
       const icon = <Icon type="pf" name="error-circle-o" />;
 
-      const planBootstrapColumns = [
-        {
-          header: {
-            label: 'ID',
-            formatters: [headerFormat]
-          },
-          cell: {
-            formatters: [cellFormat]
-          },
-          property: 'id'
-        },
-        {
-          header: {
-            label: 'Plan Name',
-            formatters: [headerFormat]
-          },
-          cell: {
-            formatters: [cellFormat]
-          },
-          property: 'name'
-        },
-        {
-          header: {
-            label: 'Description',
-            formatters: [headerFormat]
-          },
-          cell: {
-            formatters: [cellFormat]
-          },
-          property: 'description'
-        },
-        {
-          header: {
-            label: 'Source Container ID',
-            formatters: [headerFormat]
-          },
-          cell: {
-            formatters: [cellFormat]
-          },
-          property: 'source_container_id'
-        },
-        {
-          header: {
-            label: 'Target Container ID',
-            formatters: [headerFormat]
-          },
-          cell: {
-            formatters: [cellFormat]
-          },
-          property: 'target_container_id'
-        },
-        {
-          header: {
-            label: 'Target Process ID',
-            formatters: [headerFormat]
-          },
-          cell: {
-            formatters: [cellFormat]
-          },
-          property: 'target_process_id'
-        },
-        {
-          header: {
-            label: 'Actions',
-            props: {
-              rowSpan: 1,
-              colSpan: 3
-            },
-            formatters: [actionHeaderCellFormatter]
-          },
-          cell: {
-              formatters: [
-                (value, { rowData }) => [
-                  <Table.Actions key="0">
-                        <Table.Button bsStyle="default" onClick={() => this.openMigrationWizard(rowData.source_container_id)}>Execute</Table.Button>
-                  </Table.Actions>,
-                  <Table.Actions key="1">
-                        <MigrationPlansEditPopup
-                          title="Edit Migration Plan"
-                          actionName="Edit"
-                          content={JSON.stringify(rowData)}
-                          retrieveAllPlans={this.retrieveAllPlans}
-                          updatePlan={this.editPlan}
-                          planId={rowData.id}
-                        />
-                  </Table.Actions>,
-                  <Table.Actions key="2">
-                        <Table.Button bsStyle="default" onClick={() => this.showDeleteDialog(rowData.id)}>Delete</Table.Button>
-                  </Table.Actions>
-                ]
-              ]
-          },
-          property: 'action'
-        }
-      ];
+
 
     return (
         <div>
-
+              /* Delete Plan pop-up */
               <MessageDialog
                 show={this.state.showDeleteConfirmation}
                 onHide={this.hideDeleteDialog}
@@ -220,7 +116,7 @@ export default class MigrationPlans extends MigrationPlansBase {
                 accessibleDescription="deleteConfirmationDialogContent"
               />
 
-
+              /* import plan & Add Plan */
             <table border="0" width="100%">
             <tbody>
               <tr>
@@ -244,22 +140,24 @@ export default class MigrationPlans extends MigrationPlansBase {
              </tbody>
             </table>
 
+            /* Table lists all the migration plans */
+            <MigrationPlansTable
+                openMigrationWizard={this.openMigrationWizard}
+                showDeleteDialog={this.showDeleteDialog}
+                filteredPlans={this.state.filteredPlans}
+                updatePlan={this.editPlan}
+                retrieveAllPlans={this.retrieveAllPlans}
+            />
 
-            <Table.PfProvider striped bordered hover columns={planBootstrapColumns}>
-              <Table.Header />
-              <Table.Body rows={this.state.filteredPlans} rowKey="id" />
-            </Table.PfProvider>
-
-
+            /* Add Plan Wizard */
             <WizardAddPlan
                 showPlanWizard={showPlanWizard}
                 closeAddPlanWizard={this.closeAddPlanWizard}
                 addPlan={this.addPlan}
                 steps={AddPlanItems}
-
             />
 
-
+            /* Execute Migration Wizard*/
           <WizardExecuteMigration
             showMigrationWizard={showMigrationWizard}
             closeMigrationWizard={this.closeMigrationWizard}

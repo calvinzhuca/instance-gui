@@ -23,6 +23,7 @@ export default class MigrationPlansBase extends React.Component {
 
 
   retrieveAllPlans = () => {
+      console.log('retrieveAllPlans123')
       axios.get('http://localhost:8280/plans', {
       }).then (res => {
           const plans = res.data;
@@ -73,6 +74,7 @@ export default class MigrationPlansBase extends React.Component {
 
   // addPlan need to be in the parent because it's shared between WizardAddPlan and Import Plan pop-up
   addPlan = (plan) => {
+      console.log('addPlan234');
       if (plan !== null && plan !== '' ){
           //console.log('!!!!!!!!!!!!!!!!!!!submit plan' + plan);
 

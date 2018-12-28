@@ -1,11 +1,11 @@
 import React from "react";
 import ReactDOM from "react-dom";
 
-import MainPage from "./component/MainPage";
+import MigrationPlans from './component/MigrationPlans';
 
 document.addEventListener("DOMContentLoaded", function() {
   ReactDOM.render(
-    React.createElement(MainPage),
+    React.createElement(MigrationPlans),
     document.getElementById("mount")
   );
 });

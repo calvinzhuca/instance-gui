@@ -19,7 +19,6 @@ import {
 import { Grid } from 'patternfly-react';
 import { PaginationRow, paginate, PAGINATION_VIEW } from 'patternfly-react';
 import { MenuItem } from 'patternfly-react';
-import { mockRows } from './mockRows';
 
 /**
  * Reactabular client side data sorting based on the following api docs:

@@ -3,13 +3,6 @@ import React from 'react';
 import {Wizard} from "patternfly-react"
 
 
-import PfWizardSubmitPlan from './PfWizardSubmitPlan';
-
-//import MockClientPaginationTable from "./MockClientPaginationTable";
-import PageMigrationRunningInstances from "./PageMigrationRunningInstances";
-import PageMigrationScheduler from "./PageMigrationScheduler";
-import PageReview from "./PageReview";
-
 export const renderWizardSteps = (wizardSteps, activeStepIndex, activeSubStepIndex, onStepClick) => {
   const activeStep = wizardSteps[activeStepIndex];
   const activeSubStep = activeStep.subSteps[activeSubStepIndex];
