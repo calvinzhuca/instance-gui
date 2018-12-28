@@ -8,73 +8,29 @@ import { Icon } from "patternfly-react";
 import { Wizard } from "patternfly-react";
 import { actionHeaderCellFormatter, MenuItem, MessageDialog } from 'patternfly-react';
 
-import { PfWizardCreatePlanItems } from './PfWizardCreatePlanItems';
-import { WizardexecuteMigrationItems } from './WizardexecuteMigrationItems';
+
 import MigrationPlansBase from './MigrationPlansBase';
-import { renderWizardSteps, renderCreatePlanWizardContents } from './PfWizardRenderers';
+
 import MigrationPlansEditPopup from './MigrationPlansEditPopup';
 import MigrationPlanListFilter from './MigrationPlanListFilter'
 
+import WizardAddPlan from './WizardAddPlan';
 import WizardExecuteMigration from './WizardExecuteMigration';
+
+import { AddPlanItems } from './WizardItems';
+import { ExecuteMigrationItems } from './WizardItems';
 
 export default class MigrationPlans extends MigrationPlansBase {
 
 
-    handleAddPlanFormChange = (e) => {
-
-        if (e.target.name == 'name'){
-            this.setState({name: e.target.value});
-        }else if (e.target.name == 'description'){
-            this.setState({description: e.target.value});
-        }else if (e.target.name == 'source_container_id'){
-            this.setState({source_container_id: e.target.value});
-        }else if (e.target.name == 'target_container_id'){
-            this.setState({target_container_id: e.target.value});
-        }else if (e.target.name == 'target_process_id'){
-            this.setState({target_process_id: e.target.value});
-        }else if (e.target.name == 'mappings'){
-            this.setState({mappings: e.target.value});
-        }
-    }
 
 
-
-      convertFormDataToJson(){
-          const formData = {
-              name: this.state.name,
-              description: this.state.description,
-              source_container_id: this.state.source_container_id,
-              target_container_id: this.state.target_container_id,
-              target_process_id: this.state.target_process_id
-          };
-
-          if (this.state.mappings !== null && this.state.mappings !==''){
-              formData.mappings = this.state.mappings;
-          }
-
-          const jsonStr = JSON.stringify(formData, null, 2);
-
-          this.setState({migrationPlanJsonStr: jsonStr});
-
-          //console.log("!!!!!!!!!!!!! dataContainer" + dataContainer.textContent);
-      }
 
 
 
     resetAllStates = ()=> {
         //clean all states before open add plan wizard, otherwise the wizard-form might have last add-plan's values and steps
       this.setState({
-          activeStepIndex: 0,
-          activeSubStepIndex: 0,
-          sourceInfo: '',
-          targetInfo: '',
-          name:'',
-          description:'',
-          source_container_id:'',
-          target_container_id:'',
-          target_process_id:'',
-          mappings:'',
-          migrationPlanJsonStr:'',
           showDeleteConfirmation:false,
           showMigrationWizard:false,
           showPlanWizard: false,
@@ -138,7 +94,7 @@ export default class MigrationPlans extends MigrationPlansBase {
 
 
   render() {
-      const { showPlanWizard, showMigrationWizard, activeStepIndex, activeSubStepIndex, runningInstances } = this.state;
+      const { showPlanWizard, showMigrationWizard, runningInstances } = this.state;
       const headerFormat = value => <Table.Heading>{value}</Table.Heading>;
       const cellFormat = value => <Table.Cell>{value}</Table.Cell>;
       const headerFormatRightAlign = value => <Table.Heading align="right">{value}</Table.Heading>;
@@ -295,59 +251,20 @@ export default class MigrationPlans extends MigrationPlansBase {
             </Table.PfProvider>
 
 
-            <form className="form-horizontal" name="form_migration_plan" onChange={this.handleAddPlanFormChange}>
-              <Wizard show={showPlanWizard} onHide={this.closeAddPlanWizard}>
-                <Wizard.Header onClose={this.closeAddPlanWizard} title="Create Migration Plan Wizard" />
-                <Wizard.Body>
-                  <Wizard.Steps
-                    steps={renderWizardSteps(PfWizardCreatePlanItems, activeStepIndex, activeSubStepIndex, this.onStepClick)}
-                  />
-                  <Wizard.Row>
-                    <Wizard.Main>{renderCreatePlanWizardContents(PfWizardCreatePlanItems, this.state, this.setInfo)}</Wizard.Main>
-                  </Wizard.Row>
-                </Wizard.Body>
-                <Wizard.Footer>
-                  <Button bsStyle="default" className="btn-cancel" onClick={this.closeAddPlanWizard}>
-                    Cancel
-                  </Button>
-                  <Button
-                    bsStyle="default"
-                    disabled={activeStepIndex === 0 && activeSubStepIndex === 0}
-                    onClick={this.onBackButtonClick}
-                  >
-                    <Icon type="fa" name="angle-left" />
-                    Back
-                  </Button>
-                  {(activeStepIndex === 0 || activeStepIndex === 1 || activeStepIndex === 2) && (
-                    <Button bsStyle="primary" onClick={this.onNextButtonClick}>
-                      Next
-                      <Icon type="fa" name="angle-right" />
-                    </Button>
-                  )}
-                  {activeStepIndex === 3 &&
-                    activeSubStepIndex === 0 && (
-                      <Button bsStyle="primary" onClick={this.onSubmitMigrationPlan}>
-                        Submit Plan
-                        <Icon type="fa" name="angle-right" />
-                      </Button>
-                    )}
-                  {activeStepIndex === 3 &&
-                    activeSubStepIndex === 1 && (
-                      <Button bsStyle="primary" onClick={this.closeAddPlanWizard}>
-                        Close
-                        <Icon type="fa" name="angle-right" />
-                      </Button>
-                    )}
-                </Wizard.Footer>
-              </Wizard>
-          </form>
+            <WizardAddPlan
+                showPlanWizard={showPlanWizard}
+                closeAddPlanWizard={this.closeAddPlanWizard}
+                addPlan={this.addPlan}
+                steps={AddPlanItems}
+
+            />
 
 
           <WizardExecuteMigration
             showMigrationWizard={showMigrationWizard}
             closeMigrationWizard={this.closeMigrationWizard}
             runningInstances={runningInstances}
-            steps={WizardexecuteMigrationItems}
+            steps={ExecuteMigrationItems}
           />
 
     </div>

@@ -3,7 +3,6 @@ import { Row, Col } from 'patternfly-react';
 
 
 import MigrationPlans from './MigrationPlans';
-import { PfWizardCreatePlanItems } from './PfWizardCreatePlanItems';
 
 
 export default class MainPage extends React.Component {
@@ -18,7 +17,7 @@ export default class MainPage extends React.Component {
 
         <Row>
           <Col sm={12}>
-            <MigrationPlans steps={PfWizardCreatePlanItems} />
+            <MigrationPlans/>
           </Col>
         </Row>
         </div>

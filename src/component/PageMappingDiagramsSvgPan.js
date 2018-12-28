@@ -27,7 +27,7 @@ export default class PageMappingDiagramsSvgPan extends Component {
                       onMouseMove={event => console.log('move', event.x, event.y)}
                       onMouseDown={event => console.log('down', event.x, event.y)}>
 
-                      <svg width='2000' height='1000'>
+                      <svg width={2000} height={1000}>
                           <SvgLoader svgXML={this.props.svgcontents} >
                                 <SvgProxy selector={this.props.previousSelector} fill="white"/>
                                 <SvgProxy selector={this.props.currentSelector} fill="yellow"/>

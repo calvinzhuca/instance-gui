@@ -7,7 +7,7 @@ import { Icon } from "patternfly-react";
 import WizardBase from './WizardBase';
 
 import { renderWizardSteps } from './PfWizardRenderers';
-import { WizardexecuteMigrationItems } from './WizardexecuteMigrationItems';
+import { ExecuteMigrationItems } from './WizardItems';
 import PageMigrationRunningInstances from "./PageMigrationRunningInstances";
 import PageMigrationScheduler from "./PageMigrationScheduler";
 import PageReview from "./PageReview";
@@ -19,12 +19,16 @@ export default class WizardExecuteMigration extends WizardBase {
       super(props);
       this.state = {
           activeStepIndex:0,
-          activeSubStepIndex:0
+          activeSubStepIndex:0,
+          jsonStr:''
       };
 
     }
 
+    convertFormDataToJson(){
+        console.log('ExecuteMigration convertFormDataToJson is triggered. ');
 
+    }
 
   render() {
       const { activeStepIndex, activeSubStepIndex } = this.state;
@@ -100,10 +104,10 @@ export default class WizardExecuteMigration extends WizardBase {
                       <Wizard.Header onClose={this.props.closeMigrationWizard} title="Execute Migration Plan Wizard" />
                       <Wizard.Body>
                         <Wizard.Steps
-                          steps={renderWizardSteps(WizardexecuteMigrationItems, activeStepIndex, activeSubStepIndex, this.onStepClick)}
+                          steps={renderWizardSteps(ExecuteMigrationItems, activeStepIndex, activeSubStepIndex, this.onStepClick)}
                         />
                         <Wizard.Row>
-                          <Wizard.Main>{renderExecuteMigrationWizardContents(WizardexecuteMigrationItems, this.state, this.setInfo)}</Wizard.Main>
+                          <Wizard.Main>{renderExecuteMigrationWizardContents(ExecuteMigrationItems, this.state, this.setInfo)}</Wizard.Main>
                         </Wizard.Row>
                       </Wizard.Body>
                       <Wizard.Footer>

@@ -33,6 +33,7 @@ export default class WizardBase extends React.Component {
         activeSubStepIndex: 0
       }));
     }
+    this.convertFormDataToJson();
   };
 
 
