@@ -48,7 +48,7 @@ export default class MigrationPlans extends MigrationPlansBase {
                 runningInstances: instances,
                 showMigrationWizard: true
             });
-
+            this.refs.WizardExecuteMigrationChild.resetWizardStates();
         });
     }
 
@@ -62,6 +62,7 @@ export default class MigrationPlans extends MigrationPlansBase {
     openAddPlanWizard = () => {
       this.resetAllStates();
       this.setState({showPlanWizard: true});
+      this.refs.WizardAddPlanChild.resetWizardStates();
     }
 
 
@@ -155,6 +156,7 @@ export default class MigrationPlans extends MigrationPlansBase {
                 closeAddPlanWizard={this.closeAddPlanWizard}
                 addPlan={this.addPlan}
                 steps={AddPlanItems}
+                ref="WizardAddPlanChild"
             />
 
         {/* Execute Migration Wizard*/}
@@ -163,6 +165,7 @@ export default class MigrationPlans extends MigrationPlansBase {
             closeMigrationWizard={this.closeMigrationWizard}
             runningInstances={runningInstances}
             steps={ExecuteMigrationItems}
+            ref="WizardExecuteMigrationChild"
           />
 
     </div>

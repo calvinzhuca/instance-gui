@@ -21,9 +21,20 @@ export default class WizardExecuteMigration extends WizardBase {
           activeStepIndex:0,
           activeSubStepIndex:0,
           jsonStr:'',
-          runningInstanceIds:''
+          runningInstanceIds:'',
+          scheduleTime:''
       };
+    }
 
+    //using Ref, this is called from parent before open the wizard to reset all the states.
+    resetWizardStates(){
+        this.setState({
+            activeStepIndex:0,
+            activeSubStepIndex:0,
+            jsonStr:'',
+            runningInstanceIds:'',
+            scheduleTime:''
+          })
     }
 
     convertFormDataToJson(){

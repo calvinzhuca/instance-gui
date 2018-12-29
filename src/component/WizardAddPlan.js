@@ -29,10 +29,28 @@ export default class WizardAddPlan extends WizardBase {
           target_container_id:'',
           target_process_id:'',
           mappings:'',
-          migrationPlanJsonStr:'',
+          migrationPlanJsonStr:''
       };
 
     }
+
+    //using Ref, this is called from parent before open the wizard to reset all the states.
+    resetWizardStates(){
+        this.setState({
+            activeStepIndex:0,
+            activeSubStepIndex:0,
+            sourceInfo: '',
+            targetInfo: '',
+            name:'',
+            description:'',
+            source_container_id:'',
+            target_container_id:'',
+            target_process_id:'',
+            mappings:'',
+            migrationPlanJsonStr:''
+        });
+    }
+
 
     setInfo = (sourceInfo, targetInfo) => {
 
