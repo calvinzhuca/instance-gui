@@ -99,7 +99,7 @@ export default class MigrationPlans extends MigrationPlansBase {
 
     return (
         <div>
-              /* Delete Plan pop-up */
+              {/* Delete Plan pop-up */}
               <MessageDialog
                 show={this.state.showDeleteConfirmation}
                 onHide={this.hideDeleteDialog}
@@ -116,7 +116,7 @@ export default class MigrationPlans extends MigrationPlansBase {
                 accessibleDescription="deleteConfirmationDialogContent"
               />
 
-              /* import plan & Add Plan */
+              {/* import plan & Add Plan */}
             <table border="0" width="100%">
             <tbody>
               <tr>
@@ -140,7 +140,7 @@ export default class MigrationPlans extends MigrationPlansBase {
              </tbody>
             </table>
 
-            /* Table lists all the migration plans */
+            {/* Table lists all the migration plans */}
             <MigrationPlansTable
                 openMigrationWizard={this.openMigrationWizard}
                 showDeleteDialog={this.showDeleteDialog}
@@ -149,7 +149,7 @@ export default class MigrationPlans extends MigrationPlansBase {
                 retrieveAllPlans={this.retrieveAllPlans}
             />
 
-            /* Add Plan Wizard */
+            {/* Add Plan Wizard */}
             <WizardAddPlan
                 showPlanWizard={showPlanWizard}
                 closeAddPlanWizard={this.closeAddPlanWizard}
@@ -157,7 +157,7 @@ export default class MigrationPlans extends MigrationPlansBase {
                 steps={AddPlanItems}
             />
 
-            /* Execute Migration Wizard*/
+        {/* Execute Migration Wizard*/}
           <WizardExecuteMigration
             showMigrationWizard={showMigrationWizard}
             closeMigrationWizard={this.closeMigrationWizard}

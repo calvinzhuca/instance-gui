@@ -20,7 +20,8 @@ export default class WizardExecuteMigration extends WizardBase {
       this.state = {
           activeStepIndex:0,
           activeSubStepIndex:0,
-          jsonStr:''
+          jsonStr:'',
+          runningInstanceIds:''
       };
 
     }
@@ -28,6 +29,13 @@ export default class WizardExecuteMigration extends WizardBase {
     convertFormDataToJson(){
         console.log('ExecuteMigration convertFormDataToJson is triggered. ');
 
+    }
+
+    setRunngingInstancesIds =(ids) =>{
+        //console.log('set RunngingInstancesIds' + ids);
+        this.setState({
+            runningInstanceIds:ids,
+          })
     }
 
   render() {
@@ -47,7 +55,10 @@ export default class WizardExecuteMigration extends WizardBase {
                   activeStepIndex={activeStepIndex}
                   activeSubStepIndex={activeSubStepIndex}
                 >
-                  <PageMigrationRunningInstances runningInstances={this.props.runningInstances}/>
+                  <PageMigrationRunningInstances
+                    runningInstances={this.props.runningInstances}
+                    setRunngingInstancesIds={this.setRunngingInstancesIds}
+                    />
                 </Wizard.Contents>
               );
             } else if (stepIndex === 1 ) {
@@ -60,7 +71,9 @@ export default class WizardExecuteMigration extends WizardBase {
                         activeStepIndex={activeStepIndex}
                         activeSubStepIndex={activeSubStepIndex}
                       >
+                      <PageMigrationScheduler
 
+                      />
                       </Wizard.Contents>
                     );
             } else if (stepIndex === 2 && subStepIndex === 0) {
@@ -123,7 +136,11 @@ export default class WizardExecuteMigration extends WizardBase {
                           Back
                         </Button>
                         {(activeStepIndex === 0 || activeStepIndex === 1 ) && (
-                          <Button bsStyle="primary" onClick={this.onNextButtonClick}>
+                          <Button
+                            bsStyle="primary"
+                            disabled={this.state.runningInstanceIds.trim() == ''}
+                            onClick={this.onNextButtonClick}
+                          >
                             Next
                             <Icon type="fa" name="angle-right" />
                           </Button>

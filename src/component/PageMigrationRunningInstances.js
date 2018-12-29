@@ -279,6 +279,7 @@ export default class PageMigrationRunningInstances extends React.Component {
         rows: updatedRows,
         selectedRows: updatedSelections
       });
+
       this.updateSelectedProcessIds(rows, updatedSelections);
     }
   };
@@ -291,12 +292,12 @@ export default class PageMigrationRunningInstances extends React.Component {
 //          console.log('onSelectRow rowId: ' + rowId);
 //          console.log('onSelectRow processInstanceId: ' + rows[rowId-1].processInstanceId);
           if (ids === ''){
-              ids = rows[rowId-1].processInstanceId;
+              ids = '' + rows[rowId-1].processInstanceId;
           }else{
               ids = ids + "," + rows[rowId-1].processInstanceId;
           }
       }
-      console.log('onSelectRow ids: ' + ids);
+      this.props.setRunngingInstancesIds(ids);
     }
 
 
