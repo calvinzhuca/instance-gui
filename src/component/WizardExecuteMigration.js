@@ -22,7 +22,9 @@ export default class WizardExecuteMigration extends WizardBase {
           activeSubStepIndex:0,
           jsonStr:'',
           runningInstanceIds:'',
-          scheduleTime:''
+          scheduleStartTime:'',
+          executionPlanJsonStr:'',
+          callbackUrl:''
       };
     }
 
@@ -33,12 +35,36 @@ export default class WizardExecuteMigration extends WizardBase {
             activeSubStepIndex:0,
             jsonStr:'',
             runningInstanceIds:'',
-            scheduleTime:''
+            scheduleStartTime:'',
+            executionPlanJsonStr:'',
+            callbackUrl:''
           })
     }
 
+
+
     convertFormDataToJson(){
         console.log('ExecuteMigration convertFormDataToJson is triggered. ');
+        const execution={
+            typs:'async',
+            scheduled_start_time: this.state.scheduleStartTime,
+            callback_url:this.state.callbackUrl
+        }
+
+        const formData = {
+            planId: this.props.planId,
+            process_instance_ids: '[' + this.state.runningInstanceIds + ']',
+            execution:execution
+        };
+
+/*
+        if (this.state.mappings !== null && this.state.mappings !==''){
+            formData.mappings = this.state.mappings;
+        }
+*/
+        const jsonStr = JSON.stringify(formData, null, 2);
+
+        this.setState({migrationPlanJsonStr: jsonStr});
 
     }
 
@@ -47,6 +73,15 @@ export default class WizardExecuteMigration extends WizardBase {
         this.setState({
             runningInstanceIds:ids,
           })
+    }
+
+
+    setCallbackUrl =(url) => {
+
+        this.setState({
+            callbackUrl:url
+          })
+        console.log('this.state.callbackUrl: ' + this.state.callbackUrl);          
     }
 
   render() {
@@ -83,7 +118,7 @@ export default class WizardExecuteMigration extends WizardBase {
                         activeSubStepIndex={activeSubStepIndex}
                       >
                       <PageMigrationScheduler
-
+                        setCallbackUrl={this.setCallbackUrl}
                       />
                       </Wizard.Contents>
                     );
@@ -123,7 +158,7 @@ export default class WizardExecuteMigration extends WizardBase {
     return (
         <div>
 
-                  <form className="form-horizontal" name="form_migration" >
+                  <form className="form-horizontal" name="form_migration">
                     <Wizard show={this.props.showMigrationWizard} onHide={this.props.closeMigrationWizard}>
                       <Wizard.Header onClose={this.props.closeMigrationWizard} title="Execute Migration Plan Wizard" />
                       <Wizard.Body>

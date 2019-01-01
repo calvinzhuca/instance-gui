@@ -29,16 +29,18 @@ export default class MigrationPlans extends MigrationPlansBase {
           showMigrationWizard:false,
           showPlanWizard: false,
           deletePlanId:'',
-          runningInstances:[]
+          runningInstances:[],
+          planId:''
       });
     };
 
-    openMigrationWizard = (containerId) =>{
-          console.log("openMigrationWizard containerId " + containerId)
+    openMigrationWizard = (rowData) =>{
+          console.log("openMigrationWizard source_container_id " + rowData.source_container_id)
+          console.log("openMigrationWizard plan id " + rowData.id)
 
           axios.get('http://localhost:8080/backend/instances', {
               params: {
-                  containerId: containerId,
+                  containerId: rowData.source_container_id,
               }
           }).then (res => {
               const instances = res.data;
@@ -46,7 +48,8 @@ export default class MigrationPlans extends MigrationPlansBase {
 
             this.setState({
                 runningInstances: instances,
-                showMigrationWizard: true
+                showMigrationWizard: true,
+                planId:rowData.id
             });
             this.refs.WizardExecuteMigrationChild.resetWizardStates();
         });
@@ -89,7 +92,7 @@ export default class MigrationPlans extends MigrationPlansBase {
 
 
   render() {
-      const { showPlanWizard, showMigrationWizard, runningInstances } = this.state;
+      const { showPlanWizard, showMigrationWizard } = this.state;
 
       //for MessageDialogDeleteConfirmation
       const primaryContent = <p className="lead">Please confirm you will delete this migration plan {this.state.deletePlanId}</p>;
@@ -163,7 +166,8 @@ export default class MigrationPlans extends MigrationPlansBase {
           <WizardExecuteMigration
             showMigrationWizard={showMigrationWizard}
             closeMigrationWizard={this.closeMigrationWizard}
-            runningInstances={runningInstances}
+            runningInstances={this.state.runningInstances}
+            planId={this.state.planId}
             steps={ExecuteMigrationItems}
             ref="WizardExecuteMigrationChild"
           />

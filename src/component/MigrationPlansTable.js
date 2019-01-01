@@ -89,7 +89,7 @@ export default class MigrationPlansTable extends Component {
               formatters: [
                 (value, { rowData }) => [
                   <Table.Actions key="0">
-                        <Table.Button bsStyle="default" onClick={() => this.props.openMigrationWizard(rowData.source_container_id)}>Execute</Table.Button>
+                        <Table.Button bsStyle="default" onClick={() => this.props.openMigrationWizard(rowData)}>Execute</Table.Button>
                   </Table.Actions>,
                   <Table.Actions key="1">
                         <MigrationPlansEditPopup

@@ -3,6 +3,11 @@ import React, { Component } from 'react';
 
 export default class PageMigrationScheduler extends Component {
 
+
+    setCallbackUrl = (event) =>{
+        this.props.setCallbackUrl(event.target.value);
+    }
+
   render() {
 
     return (
@@ -24,12 +29,17 @@ export default class PageMigrationScheduler extends Component {
                   </td>
                   <td width="40%"/>
                 </tr>
+                <tr>
+                    <td width="30%"/>
+                    <td width="40%" align="left">
+                        Callback URL: <input type="text" name="callbackUrl" onChange={this.setCallbackUrl}/>
+                  </td>
+                  <td width="40%"/>
+                </tr>
               </tbody>
             </table>
 
         </div>
-
-
 
     );
   }
