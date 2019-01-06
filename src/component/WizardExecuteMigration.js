@@ -57,12 +57,16 @@ export default class WizardExecuteMigration extends WizardBase {
             execution:execution
         };
 
-/*
-        if (this.state.mappings !== null && this.state.mappings !==''){
-            formData.mappings = this.state.mappings;
+        var jsonStr = JSON.stringify(formData, null, 2);
+
+        //Remove the " " from running instances because it's not a string
+        if (jsonStr !== null && jsonStr !== '' ){
+            //replace "[ to [
+            jsonStr = jsonStr.replace('\"\[', '\[');
+
+            //replace ]" to ]
+            jsonStr = jsonStr.replace('\]\"', '\]');
         }
-*/
-        const jsonStr = JSON.stringify(formData, null, 2);
 
         this.setState({migrationPlanJsonStr: jsonStr});
 
@@ -75,13 +79,19 @@ export default class WizardExecuteMigration extends WizardBase {
           })
     }
 
+    setScheduleStartTime =(startTime) =>{
+        console.log('setScheduleStartTime' + startTime);
+        this.setState({
+            scheduleStartTime:startTime,
+          })
+    }
 
     setCallbackUrl =(url) => {
 
         this.setState({
             callbackUrl:url
           })
-        console.log('this.state.callbackUrl: ' + this.state.callbackUrl);          
+        console.log('this.state.callbackUrl: ' + this.state.callbackUrl);
     }
 
   render() {
@@ -119,6 +129,7 @@ export default class WizardExecuteMigration extends WizardBase {
                       >
                       <PageMigrationScheduler
                         setCallbackUrl={this.setCallbackUrl}
+                        setScheduleStartTime={this.setScheduleStartTime}
                       />
                       </Wizard.Contents>
                     );
