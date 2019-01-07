@@ -1,11 +1,11 @@
 import React, { Component } from 'react';
+import axios from 'axios';
 
 import { Wizard } from "patternfly-react";
 import { Button } from "patternfly-react";
 import { Icon } from "patternfly-react";
 
 import WizardBase from './WizardBase';
-
 import { renderWizardSteps } from './PfWizardRenderers';
 import { ExecuteMigrationItems } from './WizardItems';
 import PageMigrationRunningInstances from "./PageMigrationRunningInstances";
@@ -41,18 +41,44 @@ export default class WizardExecuteMigration extends WizardBase {
           })
     }
 
+    onSubmitMigrationPlan = () =>{
+        const plan = this.state.migrationPlanJsonStr;
+        console.log('onSubmitMigrationPlan: ' + plan);
 
+        //need to create a temp variable "self" to store this, so I can invoke this inside axios call
+        const self = this;
+
+        const serviceUrl = 'http://localhost:8280/migrations';
+        axios.post(serviceUrl, plan, {headers: {
+                  "Content-Type": "application/json",
+                  "Authorization": "Basic ZXhlY3V0aW9uVXNlcjpwYXNzd29yZA=="
+              }
+        })
+        .then(function (response) {
+          console.log('onSubmitMigrationPlan response: ' + response.data );
+          self.props.closeMigrationWizard();
+        })
+        .catch(function (error) {
+          console.log('onSubmitMigrationPlan error: ' + error );
+        });
+
+    }
 
     convertFormDataToJson(){
         //console.log('ExecuteMigration convertFormDataToJson is triggered. ');
         const execution={
-            typs:'async',
-            scheduled_start_time: this.state.scheduleStartTime,
-            callback_url:this.state.callbackUrl
+            type:'ASYNC'
+        }
+
+        if (this.state.scheduleStartTime !== null && this.state.scheduleStartTime !== ''){
+            execution.scheduled_start_time=this.state.scheduleStartTime
+        }
+        if (this.state.callbackUrl !== null && this.state.callbackUrl !== ''){
+            execution.callback_url=this.state.callbackUrl
         }
 
         const formData = {
-            planId: this.props.planId,
+            plan_id: this.props.planId,
             process_instance_ids: '[' + this.state.runningInstanceIds + ']',
             execution:execution
         };
