@@ -27,6 +27,7 @@ export default class PageMigrationScheduler extends Component {
             dateTimeInput:false,
             dateTimePickerOpen:false
          });
+         this.props.setScheduleStartTime('');
     }
 
     enableScheduleTime = () =>{
@@ -39,8 +40,17 @@ export default class PageMigrationScheduler extends Component {
     }
 
     handleDateTimeInput = (moment) =>{
-        console.log('handleDateTimeInput' + moment.format("YYYY/MM/DD hh:mm:ss a"));
-        this.props.setScheduleStartTime(moment.format("YYYY/MM/DD hh:mm:ss a"));
+        console.log('handleDateTimeInput: ' + moment.toDate());
+//        this.props.setScheduleStartTime(moment.format("YYYY/MM/DD hh:mm:ss a"));
+//2019-01-30T13:00:00-05:00        this.props.setScheduleStartTime(moment.format(moment.ISO_DATE_TIME));
+//2019-01-30T18:00:00.000Z         this.props.setScheduleStartTime(moment.toISOString());
+//2019-01-30T18:00:00.000Z            this.props.setScheduleStartTime(moment.toDate());
+        this.props.setScheduleStartTime(moment.toDate());
+    }
+
+    validDate = (current) =>{
+        var yesterday = Datetime.moment().subtract( 1, 'day' );
+        return current.isAfter(yesterday);
     }
 
   render() {
@@ -71,7 +81,9 @@ export default class PageMigrationScheduler extends Component {
                         <Datetime id="PageMigrationScheduler_scheduleTime"
                             input={this.state.dateTimeInput}
                             open={this.state.dateTimePickerOpen}
-                            onChange={this.handleDateTimeInput}/>
+                            onChange={this.handleDateTimeInput}
+                            isValidDate={this.validDate }
+                        />
                   </td>
                   <td width="40%"/>
                 </tr>

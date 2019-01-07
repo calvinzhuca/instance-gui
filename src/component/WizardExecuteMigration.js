@@ -44,7 +44,7 @@ export default class WizardExecuteMigration extends WizardBase {
 
 
     convertFormDataToJson(){
-        console.log('ExecuteMigration convertFormDataToJson is triggered. ');
+        //console.log('ExecuteMigration convertFormDataToJson is triggered. ');
         const execution={
             typs:'async',
             scheduled_start_time: this.state.scheduleStartTime,
@@ -80,7 +80,7 @@ export default class WizardExecuteMigration extends WizardBase {
     }
 
     setScheduleStartTime =(startTime) =>{
-        console.log('setScheduleStartTime' + startTime);
+        //console.log('setScheduleStartTime' + startTime);
         this.setState({
             scheduleStartTime:startTime,
           })
@@ -91,7 +91,7 @@ export default class WizardExecuteMigration extends WizardBase {
         this.setState({
             callbackUrl:url
           })
-        console.log('this.state.callbackUrl: ' + this.state.callbackUrl);
+        //console.log('this.state.callbackUrl: ' + this.state.callbackUrl);
     }
 
   render() {
