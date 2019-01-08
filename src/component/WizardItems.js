@@ -102,11 +102,18 @@ export const ExecuteMigrationItems = [
         subStep: '3.1',
         label: '3A.',
         title: 'Review'
-      },
+      }
+    ]
+  },
+  {
+    step: 4,
+    label: '4',
+    title: 'Check Response',
+    subSteps: [
       {
-        subStep: '3.2',
-        label: '3B.',
-        title: 'Submit'
+        subStep: '4.1',
+        label: '4A.',
+        title: 'Response'
       }
     ]
   }

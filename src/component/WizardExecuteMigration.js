@@ -24,7 +24,8 @@ export default class WizardExecuteMigration extends WizardBase {
           runningInstanceIds:'',
           scheduleStartTime:'',
           executionPlanJsonStr:'',
-          callbackUrl:''
+          callbackUrl:'',
+          pimServiceResponseJsonStr:''
       };
     }
 
@@ -37,7 +38,8 @@ export default class WizardExecuteMigration extends WizardBase {
             runningInstanceIds:'',
             scheduleStartTime:'',
             executionPlanJsonStr:'',
-            callbackUrl:''
+            callbackUrl:'',
+            pimServiceResponseJsonStr:''
           })
     }
 
@@ -55,8 +57,11 @@ export default class WizardExecuteMigration extends WizardBase {
               }
         })
         .then(function (response) {
-          console.log('onSubmitMigrationPlan response: ' + response.data );
-          self.props.closeMigrationWizard();
+          console.log('onSubmitMigrationPlan response: ' + JSON.stringify(response.data)  );
+          self.setState({
+              pimServiceResponseJsonStr:JSON.stringify(response.data),
+            })
+          self.onNextButtonClick();
         })
         .catch(function (error) {
           console.log('onSubmitMigrationPlan error: ' + error );
@@ -124,7 +129,7 @@ export default class WizardExecuteMigration extends WizardBase {
       const { activeStepIndex, activeSubStepIndex } = this.state;
 
       const renderExecuteMigrationWizardContents = (wizardSteps, state, setInfo) => {
-        const { activeStepIndex, activeSubStepIndex, migrationPlanJsonStr} = state;
+//        const { activeStepIndex, activeSubStepIndex} = state;
         return wizardSteps.map((step, stepIndex) =>
           step.subSteps.map((sub, subStepIndex) => {
             if (stepIndex === 0 ) {
@@ -159,7 +164,7 @@ export default class WizardExecuteMigration extends WizardBase {
                       />
                       </Wizard.Contents>
                     );
-            } else if (stepIndex === 2 && subStepIndex === 0) {
+            } else if (stepIndex === 2 ) {
               // render review
               return (
                 <Wizard.Contents
@@ -169,11 +174,11 @@ export default class WizardExecuteMigration extends WizardBase {
                   activeStepIndex={activeStepIndex}
                   activeSubStepIndex={activeSubStepIndex}
                 >
-                  <PageReview migrationPlanJsonStr={migrationPlanJsonStr}/>
+                  <PageReview inputJsonStr={this.state.migrationPlanJsonStr}/>
                 </Wizard.Contents>
               );
-          } else if (stepIndex === 2 && subStepIndex === 1) {
-              // render mock progress
+          } else if (stepIndex === 3 ) {
+              // render result page
               return (
                 <Wizard.Contents
                   key={subStepIndex}
@@ -182,7 +187,7 @@ export default class WizardExecuteMigration extends WizardBase {
                   activeStepIndex={activeStepIndex}
                   activeSubStepIndex={activeSubStepIndex}
                 >
-                  <PfWizardSubmitPlan active={stepIndex === activeStepIndex && subStepIndex === activeSubStepIndex} />
+                  <PageReview inputJsonStr={this.state.pimServiceResponseJsonStr}/>
                 </Wizard.Contents>
               );
             }
@@ -228,15 +233,13 @@ export default class WizardExecuteMigration extends WizardBase {
                             <Icon type="fa" name="angle-right" />
                           </Button>
                         )}
-                        {activeStepIndex === 2 &&
-                          activeSubStepIndex === 0 && (
+                        {activeStepIndex === 2 && (
                             <Button bsStyle="primary" onClick={this.onSubmitMigrationPlan}>
                               Execute Plan
                               <Icon type="fa" name="angle-right" />
                             </Button>
                           )}
-                        {activeStepIndex === 2 &&
-                          activeSubStepIndex === 1 && (
+                        {activeStepIndex === 3 && (
                             <Button bsStyle="primary" onClick={this.props.closeMigrationWizard}>
                               Close
                               <Icon type="fa" name="angle-right" />

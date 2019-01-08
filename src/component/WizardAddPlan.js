@@ -112,10 +112,10 @@ export default class WizardAddPlan extends WizardBase {
     }
 
   render() {
-      const { activeStepIndex, activeSubStepIndex } = this.state;
+      const { activeStepIndex, activeSubStepIndex, sourceInfo, targetInfo, migrationPlanJsonStr} = this.state;
 
       const renderAddPlanWizardContents = (wizardSteps, state, setInfo) => {
-        const { activeStepIndex, activeSubStepIndex, sourceInfo, targetInfo, migrationPlanJsonStr} = this.state;
+//        const { activeStepIndex, activeSubStepIndex, sourceInfo, targetInfo, migrationPlanJsonStr} = this.state;
         return wizardSteps.map((step, stepIndex) =>
           step.subSteps.map((sub, subStepIndex) => {
             if (stepIndex === 0 ) {
@@ -173,7 +173,7 @@ export default class WizardAddPlan extends WizardBase {
                   activeStepIndex={activeStepIndex}
                   activeSubStepIndex={activeSubStepIndex}
                 >
-                  <PageReview migrationPlanJsonStr={migrationPlanJsonStr}/>
+                  <PageReview inputJsonStr={migrationPlanJsonStr}/>
                 </Wizard.Contents>
               );
             } else if (stepIndex === 3 && subStepIndex === 1) {
