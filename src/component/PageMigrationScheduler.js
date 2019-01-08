@@ -1,5 +1,6 @@
 import React, { Component } from 'react';
 import * as Datetime from 'react-datetime';
+import moment from 'moment'
 
 export default class PageMigrationScheduler extends Component {
     constructor(props){
@@ -39,13 +40,18 @@ export default class PageMigrationScheduler extends Component {
          });
     }
 
-    handleDateTimeInput = (moment) =>{
-        console.log('handleDateTimeInput: ' + moment.toDate());
-//        this.props.setScheduleStartTime(moment.format("YYYY/MM/DD hh:mm:ss a"));
-//2019-01-30T13:00:00-05:00        this.props.setScheduleStartTime(moment.format(moment.ISO_DATE_TIME));
-//2019-01-30T18:00:00.000Z         this.props.setScheduleStartTime(moment.toISOString());
-//2019-01-30T18:00:00.000Z            this.props.setScheduleStartTime(moment.toDate());
-        this.props.setScheduleStartTime(moment.toDate());
+    handleDateTimeInput = (inputMoment) =>{
+        if (moment(inputMoment,"YYYY-MM-DDTHH:mm:ss", true).isValid()){
+            console.log('handleDateTimeInput, valid moment: ' + inputMoment.toDate());
+    //        this.props.setScheduleStartTime(inputMoment.format("YYYY/MM/DD hh:mm:ss a"));
+    //2019-01-30T13:00:00-05:00        this.props.setScheduleStartTime(inputMoment.format(moment.ISO_DATE_TIME));
+    //2019-01-30T18:00:00.000Z         this.props.setScheduleStartTime(inputMoment.toISOString());
+    //2019-01-30T18:00:00.000Z            this.props.setScheduleStartTime(inputMoment.toDate());
+            this.props.setScheduleStartTime(inputMoment.toDate());
+        }else{
+            //just ignore the user input
+            console.log('handleDateTimeInput, not valid moment: ' + inputMoment);
+        }
     }
 
     validDate = (current) =>{
