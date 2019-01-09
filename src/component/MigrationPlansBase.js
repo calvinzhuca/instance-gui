@@ -13,7 +13,8 @@ export default class MigrationPlansBase extends React.Component {
       showMigrationWizard:false,
       showPlanWizard: false,
       deletePlanId:'',
-      runningInstances:[]
+      runningInstances:[],
+      addPlanResponseJsonStr:''
     };
 
     this.retrieveAllPlans();
@@ -97,6 +98,9 @@ export default class MigrationPlansBase extends React.Component {
       })
       .then(function (response) {
         console.log('addPlan response: ' + response.data );
+        self.setState({
+            addPlanResponseJsonStr:JSON.stringify(response.data),
+          })
         self.retrieveAllPlans();
       })
       .catch(function (error) {

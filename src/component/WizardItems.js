@@ -53,11 +53,18 @@ export const AddPlanItems = [
         subStep: '4.1',
         label: '4A.',
         title: 'Review'
-      },
+      }
+    ]
+  },
+  {
+    step: 5,
+    label: '5',
+    title: 'Check Response',
+    subSteps: [
       {
-        subStep: '4.2',
-        label: '4B.',
-        title: 'Submit'
+        subStep: '5.1',
+        label: '5A.',
+        title: 'Response'
       }
     ]
   }

@@ -30,13 +30,14 @@ export default class MigrationPlans extends MigrationPlansBase {
           showPlanWizard: false,
           deletePlanId:'',
           runningInstances:[],
-          planId:''
+          planId:'',
+          addPlanResponseJsonStr:''
       });
     };
 
     openMigrationWizard = (rowData) =>{
-          console.log("openMigrationWizard source_container_id " + rowData.source_container_id)
-          console.log("openMigrationWizard plan id " + rowData.id)
+          //console.log("openMigrationWizard source_container_id " + rowData.source_container_id)
+          //console.log("openMigrationWizard plan id " + rowData.id)
 
           axios.get('http://localhost:8080/backend/instances', {
               params: {
@@ -147,6 +148,7 @@ export default class MigrationPlans extends MigrationPlansBase {
             {/* Table lists all the migration plans */}
             <MigrationPlansTable
                 openMigrationWizard={this.openMigrationWizard}
+                openAddPlanWizard={this.openAddPlanWizard}
                 showDeleteDialog={this.showDeleteDialog}
                 filteredPlans={this.state.filteredPlans}
                 updatePlan={this.editPlan}
@@ -160,6 +162,7 @@ export default class MigrationPlans extends MigrationPlansBase {
                 addPlan={this.addPlan}
                 steps={AddPlanItems}
                 ref="WizardAddPlanChild"
+                addPlanResponseJsonStr={this.state.addPlanResponseJsonStr}
             />
 
         {/* Execute Migration Wizard*/}

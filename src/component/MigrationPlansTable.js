@@ -103,7 +103,10 @@ export default class MigrationPlansTable extends Component {
                   </Table.Actions>,
                   <Table.Actions key="2">
                         <Table.Button bsStyle="default" onClick={() => this.props.showDeleteDialog(rowData.id)}>Delete</Table.Button>
-                  </Table.Actions>
+                  </Table.Actions>,
+                  <Table.Actions key="3">                  
+                        <Table.Button bsStyle="default" onClick={() => this.props.openAddPlanWizard(rowData)}>Edit 2</Table.Button>
+                  </Table.Actions>,
                 ]
               ]
           },

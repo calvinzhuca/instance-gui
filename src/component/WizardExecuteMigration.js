@@ -11,7 +11,6 @@ import { ExecuteMigrationItems } from './WizardItems';
 import PageMigrationRunningInstances from "./PageMigrationRunningInstances";
 import PageMigrationScheduler from "./PageMigrationScheduler";
 import PageReview from "./PageReview";
-import PfWizardSubmitPlan from './PfWizardSubmitPlan';
 
 export default class WizardExecuteMigration extends WizardBase {
 

@@ -12,7 +12,7 @@ import PageMapping from "./PageMapping";
 import PageDefinition from "./PageDefinition";
 import PagePlanName from "./PagePlanName";
 import PageReview from "./PageReview";
-import PfWizardSubmitPlan from './PfWizardSubmitPlan';
+
 
 export default class WizardAddPlan extends WizardBase {
 
@@ -163,7 +163,7 @@ export default class WizardAddPlan extends WizardBase {
                       />
                       </Wizard.Contents>
                     );
-            } else if (stepIndex === 3 && subStepIndex === 0) {
+            } else if (stepIndex === 3) {
               // render review
               return (
                 <Wizard.Contents
@@ -176,7 +176,7 @@ export default class WizardAddPlan extends WizardBase {
                   <PageReview inputJsonStr={migrationPlanJsonStr}/>
                 </Wizard.Contents>
               );
-            } else if (stepIndex === 3 && subStepIndex === 1) {
+          } else if (stepIndex === 4) {
               // render mock progress
               return (
                 <Wizard.Contents
@@ -186,7 +186,7 @@ export default class WizardAddPlan extends WizardBase {
                   activeStepIndex={activeStepIndex}
                   activeSubStepIndex={activeSubStepIndex}
                 >
-                  <PfWizardSubmitPlan active={stepIndex === activeStepIndex && subStepIndex === activeSubStepIndex} />
+                  <PageReview inputJsonStr={this.props.addPlanResponseJsonStr}/>
                 </Wizard.Contents>
               );
             }
@@ -228,15 +228,13 @@ export default class WizardAddPlan extends WizardBase {
                   <Icon type="fa" name="angle-right" />
                 </Button>
               )}
-              {activeStepIndex === 3 &&
-                activeSubStepIndex === 0 && (
+              {activeStepIndex === 3 && (
                   <Button bsStyle="primary" onClick={this.onSubmitMigrationPlan}>
                     Submit Plan
                     <Icon type="fa" name="angle-right" />
                   </Button>
                 )}
-              {activeStepIndex === 3 &&
-                activeSubStepIndex === 1 && (
+              {activeStepIndex === 4 && (
                   <Button bsStyle="primary" onClick={this.props.closeAddPlanWizard}>
                     Close
                     <Icon type="fa" name="angle-right" />
