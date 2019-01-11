@@ -9,28 +9,50 @@ export default class PageDefinition extends Component {
       super(props);
 
       this.state = {
-          sourceProcessId: 'evaluation',
-          sourceGroupId: 'evaluation',
-          sourceArtifactId: 'evaluation',
-          sourceVersion: '2.0.0-SNAPSHOT',
-          targetProcessId: 'Mortgage_Process.MortgageApprovalProcess',
-          targetGroupId: 'mortgage-process',
-          targetArtifactId: 'mortgage-process',
-          targetVersion: '1.0.0-SNAPSHOT'
+          sourceProcessId: '',
+          sourceGroupId: '',
+          sourceArtifactId: '',
+          sourceVersion: '',
+          targetProcessId: '',
+          targetGroupId: '',
+          targetArtifactId: '',
+          targetVersion: ''
       };
-      this.handleSourceProcessIdChange = this.handleSourceProcessIdChange.bind(this);
-      this.handleSourceGroupIdChange = this.handleSourceGroupIdChange.bind(this);
-      this.handleSourceArtifactIdChange = this.handleSourceArtifactIdChange.bind(this);
-      this.handleSourceVersionChange = this.handleSourceVersionChange.bind(this);
-      this.handleTargetProcessIdChange = this.handleTargetProcessIdChange.bind(this);
-      this.handleTargetGroupIdChange = this.handleTargetGroupIdChange.bind(this);
-      this.handleTargetArtifactIdChange = this.handleTargetArtifactIdChange.bind(this);
-      this.handleTargetVersionChange = this.handleTargetVersionChange.bind(this);
-      this.retriveBothInfo = this.retriveBothInfo.bind(this);
     }
 
+    //This is used in add plan wizard (for edit plan) to load the inital data to form fields
+    componentDidMount(){
 
-    copySourceToTarget(){
+        const sourceVersion = this.props.initSourceContainerId.substring((this.props.initSourceContainerId.indexOf('_') + 1),this.props.initSourceContainerId.length);
+        const targetVersion = this.props.initTargetContainerId.substring((this.props.initTargetContainerId.indexOf('_') + 1),this.props.initTargetContainerId.length);
+
+        this.setState({
+            sourceProcessId: this.props.initProcessId,
+            sourceGroupId: this.props.initProcessId,
+            sourceArtifactId: this.props.initProcessId,
+            sourceVersion: sourceVersion,
+            targetProcessId: this.props.initProcessId,
+            targetGroupId: this.props.initProcessId,
+            targetArtifactId: this.props.initProcessId,
+            targetVersion: targetVersion
+        });
+    }
+
+    //this function is for helping test only
+    fillWithTestRecord = () =>{
+        this.setState({
+            sourceProcessId: 'evaluation',
+            sourceGroupId: 'evaluation',
+            sourceArtifactId: 'evaluation',
+            sourceVersion: '2.0.0-SNAPSHOT',
+            targetProcessId: 'Mortgage_Process.MortgageApprovalProcess',
+            targetGroupId: 'mortgage-process',
+            targetArtifactId: 'mortgage-process',
+            targetVersion: '1.0.0-SNAPSHOT'
+        });
+    }
+
+    copySourceToTarget = () =>{
         this.setState({
             targetProcessId:  this.state.sourceProcessId,
             targetGroupId: this.state.sourceGroupId,
@@ -39,39 +61,39 @@ export default class PageDefinition extends Component {
         });
     }
 
-    handleSourceProcessIdChange(value){
+    handleSourceProcessIdChange = (value) =>{
         this.setState({sourceProcessId: value});
     }
 
-    handleSourceGroupIdChange(value){
+    handleSourceGroupIdChange = (value) =>{
         this.setState({sourceGroupId: value});
     }
 
-    handleSourceArtifactIdChange(value){
+    handleSourceArtifactIdChange = (value) =>{
         this.setState({sourceArtifactId: value});
     }
 
-    handleSourceVersionChange(value){
+    handleSourceVersionChange = (value) =>{
         this.setState({sourceVersion: value});
     }
 
-    handleTargetProcessIdChange(value){
+    handleTargetProcessIdChange = (value) =>{
         this.setState({targetProcessId: value});
     }
 
-    handleTargetGroupIdChange(value){
+    handleTargetGroupIdChange = (value) =>{
         this.setState({targetGroupId: value});
     }
 
-    handleTargetArtifactIdChange(value){
+    handleTargetArtifactIdChange = (value) =>{
         this.setState({targetArtifactId: value});
     }
 
-    handleTargetVersionChange(value){
+    handleTargetVersionChange = (value) =>{
         this.setState({targetVersion: value});
     }
 
-    retriveBothInfo(){
+    retriveBothInfo = () =>{
         console.log('this.state.sourceProcessId ' + this.state.sourceProcessId);
         console.log('this.state.targetProcessId ' + this.state.targetProcessId);
         axios.get('http://localhost:8080/backend/both', {
@@ -125,7 +147,7 @@ export default class PageDefinition extends Component {
 
     return (
       <div className="form-horizontal">
-
+                    <Button onClick={this.fillWithTestRecord}>quick fill for testing</Button>
 
                     <PageDefinitionSearchTable tableHeader="Source "
                         processId={this.state.sourceProcessId}
@@ -137,9 +159,12 @@ export default class PageDefinition extends Component {
                         handleGroupIdChange={this.handleSourceGroupIdChange}
                         handleArtifactIdChange={this.handleSourceArtifactIdChange}
                         handleVersionChange={this.handleSourceVersionChange}
+
+                        initContainerId={this.props.initSourceContainerId}
+                        initProcessId={this.props.initProcessId}
                     />
 
-                    <Button onClick={(e) => this.copySourceToTarget(e)}> Copy Source To Target</Button>
+                    <Button onClick={this.copySourceToTarget}> Copy Source To Target</Button>
 
                     <PageDefinitionSearchTable tableHeader="Target "
                         processId={this.state.targetProcessId}
@@ -151,6 +176,9 @@ export default class PageDefinition extends Component {
                         handleGroupIdChange={this.handleTargetGroupIdChange}
                         handleArtifactIdChange={this.handleTargetArtifactIdChange}
                         handleVersionChange={this.handleTargetVersionChange}
+
+                        initContainerId={this.props.initTargetContainerId}
+                        initProcessId={this.props.initProcessId}
                     />
 
 

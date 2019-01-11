@@ -81,7 +81,7 @@ export default class MigrationPlansTable extends Component {
             label: 'Actions',
             props: {
               rowSpan: 1,
-              colSpan: 3
+              colSpan: 4
             },
             formatters: [actionHeaderCellFormatter]
           },
@@ -104,8 +104,8 @@ export default class MigrationPlansTable extends Component {
                   <Table.Actions key="2">
                         <Table.Button bsStyle="default" onClick={() => this.props.showDeleteDialog(rowData.id)}>Delete</Table.Button>
                   </Table.Actions>,
-                  <Table.Actions key="3">                  
-                        <Table.Button bsStyle="default" onClick={() => this.props.openAddPlanWizard(rowData)}>Edit 2</Table.Button>
+                  <Table.Actions key="3">
+                        <Table.Button bsStyle="default" onClick={() => this.props.openAddPlanWizardwithInitialData(rowData)}>Edit with Wizard</Table.Button>
                   </Table.Actions>,
                 ]
               ]
@@ -116,7 +116,7 @@ export default class MigrationPlansTable extends Component {
 
     return (
         <div>
-            <Table.PfProvider striped bordered hover columns={planBootstrapColumns}>
+            <Table.PfProvider  hover columns={planBootstrapColumns}>
               <Table.Header />
               <Table.Body rows={this.props.filteredPlans} rowKey="id" />
             </Table.PfProvider>

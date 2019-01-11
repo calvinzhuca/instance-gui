@@ -51,6 +51,25 @@ export default class WizardAddPlan extends WizardBase {
         });
     }
 
+    //using Ref, this is called from parent before open the wizard for edit existing migration plan
+    initialWizardStates(rowData){
+        const jsonStr = JSON.stringify(rowData);
+        this.setState({
+            activeStepIndex:0,
+            activeSubStepIndex:0,
+            sourceInfo: '',
+            targetInfo: '',
+            name:rowData.name,
+            description:rowData.description,
+            source_container_id:rowData.source_container_id,
+            target_container_id:rowData.target_container_id,
+            target_process_id:rowData.target_process_id,
+            mappings:rowData.mappings,
+            migrationPlanJsonStr:jsonStr
+        });
+    }
+
+
 
     setInfo = (sourceInfo, targetInfo) => {
 
@@ -128,7 +147,10 @@ export default class WizardAddPlan extends WizardBase {
                   activeStepIndex={activeStepIndex}
                   activeSubStepIndex={activeSubStepIndex}
                 >
-                  <PagePlanName />
+                  <PagePlanName
+                    name={this.state.name}
+                    description={this.state.description}
+                  />
                 </Wizard.Contents>
               );
             } else if (stepIndex === 1 ) {
@@ -145,6 +167,9 @@ export default class WizardAddPlan extends WizardBase {
                             sourceInfo={sourceInfo}
                             targetInfo={targetInfo}
                             setInfo={setInfo}
+                            initSourceContainerId={this.state.source_container_id}
+                            initTargetContainerId={this.state.target_container_id}
+                            initProcessId={this.state.target_process_id}
                       />
                       </Wizard.Contents>
                     );
@@ -159,7 +184,9 @@ export default class WizardAddPlan extends WizardBase {
                         activeSubStepIndex={activeSubStepIndex}
                       >
                       <PageMapping
-                            sourceInfo={sourceInfo} targetInfo={targetInfo}
+                            sourceInfo={sourceInfo}
+                            targetInfo={targetInfo}
+                            mappings={this.state.mappings}
                       />
                       </Wizard.Contents>
                     );
@@ -199,7 +226,7 @@ export default class WizardAddPlan extends WizardBase {
     return (
         <div>
 
-        <form className="form-horizontal" name="form_migration_plan" onChange={this.handleAddPlanFormChange}>
+        <form className="form-horizontal" name="form_migration_plan" id="WizardAddPlan_id_form1" onChange={this.handleAddPlanFormChange}>
           <Wizard show={this.props.showPlanWizard} onHide={this.props.closeAddPlanWizard}>
             <Wizard.Header onClose={this.props.closeAddPlanWizard} title="Add Migration Plan Wizard" />
             <Wizard.Body>

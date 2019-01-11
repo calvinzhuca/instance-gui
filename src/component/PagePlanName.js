@@ -3,6 +3,11 @@ import React, { Component } from 'react';
 
 export default class PagePlanName extends Component {
 
+    componentDidMount(){
+        document.getElementById("id_PagePlanName_name").value=this.props.name;
+        document.getElementById("id_PagePlanName_description").value=this.props.description;
+    }
+
   render() {
 
     return (
@@ -10,19 +15,16 @@ export default class PagePlanName extends Component {
           <div className="form-group required">
             <label className="col-sm-2 control-label">Name</label>
             <div className="col-sm-10">
-              <input type="text" name="name" className="form-control" />
+              <input type="text" name="name" className="form-control" id="id_PagePlanName_name" />
             </div>
           </div>
           <div className="form-group">
             <label className="col-sm-2 control-label">Description</label>
             <div className="col-sm-10">
-              <textarea className="form-control" name="description" rows="2" />
+              <textarea name="description" rows="2" className="form-control" id="id_PagePlanName_description"/>
             </div>
           </div>
         </div>
-
-
-
     );
   }
 }

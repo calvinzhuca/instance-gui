@@ -69,6 +69,12 @@ export default class MigrationPlans extends MigrationPlansBase {
       this.refs.WizardAddPlanChild.resetWizardStates();
     }
 
+    openAddPlanWizardwithInitialData = (rowData) => {
+        console.log('openAddPlanWizardwithInitialData name: ' + rowData.name);
+      this.resetAllStates();
+      this.setState({showPlanWizard: true});
+      this.refs.WizardAddPlanChild.initialWizardStates(rowData);
+    }
 
 
     closeAddPlanWizard = () => {
@@ -149,6 +155,7 @@ export default class MigrationPlans extends MigrationPlansBase {
             <MigrationPlansTable
                 openMigrationWizard={this.openMigrationWizard}
                 openAddPlanWizard={this.openAddPlanWizard}
+                openAddPlanWizardwithInitialData={this.openAddPlanWizardwithInitialData}
                 showDeleteDialog={this.showDeleteDialog}
                 filteredPlans={this.state.filteredPlans}
                 updatePlan={this.editPlan}

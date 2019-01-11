@@ -75,7 +75,7 @@ export default class MigrationPlansBase extends React.Component {
 
   // addPlan need to be in the parent because it's shared between WizardAddPlan and Import Plan pop-up
   addPlan = (plan) => {
-      console.log('addPlan234');
+      //console.log('addPlan is invoked');
       if (plan !== null && plan !== '' ){
           //console.log('!!!!!!!!!!!!!!!!!!!submit plan' + plan);
 
@@ -99,7 +99,7 @@ export default class MigrationPlansBase extends React.Component {
       .then(function (response) {
         console.log('addPlan response: ' + response.data );
         self.setState({
-            addPlanResponseJsonStr:JSON.stringify(response.data),
+            addPlanResponseJsonStr:JSON.stringify(response.data, null, 2),
           })
         self.retrieveAllPlans();
       })

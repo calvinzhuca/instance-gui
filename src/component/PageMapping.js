@@ -15,33 +15,43 @@ export default class PageMapping extends Component {
                   sourceDiagramshown: false,
                   targetDiagramshown: false
                 };
-    this.handleSourceDropdownChange = this.handleSourceDropdownChange.bind(this);
-    this.handleTargetDropdownChange = this.handleTargetDropdownChange.bind(this);
-    this.handleSourceDiagramButtonClick = this.handleSourceDiagramButtonClick.bind(this);
-    this.handleTargetDiagramButtonClick = this.handleTargetDiagramButtonClick.bind(this);
-    this.handleMapButtonClick = this.handleMapButtonClick.bind(this);
-
-    //console.log("this.props.sourceInfo.nodesForDropdown " + this.props.sourceInfo.nodesForDropdown);
-    //console.log("this.props.targetInfo.nodesForDropdown " + this.props.targetInfo.nodesForDropdown);
 
   }
 
+  //This is used in add plan wizard (for edit plan) to load the inital data to form fields
+//  componentDidMount(){
+//      var test1 =  document.getElementById("nodeMappingField");
+//      console.log('PageMapping componentDidMount test1 ' + test1);
+//     test1.value=JSON.stringify(this.props.mappings);
+//  }
+    componentDidUpdate(){
+        var test1 =  document.getElementById("nodeMappingField");
+        console.log('PageMapping componentDidUpdate test1 ' + test1);
+        if (test1 != null){
+            console.log('test1 != null ' );
+            if (test1.value === null || test1.value ===''){
+                test1.value=JSON.stringify(this.props.mappings);
+            }
+        }
+    }
 
-  handleSourceDiagramButtonClick(){
+
+
+  handleSourceDiagramButtonClick = () =>{
     console.log('handleSourceDiagramButtonClick sourceDiagramshown ' + this.state.sourceDiagramshown)
     this.setState({
 			sourceDiagramshown: !this.state.sourceDiagramshown
 		});
   }
 
-  handleTargetDiagramButtonClick(){
+  handleTargetDiagramButtonClick= () =>{
     console.log('handleTargetDiagramButtonClick targetDiagramshown ' + this.state.targetDiagramshown)
     this.setState({
 			targetDiagramshown: !this.state.targetDiagramshown
 		});
   }
 
-  handleSourceDropdownChange(option){
+  handleSourceDropdownChange = (option) => {
     let tmpPreviousSelector = this.state.sourceCurrentSelector;
     //let tmpCurrentSelector = "#"  + option.value + "undefined";
     let tmpCurrentSelector = "#"  + option + "_shapeType_BACKGROUND";
@@ -55,15 +65,9 @@ export default class PageMapping extends Component {
 
   }
 
-
-
-  handleTargetDropdownChange(option){
+  handleTargetDropdownChange = (option) =>  {
     let tmpPreviousSelector = this.state.targetCurrentSelector;
     let tmpCurrentSelector = "#"  + option + "_shapeType_BACKGROUND";
-    //let tmpCurrentSelector = "#"  + option.value;
-
-    //let tmpCurrentSelector = "[bpmn2nodeid=" + option.value + "]";
-    //console.log('TargetDropdown selected ', tmpCurrentSelector);
 
     this.setState({
       targetNodeStr: option,
@@ -75,7 +79,7 @@ export default class PageMapping extends Component {
 
   }
 
-  handleMapButtonClick(){
+  handleMapButtonClick = () => {
       if (this.state.sourceNodeStr.length >0 && this.state.targetNodeStr.length >0 )
       {
           var currentNodeMapping = '"' + this.state.sourceNodeStr + '"' + ":" + '"' + this.state.targetNodeStr + '"';
@@ -135,6 +139,8 @@ export default class PageMapping extends Component {
        for (var i = 0; i < targetValues.length; i++){
            targetNode.push({value:targetValues[i],label:targetLabels[i]});
        }
+
+
 
 
         return (

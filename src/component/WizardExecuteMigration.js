@@ -58,7 +58,7 @@ export default class WizardExecuteMigration extends WizardBase {
         .then(function (response) {
           console.log('onSubmitMigrationPlan response: ' + JSON.stringify(response.data)  );
           self.setState({
-              pimServiceResponseJsonStr:JSON.stringify(response.data),
+              pimServiceResponseJsonStr:JSON.stringify(response.data, null, 2),
             })
           self.onNextButtonClick();
         })
