@@ -11,6 +11,7 @@ import { ExecuteMigrationItems } from './WizardItems';
 import PageMigrationRunningInstances from "./PageMigrationRunningInstances";
 import PageMigrationScheduler from "./PageMigrationScheduler";
 import PageReview from "./PageReview";
+import { MockupData_PIM_response } from './MockupData';
 
 export default class WizardExecuteMigration extends WizardBase {
 
@@ -43,29 +44,36 @@ export default class WizardExecuteMigration extends WizardBase {
     }
 
     onSubmitMigrationPlan = () =>{
-        const plan = this.state.migrationPlanJsonStr;
-        console.log('onSubmitMigrationPlan: ' + plan);
+        if (this.props.useMockData){
+            console.log('onSubmitMigrationPlan, using mockData: ');
+            this.setState({
+                pimServiceResponseJsonStr:JSON.stringify(MockupData_PIM_response, null, 2),
+              })
+            this.onNextButtonClick();
+        }else{
+            const plan = this.state.migrationPlanJsonStr;
+            console.log('onSubmitMigrationPlan: ' + plan);
 
-        //need to create a temp variable "self" to store this, so I can invoke this inside axios call
-        const self = this;
+            //need to create a temp variable "self" to store this, so I can invoke this inside axios call
+            const self = this;
 
-        const serviceUrl = 'http://localhost:8280/migrations';
-        axios.post(serviceUrl, plan, {headers: {
-                  "Content-Type": "application/json",
-                  "Authorization": "Basic ZXhlY3V0aW9uVXNlcjpwYXNzd29yZA=="
-              }
-        })
-        .then(function (response) {
-          console.log('onSubmitMigrationPlan response: ' + JSON.stringify(response.data)  );
-          self.setState({
-              pimServiceResponseJsonStr:JSON.stringify(response.data, null, 2),
+            const serviceUrl = 'http://localhost:8280/migrations';
+            axios.post(serviceUrl, plan, {headers: {
+                      "Content-Type": "application/json",
+                      "Authorization": "Basic ZXhlY3V0aW9uVXNlcjpwYXNzd29yZA=="
+                  }
             })
-          self.onNextButtonClick();
-        })
-        .catch(function (error) {
-          console.log('onSubmitMigrationPlan error: ' + error );
-        });
-
+            .then(function (response) {
+              console.log('onSubmitMigrationPlan response: ' + JSON.stringify(response.data)  );
+              self.setState({
+                  pimServiceResponseJsonStr:JSON.stringify(response.data, null, 2),
+                })
+              self.onNextButtonClick();
+            })
+            .catch(function (error) {
+              console.log('onSubmitMigrationPlan error: ' + error );
+            });
+        }
     }
 
     convertFormDataToJson(){

@@ -123,7 +123,6 @@ export default class WizardAddPlan extends WizardBase {
 
 
     onSubmitMigrationPlan = () => {
-        console.log('!!!!!!!!!!!!!!!!!!!onSubmitMigrationPlan' + plan);
         var plan = this.state.migrationPlanJsonStr;
         //call the addPlan. addPlan need to be in the parent because it's shared between WizardAddPlan and Import Plan pop-up
         this.props.addPlan(plan);

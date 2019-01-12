@@ -1,6 +1,5 @@
 import React from "react";
 import classNames from 'classnames';
-import axios from 'axios';
 
 import { Button } from "patternfly-react";
 import { Icon } from "patternfly-react";
@@ -35,26 +34,7 @@ export default class MigrationPlans extends MigrationPlansBase {
       });
     };
 
-    openMigrationWizard = (rowData) =>{
-          //console.log("openMigrationWizard source_container_id " + rowData.source_container_id)
-          //console.log("openMigrationWizard plan id " + rowData.id)
 
-          axios.get('http://localhost:8080/backend/instances', {
-              params: {
-                  containerId: rowData.source_container_id,
-              }
-          }).then (res => {
-              const instances = res.data;
-              //console.log('running instances: ' + JSON.stringify(instances));
-
-            this.setState({
-                runningInstances: instances,
-                showMigrationWizard: true,
-                planId:rowData.id
-            });
-            this.refs.WizardExecuteMigrationChild.resetWizardStates();
-        });
-    }
 
     closeMigrationWizard = () => {
       this.setState({ showMigrationWizard: false });
@@ -180,6 +160,7 @@ export default class MigrationPlans extends MigrationPlansBase {
             planId={this.state.planId}
             steps={ExecuteMigrationItems}
             ref="WizardExecuteMigrationChild"
+            useMockData={this.state.useMockData}
           />
 
     </div>
