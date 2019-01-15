@@ -15,7 +15,7 @@ export default class MigrationPlansBase extends React.Component {
       deletePlanId:'',
       runningInstances:[],
       addPlanResponseJsonStr:'',
-      useMockData:false
+      useMockData:true
     };
   }
 

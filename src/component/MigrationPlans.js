@@ -150,6 +150,7 @@ export default class MigrationPlans extends MigrationPlansBase {
                 steps={AddPlanItems}
                 ref="WizardAddPlanChild"
                 addPlanResponseJsonStr={this.state.addPlanResponseJsonStr}
+                useMockData={this.state.useMockData}
             />
 
         {/* Execute Migration Wizard*/}

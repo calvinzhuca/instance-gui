@@ -3,6 +3,7 @@ import { Button } from "patternfly-react";
 import axios from 'axios';
 
 import PageDefinitionSearchTable from "./PageDefinitionSearchTable";
+import { Mockup_processMapping_Info } from './MockupData';
 
 export default class PageDefinition extends Component {
     constructor (props) {
@@ -94,22 +95,13 @@ export default class PageDefinition extends Component {
     }
 
     retriveBothInfo = () =>{
-        console.log('this.state.sourceProcessId ' + this.state.sourceProcessId);
-        console.log('this.state.targetProcessId ' + this.state.targetProcessId);
-        axios.get('http://localhost:8080/backend/both', {
-            params: {
-                sourceProcessId: this.state.sourceProcessId,
-                sourceGroupId: this.state.sourceGroupId,
-                sourceArtifactId: this.state.sourceArtifactId,
-                sourceVersion: this.state.sourceVersion,
-                targetProcessId: this.state.targetProcessId,
-                targetGroupId: this.state.targetGroupId,
-                targetArtifactId: this.state.targetArtifactId,
-                targetVersion: this.state.targetVersion
-            }
-        }).then (res => {
-
-            this.props.setInfo(res.data.sourceInfo,res.data.targetInfo);
+        //console.log('this.state.sourceProcessId ' + this.state.sourceProcessId);
+        //console.log('this.state.targetProcessId ' + this.state.targetProcessId);
+        console.log('!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!retriveBothInfo');
+        if (this.props.useMockData){
+            console.log('retriveBothInfo useMockData ');
+            const mockData = Mockup_processMapping_Info;
+            this.props.setInfo(mockData.sourceInfo,mockData.targetInfo);
 
             var input = document.getElementById("hiddenField_source_container_id");
             var containerId = this.state.sourceProcessId + "_" + this.state.sourceVersion;
@@ -136,8 +128,53 @@ export default class PageDefinition extends Component {
             var ev = new Event('input', { bubbles: true});
             input.dispatchEvent(ev);
 
+        }else{
+            axios.get('http://localhost:8080/backend/both', {
+                params: {
+                    sourceProcessId: this.state.sourceProcessId,
+                    sourceGroupId: this.state.sourceGroupId,
+                    sourceArtifactId: this.state.sourceArtifactId,
+                    sourceVersion: this.state.sourceVersion,
+                    targetProcessId: this.state.targetProcessId,
+                    targetGroupId: this.state.targetGroupId,
+                    targetArtifactId: this.state.targetArtifactId,
+                    targetVersion: this.state.targetVersion
+                }
+            }).then (res => {
+                //console.log('retriveBothInfo response: ' + JSON.stringify(res.data, null, 2) );
 
-        });
+                this.props.setInfo(res.data.sourceInfo,res.data.targetInfo);
+
+                var input = document.getElementById("hiddenField_source_container_id");
+                var containerId = this.state.sourceProcessId + "_" + this.state.sourceVersion;
+                var nativeInputValueSetter = Object.getOwnPropertyDescriptor(window.HTMLInputElement.prototype, "value").set;
+                nativeInputValueSetter.call(input, containerId);
+                //once fired the event, this currentInputValue will be saved in the wizard form's values
+                var ev = new Event('input', { bubbles: true});
+                input.dispatchEvent(ev);
+
+                var input = document.getElementById("hiddenField_target_container_id");
+                var containerId = this.state.targetProcessId + "_" + this.state.targetVersion;
+                var nativeInputValueSetter = Object.getOwnPropertyDescriptor(window.HTMLInputElement.prototype, "value").set;
+                nativeInputValueSetter.call(input, containerId);
+                //once fired the event, this currentInputValue will be saved in the wizard form's values
+                var ev = new Event('input', { bubbles: true});
+                input.dispatchEvent(ev);
+
+
+                input = document.getElementById("hiddenField_target_process_id");
+                var processId = this.state.targetProcessId;
+                var nativeInputValueSetter = Object.getOwnPropertyDescriptor(window.HTMLInputElement.prototype, "value").set;
+                nativeInputValueSetter.call(input, processId);
+                //once fired the event, this currentInputValue will be saved in the wizard form's values
+                var ev = new Event('input', { bubbles: true});
+                input.dispatchEvent(ev);
+
+
+            });
+
+        }
+
 
 
     }
