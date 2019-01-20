@@ -116,7 +116,7 @@ export default class MigrationPlansTable extends Component {
 
     return (
         <div>
-            <Table.PfProvider  hover columns={planBootstrapColumns}>
+            <Table.PfProvider striped bordered hover columns={planBootstrapColumns}>
               <Table.Header />
               <Table.Body rows={this.props.filteredPlans} rowKey="id" />
             </Table.PfProvider>
