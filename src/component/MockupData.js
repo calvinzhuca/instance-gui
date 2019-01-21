@@ -188,6 +188,29 @@ export const MockupData_PIM_response = {
 };
 
 
+export const MockupData_Migration_Results = [
+   {
+      "id":1,
+      "definition":{
+         "execution":{
+            "type":"ASYNC",
+            "callback_url":null,
+            "scheduled_start_time":null
+         },
+         "plan_id":1,
+         "process_instance_ids":[
+            1
+         ]
+      },
+      "status":"COMPLETED",
+      "created_at":"2019-01-21T02:30:59",
+      "started_at":"2019-01-21T02:30:59",
+      "finished_at":"2019-01-21T02:31:00",
+      "cancelled_at":null,
+      "error_message":null
+   }
+];
+
 export const Mockup_processMapping_Info = {
   "sourceInfo": {
     "nodes": [
