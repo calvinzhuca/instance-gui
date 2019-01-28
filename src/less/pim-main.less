@@ -1,0 +1,10 @@
+@import "../../node_modules/patternfly/dist/less/patternfly.less";
+@import "../../node_modules/patternfly/dist/less/patternfly-additions.less";
+// must re-import variables because they've been overwritten by the bootstrap extras in pf-additions
+@import "../../node_modules/patternfly/dist/less/variables.less";
+@import "../../node_modules/patternfly/dist/less/color-variables.less";
+
+// Import custom Less code from separate Less files if it makes sense to break styling into pieces
+@import "pim-custom.less";
+
+// Custom Less could go here if needed 
