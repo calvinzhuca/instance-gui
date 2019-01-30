@@ -1,11 +1,10 @@
 import React from "react";
 import ReactDOM from "react-dom";
 
-import MigrationPlans from './component/MigrationPlans';
-
+import MainPageUsingSecondaryTab from './component/MainPageUsingSecondaryTab';
 document.addEventListener("DOMContentLoaded", function() {
   ReactDOM.render(
-    React.createElement(MigrationPlans),
+    React.createElement(MainPageUsingSecondaryTab),
     document.getElementById("mount")
   );
 });

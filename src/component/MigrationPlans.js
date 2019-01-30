@@ -67,7 +67,7 @@ export default class MigrationPlans extends MigrationPlansBase {
 
         let filteredPlans = this.state.plans
         filteredPlans = filteredPlans.filter((plan) => {
-          let sourceContainterId = plan.source_container_id.toLowerCase()
+          let sourceContainterId = plan.sourceContainerId.toLowerCase()
           return sourceContainterId.indexOf(
             planFilter.toLowerCase()) !== -1
         })

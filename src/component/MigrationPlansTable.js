@@ -54,7 +54,7 @@ export default class MigrationPlansTable extends Component {
           cell: {
             formatters: [cellFormat]
           },
-          property: 'source_container_id'
+          property: 'sourceContainerId'
         },
         {
           header: {
@@ -64,7 +64,7 @@ export default class MigrationPlansTable extends Component {
           cell: {
             formatters: [cellFormat]
           },
-          property: 'target_container_id'
+          property: 'targetContainerId'
         },
         {
           header: {
@@ -74,7 +74,7 @@ export default class MigrationPlansTable extends Component {
           cell: {
             formatters: [cellFormat]
           },
-          property: 'target_process_id'
+          property: 'targetProcessId'
         },
         {
           header: {
@@ -116,7 +116,7 @@ export default class MigrationPlansTable extends Component {
 
     return (
         <div>
-            <Table.PfProvider  hover columns={planBootstrapColumns}>
+            <Table.PfProvider striped bordered hover columns={planBootstrapColumns}>
               <Table.Header />
               <Table.Body rows={this.props.filteredPlans} rowKey="id" />
             </Table.PfProvider>
