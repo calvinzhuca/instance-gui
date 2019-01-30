@@ -5,6 +5,7 @@ import { actionHeaderCellFormatter } from "patternfly-react";
 import axios from 'axios';
 
 import { MockupData_Migration_Results } from './MockupData';
+import {BACKEND_URL} from './PimConstants';
 
 export default class MigrationResults extends Component {
     constructor(props) {
@@ -27,7 +28,7 @@ export default class MigrationResults extends Component {
              });
 
         }else{
-                const serviceUrl = 'http://localhost:8280/migrations/' + input.value;
+                const serviceUrl = BACKEND_URL + '/migrations/' + input.value;
                 axios.get(serviceUrl, {
                 }).then (res => {
                     var migrationResults = res.data;
@@ -83,7 +84,7 @@ export default class MigrationResults extends Component {
           cell: {
             formatters: [cellFormat]
           },
-          property: 'created_at'
+          property: 'createdAt'
         },
         {
           header: {
@@ -93,7 +94,7 @@ export default class MigrationResults extends Component {
           cell: {
             formatters: [cellFormat]
           },
-          property: 'started_at'
+          property: 'startedAt'
         },
         {
           header: {
@@ -103,7 +104,7 @@ export default class MigrationResults extends Component {
           cell: {
             formatters: [cellFormat]
           },
-          property: 'finished_at'
+          property: 'finishedAt'
         },
         {
           header: {
@@ -113,7 +114,7 @@ export default class MigrationResults extends Component {
           cell: {
             formatters: [cellFormat]
           },
-          property: 'cancelled_at'
+          property: 'cancelledAt'
         },
         {
           header: {
@@ -123,7 +124,7 @@ export default class MigrationResults extends Component {
           cell: {
             formatters: [cellFormat]
           },
-          property: 'error_message'
+          property: 'errorMessage'
         },
     ];
 

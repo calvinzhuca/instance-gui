@@ -12,7 +12,7 @@ import PageMigrationRunningInstances from "./PageMigrationRunningInstances";
 import PageMigrationScheduler from "./PageMigrationScheduler";
 import PageReview from "./PageReview";
 import { MockupData_PIM_response } from './MockupData';
-import {BACKEND_URL} from './PimConstants';
+import {BACKEND_URL,KIE_SERVER_ID} from './PimConstants';
 
 export default class WizardExecuteMigration extends WizardBase {
 
@@ -26,7 +26,8 @@ export default class WizardExecuteMigration extends WizardBase {
           scheduleStartTime:'',
           executionPlanJsonStr:'',
           callbackUrl:'',
-          pimServiceResponseJsonStr:''
+          pimServiceResponseJsonStr:'',
+          kieserverId:KIE_SERVER_ID
       };
     }
 
@@ -93,6 +94,7 @@ export default class WizardExecuteMigration extends WizardBase {
 
         const formData = {
             planId: this.props.planId,
+            kieserverId: this.state.kieserverId,
             processInstanceIds: '[' + this.state.runningInstanceIds + ']',
             execution:execution
         };
