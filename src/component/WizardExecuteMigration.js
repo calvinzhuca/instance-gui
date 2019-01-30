@@ -12,6 +12,7 @@ import PageMigrationRunningInstances from "./PageMigrationRunningInstances";
 import PageMigrationScheduler from "./PageMigrationScheduler";
 import PageReview from "./PageReview";
 import { MockupData_PIM_response } from './MockupData';
+import {BACKEND_URL} from './PimConstants';
 
 export default class WizardExecuteMigration extends WizardBase {
 
@@ -57,10 +58,11 @@ export default class WizardExecuteMigration extends WizardBase {
             //need to create a temp variable "self" to store this, so I can invoke this inside axios call
             const self = this;
 
-            const serviceUrl = 'http://localhost:8280/migrations';
+            const serviceUrl = BACKEND_URL + '/migrations';
+            console.log('onSubmitMigrationPlan: ' + serviceUrl);
+            console.log('onSubmitMigrationPlan plan: ' + plan);
             axios.post(serviceUrl, plan, {headers: {
-                      "Content-Type": "application/json",
-                      "Authorization": "Basic ZXhlY3V0aW9uVXNlcjpwYXNzd29yZA=="
+                      "Content-Type": "application/json"
                   }
             })
             .then(function (response) {
@@ -83,15 +85,15 @@ export default class WizardExecuteMigration extends WizardBase {
         }
 
         if (this.state.scheduleStartTime !== null && this.state.scheduleStartTime !== ''){
-            execution.scheduled_start_time=this.state.scheduleStartTime
+            execution.scheduledStartTime=this.state.scheduleStartTime
         }
         if (this.state.callbackUrl !== null && this.state.callbackUrl !== ''){
-            execution.callback_url=this.state.callbackUrl
+            execution.callbackUrl=this.state.callbackUrl
         }
 
         const formData = {
-            plan_id: this.props.planId,
-            process_instance_ids: '[' + this.state.runningInstanceIds + ']',
+            planId: this.props.planId,
+            processInstanceIds: '[' + this.state.runningInstanceIds + ']',
             execution:execution
         };
 

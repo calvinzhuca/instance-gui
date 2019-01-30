@@ -103,7 +103,7 @@ export default class PageDefinition extends Component {
             const mockData = Mockup_processMapping_Info;
             this.props.setInfo(mockData.sourceInfo,mockData.targetInfo);
 
-            var input = document.getElementById("hiddenField_source_container_id");
+            var input = document.getElementById("hiddenField_sourceContainerId");
             var containerId = this.state.sourceProcessId + "_" + this.state.sourceVersion;
             var nativeInputValueSetter = Object.getOwnPropertyDescriptor(window.HTMLInputElement.prototype, "value").set;
             nativeInputValueSetter.call(input, containerId);
@@ -111,7 +111,7 @@ export default class PageDefinition extends Component {
             var ev = new Event('input', { bubbles: true});
             input.dispatchEvent(ev);
 
-            var input = document.getElementById("hiddenField_target_container_id");
+            var input = document.getElementById("hiddenField_targetContainerId");
             var containerId = this.state.targetProcessId + "_" + this.state.targetVersion;
             var nativeInputValueSetter = Object.getOwnPropertyDescriptor(window.HTMLInputElement.prototype, "value").set;
             nativeInputValueSetter.call(input, containerId);
@@ -120,7 +120,7 @@ export default class PageDefinition extends Component {
             input.dispatchEvent(ev);
 
 
-            input = document.getElementById("hiddenField_target_process_id");
+            input = document.getElementById("hiddenField_targetProcessId");
             var processId = this.state.targetProcessId;
             var nativeInputValueSetter = Object.getOwnPropertyDescriptor(window.HTMLInputElement.prototype, "value").set;
             nativeInputValueSetter.call(input, processId);
@@ -145,7 +145,7 @@ export default class PageDefinition extends Component {
 
                 this.props.setInfo(res.data.sourceInfo,res.data.targetInfo);
 
-                var input = document.getElementById("hiddenField_source_container_id");
+                var input = document.getElementById("hiddenField_sourceContainerId");
                 var containerId = this.state.sourceProcessId + "_" + this.state.sourceVersion;
                 var nativeInputValueSetter = Object.getOwnPropertyDescriptor(window.HTMLInputElement.prototype, "value").set;
                 nativeInputValueSetter.call(input, containerId);
@@ -153,7 +153,7 @@ export default class PageDefinition extends Component {
                 var ev = new Event('input', { bubbles: true});
                 input.dispatchEvent(ev);
 
-                var input = document.getElementById("hiddenField_target_container_id");
+                var input = document.getElementById("hiddenField_targetContainerId");
                 var containerId = this.state.targetProcessId + "_" + this.state.targetVersion;
                 var nativeInputValueSetter = Object.getOwnPropertyDescriptor(window.HTMLInputElement.prototype, "value").set;
                 nativeInputValueSetter.call(input, containerId);
@@ -162,7 +162,7 @@ export default class PageDefinition extends Component {
                 input.dispatchEvent(ev);
 
 
-                input = document.getElementById("hiddenField_target_process_id");
+                input = document.getElementById("hiddenField_targetProcessId");
                 var processId = this.state.targetProcessId;
                 var nativeInputValueSetter = Object.getOwnPropertyDescriptor(window.HTMLInputElement.prototype, "value").set;
                 nativeInputValueSetter.call(input, processId);
@@ -226,9 +226,9 @@ export default class PageDefinition extends Component {
                         <label className="col-sm-2 control-label">{this.props.targetInfo.containerId}</label>
                     </div>
                     <div style={{display: 'none'}}>
-                        <input type="text" className="form-control" name="source_container_id" id="hiddenField_source_container_id" />
-                        <input type="text" className="form-control" name="target_container_id" id="hiddenField_target_container_id" />
-                        <input type="text" className="form-control" name="target_process_id" id="hiddenField_target_process_id" />
+                        <input type="text" className="form-control" name="sourceContainerId" id="hiddenField_sourceContainerId" />
+                        <input type="text" className="form-control" name="targetContainerId" id="hiddenField_targetContainerId" />
+                        <input type="text" className="form-control" name="targetProcessId" id="hiddenField_targetProcessId" />
                     </div>
 
 

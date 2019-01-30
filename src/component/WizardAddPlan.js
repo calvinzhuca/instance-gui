@@ -25,9 +25,9 @@ export default class WizardAddPlan extends WizardBase {
           targetInfo: '',
           name:'',
           description:'',
-          source_container_id:'',
-          target_container_id:'',
-          target_process_id:'',
+          sourceContainerId:'',
+          targetContainerId:'',
+          targetProcessId:'',
           mappings:'',
           migrationPlanJsonStr:''
       };
@@ -43,9 +43,9 @@ export default class WizardAddPlan extends WizardBase {
             targetInfo: '',
             name:'',
             description:'',
-            source_container_id:'',
-            target_container_id:'',
-            target_process_id:'',
+            sourceContainerId:'',
+            targetContainerId:'',
+            targetProcessId:'',
             mappings:'',
             migrationPlanJsonStr:''
         });
@@ -61,9 +61,9 @@ export default class WizardAddPlan extends WizardBase {
             targetInfo: '',
             name:rowData.name,
             description:rowData.description,
-            source_container_id:rowData.source_container_id,
-            target_container_id:rowData.target_container_id,
-            target_process_id:rowData.target_process_id,
+            sourceContainerId:rowData.sourceContainerId,
+            targetContainerId:rowData.targetContainerId,
+            targetProcessId:rowData.targetProcessId,
             mappings:rowData.mappings,
             migrationPlanJsonStr:jsonStr
         });
@@ -86,12 +86,12 @@ export default class WizardAddPlan extends WizardBase {
             this.setState({name: e.target.value});
         }else if (e.target.name == 'description'){
             this.setState({description: e.target.value});
-        }else if (e.target.name == 'source_container_id'){
-            this.setState({source_container_id: e.target.value});
-        }else if (e.target.name == 'target_container_id'){
-            this.setState({target_container_id: e.target.value});
-        }else if (e.target.name == 'target_process_id'){
-            this.setState({target_process_id: e.target.value});
+        }else if (e.target.name == 'sourceContainerId'){
+            this.setState({sourceContainerId: e.target.value});
+        }else if (e.target.name == 'targetContainerId'){
+            this.setState({targetContainerId: e.target.value});
+        }else if (e.target.name == 'targetProcessId'){
+            this.setState({targetProcessId: e.target.value});
         }else if (e.target.name == 'mappings'){
             this.setState({mappings: e.target.value});
         }
@@ -105,9 +105,9 @@ export default class WizardAddPlan extends WizardBase {
       const formData = {
           name: this.state.name,
           description: this.state.description,
-          source_container_id: this.state.source_container_id,
-          target_container_id: this.state.target_container_id,
-          target_process_id: this.state.target_process_id
+          sourceContainerId: this.state.sourceContainerId,
+          targetContainerId: this.state.targetContainerId,
+          targetProcessId: this.state.targetProcessId
       };
 
       if (this.state.mappings !== null && this.state.mappings !==''){
@@ -166,9 +166,9 @@ export default class WizardAddPlan extends WizardBase {
                             sourceInfo={sourceInfo}
                             targetInfo={targetInfo}
                             setInfo={setInfo}
-                            initSourceContainerId={this.state.source_container_id}
-                            initTargetContainerId={this.state.target_container_id}
-                            initProcessId={this.state.target_process_id}
+                            initSourceContainerId={this.state.sourceContainerId}
+                            initTargetContainerId={this.state.targetContainerId}
+                            initProcessId={this.state.targetProcessId}
                             useMockData={this.props.useMockData}
                       />
                       </Wizard.Contents>

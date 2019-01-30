@@ -3,7 +3,9 @@ import PropTypes from 'prop-types';
 
 import axios from 'axios';
 import { MockupData_planList, MockupData_runningInstances, MockupData_PIM_response } from './MockupData';
+import {BACKEND_URL} from './PimConstants';
 export default class MigrationPlansBase extends React.Component {
+
   constructor(props) {
     super(props);
     this.state = {
@@ -19,9 +21,15 @@ export default class MigrationPlansBase extends React.Component {
     };
   }
 
+
+
     componentDidMount(){
         this.retrieveAllPlans();
     }
+
+      retrieveAllPlans1 = () => {
+          console.log('fake retrive all plans')
+      }
 
   retrieveAllPlans = () => {
 
@@ -33,7 +41,9 @@ export default class MigrationPlansBase extends React.Component {
            });
 
       }else{
-          axios.get('http://localhost:8280/plans', {
+
+          const servicesUrl = BACKEND_URL + "/plans";
+          axios.get(servicesUrl, {
           }).then (res => {
               const plans = res.data;
               //console.log('retrieveAllPlans ' + JSON.stringify(plans));
@@ -68,7 +78,7 @@ export default class MigrationPlansBase extends React.Component {
       }else{
           //need to create a temp variable "self" to store this, so I can invoke this inside axios call
           const self = this;
-          const serviceUrl = 'http://localhost:8280/plans/' + this.state.deletePlanId;
+          const serviceUrl = BACKEND_URL + "/plans/"+ this.state.deletePlanId;
           console.log('delete url: ' + serviceUrl);
 
           axios.delete(serviceUrl,  {headers: {
@@ -112,10 +122,15 @@ export default class MigrationPlansBase extends React.Component {
 
           //need to create a temp variable "self" to store this, so I can invoke this inside axios call
           const self = this;
-
-          const serviceUrl = 'http://localhost:8280/plans';
-          axios.post(serviceUrl, plan, {headers: {
-                    "Content-Type": "application/json"}
+          const servicsUrl = BACKEND_URL + "/plans";
+          //const serviceUrl = 'http://localhost:8280/plans';
+          console.log('servicsUrl: ' + servicsUrl);
+          axios.post(servicsUrl, plan, {headers: {
+                    "Content-Type": "application/json"
+                    //"Content-Type": "text/plain"
+                    //"Content-Type": "application/x-www-form-urlencoded"
+                    //"Content-Type": "multipart/form-data"
+                }
           })
           .then(function (response) {
             console.log('addPlan response: ' + response.data );
@@ -140,7 +155,8 @@ export default class MigrationPlansBase extends React.Component {
       }else{
           //need to create a temp variable "self" to store this, so I can invoke this inside axios call
           const self = this;
-          const serviceUrl = 'http://localhost:8280/plans/' + planId;
+          const serviceUrl = BACKEND_URL + "/plans/"+ planId;
+          console.log('edit plan: ' + plan);
           axios.put(serviceUrl, plan, {headers: {
                     "Content-Type": "application/json"}
           })
@@ -167,9 +183,10 @@ export default class MigrationPlansBase extends React.Component {
             });
             this.refs.WizardExecuteMigrationChild.resetWizardStates();
       }else{
-          axios.get('http://localhost:8080/backend/instances', {
+          const servicsUrl = BACKEND_URL + "/instances"
+          axios.get(servicsUrl, {
               params: {
-                  containerId: rowData.source_container_id,
+                  containerId: rowData.sourceContainerId,
               }
           }).then (res => {
               const instances = res.data;

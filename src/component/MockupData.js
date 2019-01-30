@@ -8,9 +8,9 @@ export const MockupData_planList = [
       "mappings":{
          "_B8E4DA1E-A62B-49C2-9A94-FEE5F5FD2B4E":"_B8E4DA1E-A62B-49C2-9A94-FEE5F5FD2B4E"
       },
-      "source_container_id":"evaluation_2.0.0-SNAPSHOT",
-      "target_container_id":"evaluation_3.0.0-SNAPSHOT",
-      "target_process_id":"evaluation"
+      "sourceContainerId":"evaluation_2.0.0-SNAPSHOT",
+      "targetContainerId":"evaluation_3.0.0-SNAPSHOT",
+      "targetProcessId":"evaluation"
    },
    {
       "id":2,
@@ -19,9 +19,9 @@ export const MockupData_planList = [
       "mappings":{
          "_B8E4DA1E-A62B-49C2-9A94-FEE5F5FD2B4E":"_B8E4DA1E-A62B-49C2-9A94-FEE5F5FD2B4E"
       },
-      "source_container_id":"evaluation_2.0.0-SNAPSHOT",
-      "target_container_id":"evaluation_3.0.0-SNAPSHOT",
-      "target_process_id":"evaluation"
+      "sourceContainerId":"evaluation_2.0.0-SNAPSHOT",
+      "targetContainerId":"evaluation_3.0.0-SNAPSHOT",
+      "targetProcessId":"evaluation"
    },
    {
       "id":3,
@@ -30,9 +30,9 @@ export const MockupData_planList = [
       "mappings":{
          "_B8E4DA1E-A62B-49C2-9A94-FEE5F5FD2B4E":"_B8E4DA1E-A62B-49C2-9A94-FEE5F5FD2B4E"
       },
-      "source_container_id":"evaluation_3.0.0-SNAPSHOT",
-      "target_container_id":"evaluation_2.0.0-SNAPSHOT",
-      "target_process_id":"evaluation"
+      "sourceContainerId":"evaluation_3.0.0-SNAPSHOT",
+      "targetContainerId":"evaluation_2.0.0-SNAPSHOT",
+      "targetProcessId":"evaluation"
    },
    {
       "id":5,
@@ -41,9 +41,9 @@ export const MockupData_planList = [
       "mappings":{
 
       },
-      "source_container_id":"evaluation_2.0.0-SNAPSHOT",
-      "target_container_id":"Mortgage_Process.MortgageApprovalProcess_1.0.0-SNAPSHOT",
-      "target_process_id":"Mortgage_Process.MortgageApprovalProcess"
+      "sourceContainerId":"evaluation_2.0.0-SNAPSHOT",
+      "targetContainerId":"Mortgage_Process.MortgageApprovalProcess_1.0.0-SNAPSHOT",
+      "targetProcessId":"Mortgage_Process.MortgageApprovalProcess"
    },
    {
       "id":8,
@@ -52,9 +52,9 @@ export const MockupData_planList = [
       "mappings":{
 
       },
-      "source_container_id":"evaluation_3.0.0-SNAPSHOT",
-      "target_container_id":"evaluation_2.0.0-SNAPSHOT",
-      "target_process_id":"evaluation"
+      "sourceContainerId":"evaluation_3.0.0-SNAPSHOT",
+      "targetContainerId":"evaluation_2.0.0-SNAPSHOT",
+      "targetProcessId":"evaluation"
    },
    {
       "id":9,
@@ -63,9 +63,9 @@ export const MockupData_planList = [
       "mappings":{
 
       },
-      "source_container_id":"evaluation_2.0.0-SNAPSHOT",
-      "target_container_id":"Mortgage_Process.MortgageApprovalProcess_1.0.0-SNAPSHOT",
-      "target_process_id":"Mortgage_Process.MortgageApprovalProcess"
+      "sourceContainerId":"evaluation_2.0.0-SNAPSHOT",
+      "targetContainerId":"Mortgage_Process.MortgageApprovalProcess_1.0.0-SNAPSHOT",
+      "targetProcessId":"Mortgage_Process.MortgageApprovalProcess"
    },
    {
       "id":10,
@@ -74,9 +74,9 @@ export const MockupData_planList = [
       "mappings":{
 
       },
-      "source_container_id":"evaluation_2.0.0-SNAPSHOT",
-      "target_container_id":"Mortgage_Process.MortgageApprovalProcess_1.0.0-SNAPSHOT",
-      "target_process_id":"Mortgage_Process.MortgageApprovalProcess"
+      "sourceContainerId":"evaluation_2.0.0-SNAPSHOT",
+      "targetContainerId":"Mortgage_Process.MortgageApprovalProcess_1.0.0-SNAPSHOT",
+      "targetProcessId":"Mortgage_Process.MortgageApprovalProcess"
    },
    {
       "id":11,
@@ -85,9 +85,9 @@ export const MockupData_planList = [
       "mappings":{
 
       },
-      "source_container_id":"evaluation_2.0.0-SNAPSHOT",
-      "target_container_id":"Mortgage_Process.MortgageApprovalProcess_1.0.0-SNAPSHOT",
-      "target_process_id":"Mortgage_Process.MortgageApprovalProcess"
+      "sourceContainerId":"evaluation_2.0.0-SNAPSHOT",
+      "targetContainerId":"Mortgage_Process.MortgageApprovalProcess_1.0.0-SNAPSHOT",
+      "targetProcessId":"Mortgage_Process.MortgageApprovalProcess"
    },
    {
       "id":12,
@@ -97,9 +97,9 @@ export const MockupData_planList = [
          "_D3E17247-1D94-47D8-93AD-D645E317B736":"_D3E17247-1D94-47D8-93AD-D645E317B736",
          "_B8E4DA1E-A62B-49C2-9A94-FEE5F5FD2B4E":"_B8E4DA1E-A62B-49C2-9A94-FEE5F5FD2B4E"
       },
-      "source_container_id":"evaluation_2.0.0-SNAPSHOT",
-      "target_container_id":"evaluation_3.0.0-SNAPSHOT",
-      "target_process_id":"evaluation"
+      "sourceContainerId":"evaluation_2.0.0-SNAPSHOT",
+      "targetContainerId":"evaluation_3.0.0-SNAPSHOT",
+      "targetProcessId":"evaluation"
    },
    {
       "id":13,
@@ -108,9 +108,9 @@ export const MockupData_planList = [
       "mappings":{
          "_B8E4DA1E-A62B-49C2-9A94-FEE5F5FD2B4E":"_B8E4DA1E-A62B-49C2-9A94-FEE5F5FD2B4E"
       },
-      "source_container_id":"evaluation_2.0.0-SNAPSHOT",
-      "target_container_id":"evaluation_3.0.0-SNAPSHOT",
-      "target_process_id":"evaluation"
+      "sourceContainerId":"evaluation_2.0.0-SNAPSHOT",
+      "targetContainerId":"evaluation_3.0.0-SNAPSHOT",
+      "targetProcessId":"evaluation"
    }
 ];
 
