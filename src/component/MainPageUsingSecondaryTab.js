@@ -4,7 +4,7 @@ import classNames from 'classnames';
 import { TabContainer, Nav, NavItem, TabPane, TabContent } from "patternfly-react";
 
 import MigrationPlans from './MigrationPlans';
-import MigrationResults from './MigrationResults';
+import MigrationResults from './tabMigrationResults/MigrationResults';
 
 export default class MainPageUsingSecondaryTab extends Component {
 

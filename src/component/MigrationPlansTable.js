@@ -11,9 +11,6 @@ export default class MigrationPlansTable extends Component {
   render() {
       const headerFormat = value => <Table.Heading>{value}</Table.Heading>;
       const cellFormat = value => <Table.Cell>{value}</Table.Cell>;
-      const headerFormatRightAlign = value => <Table.Heading align="right">{value}</Table.Heading>;
-      const cellFormatRightAlign = value => <Table.Cell align="right">{value}</Table.Cell>;
-
 
       const planBootstrapColumns = [
         {
@@ -106,7 +103,7 @@ export default class MigrationPlansTable extends Component {
                   </Table.Actions>,
                   <Table.Actions key="3">
                         <Table.Button bsStyle="default" onClick={() => this.props.openAddPlanWizardwithInitialData(rowData)}>Edit with Wizard</Table.Button>
-                  </Table.Actions>,
+                  </Table.Actions>
                 ]
               ]
           },
