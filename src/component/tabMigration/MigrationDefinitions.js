@@ -24,7 +24,7 @@ export default class MigrationDefinitions extends Component {
     }
 
     componentDidMount(){
-        this.retriveMigrationResults();
+        //this.retriveMigrationResults();
     }
 
     hideDetailDialog = () => {
@@ -34,19 +34,17 @@ export default class MigrationDefinitions extends Component {
     };
 
 
-    retriveMigrationLogs = (id) =>{
-                console.log('!!!!!!!!!!!!!!!!!!retriveMigrationLogs ' + id);
+    retriveMigrationLogs = (rowData) =>{
         this.setState({
             showLogDialog:true
         });
-
         if (USE_MOCK_DATA){
             console.log('retriveMigrationLogs useMockData: ');
             //TODO
 
         }else{
 
-            const servicesUrl = BACKEND_URL + "/migrations/" + id + "/results";
+            const servicesUrl = BACKEND_URL + "/migrations/" + rowData.id + "/results";
             //console.log('retriveMigrationLogs url: ' + servicesUrl);
             axios.get(servicesUrl, {
             }).then (res => {
@@ -58,8 +56,6 @@ export default class MigrationDefinitions extends Component {
                 console.log('retriveMigrationLogs is done ');
           });
         }
-
-
     }
 
 
@@ -153,7 +149,14 @@ export default class MigrationDefinitions extends Component {
             formatters: [headerFormat]
           },
           cell: {
-            formatters: [cellFormat]
+            formatters:  [
+              (value, { rowData }) => [
+                  <Table.Actions key="0">
+                        <a href="#" onClick={() => this.retriveMigrationLogs(rowData)}>{value}</a>
+                  </Table.Actions>
+
+              ]
+            ]
           },
           property: 'status'
         },
@@ -189,16 +192,6 @@ export default class MigrationDefinitions extends Component {
         },
         {
           header: {
-            label: 'Cancelled At',
-            formatters: [headerFormat]
-          },
-          cell: {
-            formatters: [cellFormat]
-          },
-          property: 'cancelledAt'
-        },
-        {
-          header: {
             label: 'Error Message',
             formatters: [headerFormat]
           },
@@ -219,12 +212,12 @@ export default class MigrationDefinitions extends Component {
           cell: {
               formatters: [
                 (value, { rowData }) => [
-                  <Table.Actions key="0">
-                        <Table.Button bsStyle="default" onClick={() => this.retriveMigrationLogs(rowData.id)}>Details</Table.Button>
-                  </Table.Actions>,
-                  <Table.Actions key="1">
-                        <Table.Button bsStyle="default" onClick={() => this.showDeleteDialog(rowData.id)}>Delete</Table.Button>
-                  </Table.Actions>
+                        <Table.Actions key="0">
+                              <Table.Button bsStyle="default" onClick={() => this.retriveMigrationLogs(rowData.id)}>Edit</Table.Button>
+                        </Table.Actions>,
+                          <Table.Actions key="1">
+                                <Table.Button bsStyle="default" onClick={() => this.showDeleteDialog(rowData.id)}>Delete</Table.Button>
+                          </Table.Actions>
                 ]
               ]
           },

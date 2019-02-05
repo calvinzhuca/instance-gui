@@ -1,25 +1,29 @@
 import React, { Component } from 'react';
-import { Button } from "patternfly-react";
-import { Table } from 'patternfly-react';
+
 
 import MigrationLog from './MigrationLog';
 
 export default class PageViewMigrationLogs extends Component {
 
-
-
-
   render() {
-      //let id = this.props[0].migrationLogs.id;
+
+      function DisplayMessage(props){
+          if ( props.migrationLogs!= null && props.migrationLogs!=''){
+              return <div>
+                        {props.migrationLogs.map((log, key) =>
+                            <MigrationLog log={log} key={log.id} />
+                        )}
+                    </div>
+          }else{
+              return <div> No detail migration logs for this status</div>
+          }
+
+      }
+
     return (
         <div>
-            {this.props.migrationLogs.map((log, key) =>
-                <MigrationLog log={log} key={log.id} />
-            )}
+            <DisplayMessage  migrationLogs={this.props.migrationLogs}/>
         </div>
-
-
-
     );
   }
 }
