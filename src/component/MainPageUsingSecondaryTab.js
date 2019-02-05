@@ -4,7 +4,7 @@ import classNames from 'classnames';
 import { TabContainer, Nav, NavItem, TabPane, TabContent } from "patternfly-react";
 
 import MigrationPlans from './MigrationPlans';
-import MigrationResults from './tabMigrationResults/MigrationResults';
+import MigrationDefinitions from './tabMigration/MigrationDefinitions';
 
 export default class MainPageUsingSecondaryTab extends Component {
 
@@ -36,7 +36,7 @@ export default class MainPageUsingSecondaryTab extends Component {
                             <MigrationPlans/>
                       </TabPane>
                       <TabPane eventKey={1.2}>
-                            <MigrationResults/>
+                            <MigrationDefinitions/>
                       </TabPane>
                     </TabContent>
                   </div>

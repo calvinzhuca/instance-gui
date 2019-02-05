@@ -11,26 +11,33 @@ import {BACKEND_URL, USE_MOCK_DATA} from '../PimConstants';
 import PageViewMigrationLogs from './PageViewMigrationLogs';
 
 
-export default class MigrationResults extends Component {
+export default class MigrationDefinitions extends Component {
     constructor(props) {
       super(props);
       this.state = {
           migrationResults:[],
           migrationLogs:[],
-          show: false
+          showLogDialog: false,
+          showDeleteConfirmation: false,
+          deleteMigrationId:''
       };
+    }
+
+    componentDidMount(){
+        this.retriveMigrationResults();
     }
 
     hideDetailDialog = () => {
         this.setState({
-            show: false
+            showLogDialog: false
          });
     };
+
 
     retriveMigrationLogs = (id) =>{
                 console.log('!!!!!!!!!!!!!!!!!!retriveMigrationLogs ' + id);
         this.setState({
-            show:true
+            showLogDialog:true
         });
 
         if (USE_MOCK_DATA){
@@ -40,7 +47,7 @@ export default class MigrationResults extends Component {
         }else{
 
             const servicesUrl = BACKEND_URL + "/migrations/" + id + "/results";
-            console.log('retriveMigrationLogs url: ' + servicesUrl);
+            //console.log('retriveMigrationLogs url: ' + servicesUrl);
             axios.get(servicesUrl, {
             }).then (res => {
                 const results = res.data;
@@ -55,6 +62,40 @@ export default class MigrationResults extends Component {
 
     }
 
+
+
+        showDeleteDialog = (id) =>{
+            this.setState({
+                showDeleteConfirmation: true,
+                deleteMigrationId: id
+            });
+        }
+
+        hideDeleteDialog = () =>{
+            this.setState({
+                showDeleteConfirmation: false
+            });
+        }
+
+    deleteMigration = () =>{
+        if (USE_MOCK_DATA){
+            console.log('deleteMigration useMockData: ');
+            //TODO
+
+        }else{
+            //need to create a temp variable "self" to store this, so I can invoke this inside axios call
+            const self = this;
+            const servicesUrl = BACKEND_URL + "/migrations/" + this.state.deleteMigrationId;
+            console.log('deleteMigration url: ' + servicesUrl);
+            axios.delete(servicesUrl, {
+            }).then (res => {
+                const results = res.data;
+                console.log('deleteMigration ' + JSON.stringify(results));
+                self.hideDeleteDialog();
+                self.retriveMigrationResults();
+          });
+        }
+    }
 
     retriveMigrationResults = () =>{
         const input = document.getElementById("id_MigrationResults_input1");
@@ -180,6 +221,9 @@ export default class MigrationResults extends Component {
                 (value, { rowData }) => [
                   <Table.Actions key="0">
                         <Table.Button bsStyle="default" onClick={() => this.retriveMigrationLogs(rowData.id)}>Details</Table.Button>
+                  </Table.Actions>,
+                  <Table.Actions key="1">
+                        <Table.Button bsStyle="default" onClick={() => this.showDeleteDialog(rowData.id)}>Delete</Table.Button>
                   </Table.Actions>
                 ]
               ]
@@ -193,11 +237,18 @@ export default class MigrationResults extends Component {
     const secondaryContent = <p></p>;
     const icon = <Icon type="pf" name="info" />;
 
+    //for MessageDialogDeleteConfirmation
+    const primaryDeleteContent = <p className="lead">Please confirm you will delete this migration: {this.state.deleteMigrationId}</p>;
+    const deleteIcon = <Icon type="pf" name="error-circle-o" />;
+
+
+
     return (
         <div>
+
         {/* MIgration Result Detail pop-up */}
         <MessageDialog
-            show={this.state.show}
+            show={this.state.showLogDialog}
             onHide={this.hideDetailDialog}
             primaryAction={this.hideDetailDialog}
             primaryActionButtonContent="Close"
@@ -207,6 +258,22 @@ export default class MigrationResults extends Component {
             secondaryContent={secondaryContent}
             accessibleName="migrationDetailDialog"
             accessibleDescription="migrationDetailDialogContent"
+        />
+
+        {/* Delete Migration pop-up */}
+        <MessageDialog
+          show={this.state.showDeleteConfirmation}
+          onHide={this.hideDeleteDialog}
+          primaryAction={this.deleteMigration}
+          secondaryAction={this.hideDeleteDialog}
+          primaryActionButtonContent="Delete"
+          secondaryActionButtonContent="Cancel"
+          primaryActionButtonBsStyle="danger"
+          title="Delete Migration"
+          icon={deleteIcon}
+          primaryContent={primaryDeleteContent}
+          accessibleName="deleteConfirmationDialog"
+          accessibleDescription="deleteConfirmationDialogContent"
         />
 
 
