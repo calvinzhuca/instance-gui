@@ -151,9 +151,7 @@ export default class MigrationDefinitions extends Component {
           cell: {
             formatters:  [
               (value, { rowData }) => [
-                  <Table.Actions key="0">
-                        <a href="#" onClick={() => this.retriveMigrationLogs(rowData)}>{value}</a>
-                  </Table.Actions>
+                  <DisplayStatus rowData={rowData} retriveMigrationLogs={this.retriveMigrationLogs}/>
 
               ]
             ]
@@ -205,19 +203,17 @@ export default class MigrationDefinitions extends Component {
             label: 'Actions',
             props: {
               rowSpan: 1,
-              colSpan: 1
+              colSpan: 2
             },
             formatters: [actionHeaderCellFormatter]
           },
           cell: {
               formatters: [
                 (value, { rowData }) => [
-                        <Table.Actions key="0">
-                              <Table.Button bsStyle="default" onClick={() => this.retriveMigrationLogs(rowData.id)}>Edit</Table.Button>
-                        </Table.Actions>,
-                          <Table.Actions key="1">
-                                <Table.Button bsStyle="default" onClick={() => this.showDeleteDialog(rowData.id)}>Delete</Table.Button>
-                          </Table.Actions>
+                    <Table.Actions key="0">
+                          <Table.Button bsStyle="default" onClick={() => this.showDeleteDialog(rowData.id)}>Delete</Table.Button>
+                    </Table.Actions>,
+                    <DisplayActions rowData={rowData} />
                 ]
               ]
           },
@@ -234,7 +230,31 @@ export default class MigrationDefinitions extends Component {
     const primaryDeleteContent = <p className="lead">Please confirm you will delete this migration: {this.state.deleteMigrationId}</p>;
     const deleteIcon = <Icon type="pf" name="error-circle-o" />;
 
+    //only for rowData.status == "SCHEDULED" enable the "Edit" button
+    function DisplayActions(props){
+        const rowData = props.rowData;
+        if ( rowData.status == "SCHEDULED"){
+            return <Table.Actions key="1">
+                          <Table.Button bsStyle="default" onClick={() => this.retriveMigrationLogs(rowData.id)}>Edit</Table.Button>
+                    </Table.Actions>
+        }else{
+            return <Table.Actions key="1"/>
 
+        }
+    }
+
+
+    //for rowData.status != "SCHEDULED" enable the href to check migration logs
+    function DisplayStatus(props){
+        const rowData = props.rowData;
+        if ( rowData.status == "SCHEDULED"){
+            return <Table.Actions key="0">{rowData.status}</Table.Actions>
+        }else{
+            return  <Table.Actions key="0">
+                        <a href="#" onClick={() => props.retriveMigrationLogs(rowData)}>{rowData.status}</a>
+                     </Table.Actions>
+        }
+    }
 
     return (
         <div>
