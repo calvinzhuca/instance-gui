@@ -1,10 +1,11 @@
 import React from "react";
 import ReactDOM from "react-dom";
 
-import MainPageUsingSecondaryTab from './component/MainPageUsingSecondaryTab';
+import MainPagewithPfTab from './component/MainPagewithPfTab';
+
 document.addEventListener("DOMContentLoaded", function() {
   ReactDOM.render(
-    React.createElement(MainPageUsingSecondaryTab),
+    React.createElement(MainPagewithPfTab),
     document.getElementById("mount")
   );
 });
