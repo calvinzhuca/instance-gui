@@ -21,10 +21,9 @@ export default class WizardExecuteMigration extends WizardBase {
       this.state = {
           activeStepIndex:0,
           activeSubStepIndex:0,
-          jsonStr:'',
           runningInstanceIds:'',
           scheduleStartTime:'',
-          executionPlanJsonStr:'',
+          migrationDefinitionJsonStr:'',
           callbackUrl:'',
           pimServiceResponseJsonStr:'',
           kieserverId:KIE_SERVER_ID
@@ -36,10 +35,9 @@ export default class WizardExecuteMigration extends WizardBase {
         this.setState({
             activeStepIndex:0,
             activeSubStepIndex:0,
-            jsonStr:'',
             runningInstanceIds:'',
             scheduleStartTime:'',
-            executionPlanJsonStr:'',
+            migrationDefinitionJsonStr:'',
             callbackUrl:'',
             pimServiceResponseJsonStr:''
           })
@@ -53,7 +51,7 @@ export default class WizardExecuteMigration extends WizardBase {
               })
             this.onNextButtonClick();
         }else{
-            const plan = this.state.migrationPlanJsonStr;
+            const plan = this.state.migrationDefinitionJsonStr;
             console.log('onSubmitMigrationPlan: ' + plan);
 
             //need to create a temp variable "self" to store this, so I can invoke this inside axios call
@@ -110,7 +108,7 @@ export default class WizardExecuteMigration extends WizardBase {
             jsonStr = jsonStr.replace('\]\"', '\]');
         }
 
-        this.setState({migrationPlanJsonStr: jsonStr});
+        this.setState({migrationDefinitionJsonStr: jsonStr});
 
     }
 
@@ -185,7 +183,7 @@ export default class WizardExecuteMigration extends WizardBase {
                   activeStepIndex={activeStepIndex}
                   activeSubStepIndex={activeSubStepIndex}
                 >
-                  <PageReview inputJsonStr={this.state.migrationPlanJsonStr}/>
+                  <PageReview inputJsonStr={this.state.migrationDefinitionJsonStr}/>
                 </Wizard.Contents>
               );
           } else if (stepIndex === 3 ) {

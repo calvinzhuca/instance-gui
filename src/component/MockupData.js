@@ -1,5 +1,130 @@
 import React from 'react';
 
+
+export const MockupData_Migrations_Logs = [
+   {
+      "id":1,
+      "migrationId":1,
+      "processInstanceId":null,
+      "startDate":"2019-02-03T21:17:54.739Z",
+      "endDate":"2019-02-03T21:17:54.854Z",
+      "successful":true,
+      "logs":[
+         "INFO Sun Feb 03 16:17:54 EST 2019 Variable instances updated = 3 for process instance id 1",
+         "INFO Sun Feb 03 16:17:54 EST 2019 Node instances updated = 3 for process instance id 1",
+         "INFO Sun Feb 03 16:17:54 EST 2019 Process instances updated = 1 for process instance id 1",
+         "INFO Sun Feb 03 16:17:54 EST 2019 Task variables updated = 4 for process instance id 1",
+         "INFO Sun Feb 03 16:17:54 EST 2019 Task audit updated = 1 for process instance id 1",
+         "INFO Sun Feb 03 16:17:54 EST 2019 Tasks updated = 1 for process instance id 1",
+         "INFO Sun Feb 03 16:17:54 EST 2019 Context info updated = 0 for process instance id 1",
+         "WARN Sun Feb 03 16:17:54 EST 2019 Source and target process id is exactly the same (evaluation) it's recommended to use unique process ids",
+         "INFO Sun Feb 03 16:17:54 EST 2019 Mapping: Node instance logs to be updated  = [1]",
+         "INFO Sun Feb 03 16:17:54 EST 2019 Mapping: Node instance logs updated = 1 for node instance id 1",
+         "INFO Sun Feb 03 16:17:54 EST 2019 Mapping: Task audit updated = 1 for task id 1",
+         "INFO Sun Feb 03 16:17:54 EST 2019 Mapping: Task updated = 1 for task id 1",
+         "INFO Sun Feb 03 16:17:54 EST 2019 Migration of process instance (1) completed successfully to process evaluation"
+      ]
+   }
+]
+
+export const MockupData_Migrations_Definitions = [
+   {
+      "id":1,
+      "definition":{
+         "planId":2,
+         "processInstanceIds":[
+            1
+         ],
+         "kieserverId":"15ad5bfa-7532-3eea-940a-abbbbc89f1e8",
+         "requester":"kermit",
+         "execution":{
+            "type":"ASYNC"
+         }
+      },
+      "createdAt":"2019-02-03T21:17:54.558Z",
+      "startedAt":"2019-02-03T21:17:54.645Z",
+      "finishedAt":"2019-02-03T21:17:54.872Z",
+      "status":"COMPLETED"
+   },
+   {
+      "id":2,
+      "definition":{
+         "planId":1,
+         "processInstanceIds":[
+            1
+         ],
+         "kieserverId":"15ad5bfa-7532-3eea-940a-abbbbc89f1e8",
+         "requester":"kermit",
+         "execution":{
+            "type":"ASYNC"
+         }
+      },
+      "createdAt":"2019-02-04T02:23:57.124Z",
+      "startedAt":"2019-02-04T02:23:57.150Z",
+      "finishedAt":"2019-02-04T02:23:57.218Z",
+      "status":"COMPLETED"
+   },
+   {
+      "id":8,
+      "definition":{
+         "planId":2,
+         "processInstanceIds":[
+            2,
+            1
+         ],
+         "kieserverId":"15ad5bfa-7532-3eea-940a-abbbbc89f1e8",
+         "requester":"kermit",
+         "execution":{
+            "type":"ASYNC"
+         }
+      },
+      "createdAt":"2019-02-05T01:36:33.300Z",
+      "startedAt":"2019-02-05T01:36:33.329Z",
+      "finishedAt":"2019-02-05T01:36:33.433Z",
+      "status":"COMPLETED"
+   },
+   {
+      "id":4,
+      "definition":{
+         "planId":2,
+         "processInstanceIds":[
+            1,
+            2
+         ],
+         "kieserverId":"15ad5bfa-7532-3eea-940a-abbbbc89f1e8",
+         "requester":"kermit",
+         "execution":{
+            "type":"ASYNC",
+            "scheduledStartTime":"2019-02-04T03:29:00Z"
+         }
+      },
+      "createdAt":"2019-02-04T03:28:19.139Z",
+      "startedAt":"2019-02-04T03:29:00.010Z",
+      "finishedAt":"2019-02-04T03:29:00.148Z",
+      "status":"COMPLETED"
+   },
+   {
+      "id":11,
+      "definition":{
+         "planId":1,
+         "processInstanceIds":[
+            2,
+            1
+         ],
+         "kieserverId":"15ad5bfa-7532-3eea-940a-abbbbc89f1e8",
+         "requester":"kermit",
+         "execution":{
+            "type":"ASYNC",
+            "scheduledStartTime":"2019-02-20T05:00:00Z"
+         }
+      },
+      "createdAt":"2019-02-06T00:51:45.026Z",
+      "startedAt":null,
+      "finishedAt":null,
+      "status":"SCHEDULED"
+   }
+]
+
 export const MockupData_planList = [
    {
       "id":1,
@@ -187,29 +312,6 @@ export const MockupData_PIM_response = {
   "error_message": null
 };
 
-
-export const MockupData_Migration_Results = [
-   {
-      "id":1,
-      "definition":{
-         "execution":{
-            "type":"ASYNC",
-            "callback_url":null,
-            "scheduled_start_time":null
-         },
-         "plan_id":1,
-         "process_instance_ids":[
-            1
-         ]
-      },
-      "status":"COMPLETED",
-      "created_at":"2019-01-21T02:30:59",
-      "started_at":"2019-01-21T02:30:59",
-      "finished_at":"2019-01-21T02:31:00",
-      "cancelled_at":null,
-      "error_message":null
-   }
-];
 
 export const Mockup_processMapping_Info = {
   "sourceInfo": {

@@ -69,7 +69,7 @@ export default class PageMigrationScheduler extends Component {
               <tr>
                   <td width="30%"/>
                   <td width="40%" align="left">
-                      Callback URL: <input type="text" name="callbackUrl" onChange={this.setCallbackUrl}/>
+                      Callback URL: <input type="text" name="callbackUrl" onChange={this.setCallbackUrl} value={this.props.callbackUrl}/>
                 </td>
                 <td width="40%"/>
               </tr>
@@ -83,7 +83,7 @@ export default class PageMigrationScheduler extends Component {
                 <tr>
                     <td width="30%"/>
                     <td width="40%" align="left">
-                        <input type="radio" name="timeType" value="2" onClick={this.enableScheduleTime}/>Schedule Migration
+                        <input type="radio" name="timeType" value="2" onClick={this.enableScheduleTime} />Schedule Migration
                         <Datetime id="PageMigrationScheduler_scheduleTime"
                             input={this.state.dateTimeInput}
                             open={this.state.dateTimePickerOpen}

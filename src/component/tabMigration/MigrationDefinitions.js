@@ -6,26 +6,32 @@ import axios from 'axios';
 
 import { Icon } from "patternfly-react";
 import { MessageDialog } from 'patternfly-react';
-import { MockupData_Migration_Results } from '../MockupData';
+
+
+import { MockupData_runningInstances, MockupData_Migrations_Definitions, MockupData_Migrations_Logs } from '../MockupData';
 import {BACKEND_URL, USE_MOCK_DATA} from '../PimConstants';
 import PageViewMigrationLogs from './PageViewMigrationLogs';
-
+import PageEditMigrationDefinitionModal from './PageEditMigrationDefinitionModal';
 
 export default class MigrationDefinitions extends Component {
     constructor(props) {
       super(props);
       this.state = {
-          migrationResults:[],
+          migrationsDefinitions:[],
           migrationLogs:[],
           showLogDialog: false,
           showDeleteConfirmation: false,
-          deleteMigrationId:''
+          deleteMigrationId:'',
+          editMigrationId:''
       };
     }
 
     componentDidMount(){
-        //this.retriveMigrationResults();
+        this.retriveMigrationDefinitions();
     }
+
+
+
 
     hideDetailDialog = () => {
         this.setState({
@@ -40,7 +46,9 @@ export default class MigrationDefinitions extends Component {
         });
         if (USE_MOCK_DATA){
             console.log('retriveMigrationLogs useMockData: ');
-            //TODO
+            this.setState({
+                migrationLogs: MockupData_Migrations_Logs
+             });
 
         }else{
 
@@ -76,7 +84,8 @@ export default class MigrationDefinitions extends Component {
     deleteMigration = () =>{
         if (USE_MOCK_DATA){
             console.log('deleteMigration useMockData: ');
-            //TODO
+            this.hideDeleteDialog();
+            this.retriveMigrationDefinitions();
 
         }else{
             //need to create a temp variable "self" to store this, so I can invoke this inside axios call
@@ -88,37 +97,37 @@ export default class MigrationDefinitions extends Component {
                 const results = res.data;
                 console.log('deleteMigration ' + JSON.stringify(results));
                 self.hideDeleteDialog();
-                self.retriveMigrationResults();
+                self.retriveMigrationDefinitions();
           });
         }
     }
 
-    retriveMigrationResults = () =>{
-        const input = document.getElementById("id_MigrationResults_input1");
-        console.log('retriveMigrationResults: ' +  input.value);
+    retriveMigrationDefinitions = () =>{
+        const input = document.getElementById("id_migrationsDefinitions_input1");
+        console.log('retriveMigrationDefinitions: ' +  input.value);
 
-        if (this.state.useMockData){
-            console.log('retriveMigrationResults useMockData: ');
-            const migrationResults = MockupData_Migration_Results;
+        if (USE_MOCK_DATA){
+            console.log('retriveMigrationDefinitions useMockData: ');
+            const migrationsDefinitions = MockupData_Migrations_Definitions;
             this.setState({
-                migrationResults
+                migrationsDefinitions
              });
 
         }else{
                 const serviceUrl = BACKEND_URL + '/migrations/' + input.value;
                 axios.get(serviceUrl, {
                 }).then (res => {
-                    var migrationResults = res.data;
-                    if (migrationResults != null){
-                        const tmpStr = JSON.stringify(migrationResults);
+                    var migrationsDefinitions = res.data;
+                    if (migrationsDefinitions != null){
+                        const tmpStr = JSON.stringify(migrationsDefinitions);
                         if (tmpStr != '' && tmpStr.charAt(0) !='['){
                             //this is single element json, need to change to json array, otherwise the table won't display
-                            migrationResults = [migrationResults];
+                            migrationsDefinitions = [migrationsDefinitions];
                         }
                     }
-                    console.log('retriveMigrationResults: ' + JSON.stringify(migrationResults));
+                    console.log('retriveMigrationDefinitions: ' + JSON.stringify(migrationsDefinitions));
                     this.setState({
-                        migrationResults
+                        migrationsDefinitions
                      });
               });
         }
@@ -213,7 +222,7 @@ export default class MigrationDefinitions extends Component {
                     <Table.Actions key="0">
                           <Table.Button bsStyle="default" onClick={() => this.showDeleteDialog(rowData.id)}>Delete</Table.Button>
                     </Table.Actions>,
-                    <DisplayActions rowData={rowData} />
+                    <DisplayActions rowData={rowData} openEditMigration={this.openEditMigration}/>
                 ]
               ]
           },
@@ -221,21 +230,24 @@ export default class MigrationDefinitions extends Component {
         }
     ];
 
-    //for MessageDialogInfo
+    //for View migration logs pop-up
     const primaryContent = <PageViewMigrationLogs migrationLogs={this.state.migrationLogs} />;
     const secondaryContent = <p></p>;
     const icon = <Icon type="pf" name="info" />;
 
-    //for MessageDialogDeleteConfirmation
+    //for Delete migration definition pop-up
     const primaryDeleteContent = <p className="lead">Please confirm you will delete this migration: {this.state.deleteMigrationId}</p>;
     const deleteIcon = <Icon type="pf" name="error-circle-o" />;
 
-    //only for rowData.status == "SCHEDULED" enable the "Edit" button
+
+
+    //only for status is "SCHEDULED" enable the "Edit" button
     function DisplayActions(props){
         const rowData = props.rowData;
+        const migrationPlanJsonStr='testString!!!!!!!!!!!!!';
         if ( rowData.status == "SCHEDULED"){
             return <Table.Actions key="1">
-                          <Table.Button bsStyle="default" onClick={() => this.retriveMigrationLogs(rowData.id)}>Edit</Table.Button>
+                          <PageEditMigrationDefinitionModal rowData={rowData}/>
                     </Table.Actions>
         }else{
             return <Table.Actions key="1"/>
@@ -244,7 +256,7 @@ export default class MigrationDefinitions extends Component {
     }
 
 
-    //for rowData.status != "SCHEDULED" enable the href to check migration logs
+    //for status other than "SCHEDULED" enable the link to check migration logs
     function DisplayStatus(props){
         const rowData = props.rowData;
         if ( rowData.status == "SCHEDULED"){
@@ -259,21 +271,21 @@ export default class MigrationDefinitions extends Component {
     return (
         <div>
 
-        {/* MIgration Result Detail pop-up */}
+        {/* View migration logs pop-up */}
         <MessageDialog
             show={this.state.showLogDialog}
             onHide={this.hideDetailDialog}
             primaryAction={this.hideDetailDialog}
             primaryActionButtonContent="Close"
-            title="Migration Result Details"
+            title="View Migration Logs"
             icon={icon}
             primaryContent={primaryContent}
             secondaryContent={secondaryContent}
-            accessibleName="migrationDetailDialog"
+            accessibleName="viewMigrationLogsDialog"
             accessibleDescription="migrationDetailDialogContent"
         />
 
-        {/* Delete Migration pop-up */}
+        {/* Delete migration definition pop-up */}
         <MessageDialog
           show={this.state.showDeleteConfirmation}
           onHide={this.hideDeleteDialog}
@@ -282,7 +294,7 @@ export default class MigrationDefinitions extends Component {
           primaryActionButtonContent="Delete"
           secondaryActionButtonContent="Cancel"
           primaryActionButtonBsStyle="danger"
-          title="Delete Migration"
+          title="Delete Migration Definition"
           icon={deleteIcon}
           primaryContent={primaryDeleteContent}
           accessibleName="deleteConfirmationDialog"
@@ -290,12 +302,13 @@ export default class MigrationDefinitions extends Component {
         />
 
 
-          <input id="id_MigrationResults_input1" type="search" placeholder="Search By Migration ID"/>
-          <button type="button" onClick={this.retriveMigrationResults}><span className="fa fa-search"></span></button>
+
+          <input id="id_migrationsDefinitions_input1" type="search" placeholder="Search By Migration ID"/>
+          <button type="button" onClick={this.retriveMigrationDefinitions}><span className="fa fa-search"></span></button>
 
           <Table.PfProvider striped columns={resultBootstrapColumns}>
             <Table.Header />
-            <Table.Body rows={this.state.migrationResults} rowKey="id" />
+            <Table.Body rows={this.state.migrationsDefinitions} rowKey="id" />
           </Table.PfProvider>
         </div>
 
