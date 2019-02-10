@@ -199,6 +199,21 @@ export default class MigrationDefinitions extends Component {
         },
         {
           header: {
+            label: 'Scheduled At',
+            formatters: [headerFormat]
+          },
+          cell: {
+              formatters:  [
+                (value, { rowData }) => [
+                    <Table.Cell>{rowData.definition.execution.scheduledStartTime}</Table.Cell>
+
+                ]
+              ]
+          },
+          property: 'definition.planId'
+        },
+        {
+          header: {
             label: 'Error Message',
             formatters: [headerFormat]
           },
@@ -260,11 +275,11 @@ export default class MigrationDefinitions extends Component {
     function DisplayStatus(props){
         const rowData = props.rowData;
         if ( rowData.status == "SCHEDULED"){
-            return <Table.Actions key="0">{rowData.status}</Table.Actions>
+            return <Table.Cell key="0">{rowData.status}</Table.Cell>
         }else{
-            return  <Table.Actions key="0">
+            return  <Table.Cell key="0">
                         <a href="#" onClick={() => props.retriveMigrationLogs(rowData)}>{rowData.status}</a>
-                     </Table.Actions>
+                     </Table.Cell>
         }
     }
 
