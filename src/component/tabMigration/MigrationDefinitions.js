@@ -45,7 +45,7 @@ export default class MigrationDefinitions extends Component {
             showLogDialog:true
         });
         if (USE_MOCK_DATA){
-            console.log('retriveMigrationLogs useMockData: ');
+            console.log('retriveMigrationLogs use mock data: ');
             this.setState({
                 migrationLogs: MockupData_Migrations_Logs
              });
@@ -83,7 +83,7 @@ export default class MigrationDefinitions extends Component {
 
     deleteMigration = () =>{
         if (USE_MOCK_DATA){
-            console.log('deleteMigration useMockData: ');
+            console.log('deleteMigration use mock data: ');
             this.hideDeleteDialog();
             this.retriveMigrationDefinitions();
 
@@ -107,7 +107,7 @@ export default class MigrationDefinitions extends Component {
         console.log('retriveMigrationDefinitions: ' +  input.value);
 
         if (USE_MOCK_DATA){
-            console.log('retriveMigrationDefinitions useMockData: ');
+            console.log('retriveMigrationDefinitions use mock data: ');
             const migrationsDefinitions = MockupData_Migrations_Definitions;
             this.setState({
                 migrationsDefinitions

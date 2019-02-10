@@ -169,7 +169,6 @@ export default class WizardAddPlan extends WizardBase {
                             initSourceContainerId={this.state.sourceContainerId}
                             initTargetContainerId={this.state.targetContainerId}
                             initProcessId={this.state.targetProcessId}
-                            useMockData={this.props.useMockData}
                       />
                       </Wizard.Contents>
                     );

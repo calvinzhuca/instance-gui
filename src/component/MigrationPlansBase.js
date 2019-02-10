@@ -3,7 +3,7 @@ import PropTypes from 'prop-types';
 
 import axios from 'axios';
 import { MockupData_planList, MockupData_runningInstances, MockupData_PIM_response } from './MockupData';
-import {BACKEND_URL} from './PimConstants';
+import {BACKEND_URL, USE_MOCK_DATA} from './PimConstants';
 export default class MigrationPlansBase extends React.Component {
 
   constructor(props) {
@@ -16,8 +16,7 @@ export default class MigrationPlansBase extends React.Component {
       showPlanWizard: false,
       deletePlanId:'',
       runningInstances:[],
-      addPlanResponseJsonStr:'',
-      useMockData:false
+      addPlanResponseJsonStr:''
     };
   }
 
@@ -33,8 +32,8 @@ export default class MigrationPlansBase extends React.Component {
 
   retrieveAllPlans = () => {
 
-      if (this.state.useMockData){
-          console.log('retrieveAllPlans useMockData: ');
+      if (USE_MOCK_DATA){
+          console.log('retrieveAllPlans useing mock data: ');
           const plans = MockupData_planList;
           this.setState({plans,
               filteredPlans: plans
@@ -72,7 +71,7 @@ export default class MigrationPlansBase extends React.Component {
 
   deletePlan = () => {
 
-      if (this.state.useMockData){
+      if (USE_MOCK_DATA){
           this.retrieveAllPlans();
           this.hideDeleteDialog();
       }else{
@@ -99,7 +98,7 @@ export default class MigrationPlansBase extends React.Component {
 
   // addPlan need to be in the parent because it's shared between WizardAddPlan and Import Plan pop-up
   addPlan = (plan) => {
-      if (this.state.useMockData){
+      if (USE_MOCK_DATA){
           this.setState({
               addPlanResponseJsonStr:JSON.stringify(MockupData_PIM_response, null, 2),
             })
@@ -150,7 +149,7 @@ export default class MigrationPlansBase extends React.Component {
 
 
   editPlan = (plan, planId) => {
-      if (this.state.useMockData){
+      if (USE_MOCK_DATA){
           this.retrieveAllPlans();
       }else{
           //need to create a temp variable "self" to store this, so I can invoke this inside axios call
@@ -172,7 +171,7 @@ export default class MigrationPlansBase extends React.Component {
   }
 
   openMigrationWizard = (rowData) =>{
-      if (this.state.useMockData){
+      if (USE_MOCK_DATA){
           const instances = MockupData_runningInstances;
           //console.log('running instances: ' + JSON.stringify(instances));
 

@@ -11,7 +11,6 @@ import MigrationPlansTable from './MigrationPlansTable';
 import MigrationPlanListFilter from './MigrationPlanListFilter'
 import MigrationPlansEditPopup from './MigrationPlansEditPopup';
 
-
 import WizardAddPlan from './WizardAddPlan';
 import WizardExecuteMigration from './WizardExecuteMigration';
 
@@ -150,7 +149,6 @@ export default class MigrationPlans extends MigrationPlansBase {
                 steps={AddPlanItems}
                 ref="WizardAddPlanChild"
                 addPlanResponseJsonStr={this.state.addPlanResponseJsonStr}
-                useMockData={this.state.useMockData}
             />
 
         {/* Execute Migration Wizard*/}
@@ -161,7 +159,6 @@ export default class MigrationPlans extends MigrationPlansBase {
             planId={this.state.planId}
             steps={ExecuteMigrationItems}
             ref="WizardExecuteMigrationChild"
-            useMockData={this.state.useMockData}
           />
 
     </div>

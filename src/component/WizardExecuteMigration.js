@@ -13,6 +13,7 @@ import PageMigrationScheduler from "./PageMigrationScheduler";
 import PageReview from "./PageReview";
 import { MockupData_PIM_response } from './MockupData';
 import {BACKEND_URL,KIE_SERVER_ID} from './PimConstants';
+import {USE_MOCK_DATA} from './PimConstants';
 
 export default class WizardExecuteMigration extends WizardBase {
 
@@ -44,8 +45,8 @@ export default class WizardExecuteMigration extends WizardBase {
     }
 
     onSubmitMigrationPlan = () =>{
-        if (this.props.useMockData){
-            console.log('onSubmitMigrationPlan, using mockData: ');
+        if (USE_MOCK_DATA){
+            console.log('onSubmitMigrationPlan, using mock data: ');
             this.setState({
                 pimServiceResponseJsonStr:JSON.stringify(MockupData_PIM_response, null, 2),
               })

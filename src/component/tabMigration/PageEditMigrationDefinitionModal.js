@@ -85,7 +85,7 @@ export default class PageEditMigrationDefinitionModal extends React.Component {
 
   submit = () =>{
       if (USE_MOCK_DATA){
-          console.log('editMigration useMockData: ');
+          console.log('editMigration use mock data: ');
           this.hideEditDialog();
           //this.retriveMigrationDefinitions();
 

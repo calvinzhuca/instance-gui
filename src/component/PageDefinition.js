@@ -4,6 +4,7 @@ import axios from 'axios';
 
 import PageDefinitionSearchTable from "./PageDefinitionSearchTable";
 import { Mockup_processMapping_Info } from './MockupData';
+import {USE_MOCK_DATA} from './PimConstants';
 
 export default class PageDefinition extends Component {
     constructor (props) {
@@ -98,8 +99,8 @@ export default class PageDefinition extends Component {
         //console.log('this.state.sourceProcessId ' + this.state.sourceProcessId);
         //console.log('this.state.targetProcessId ' + this.state.targetProcessId);
         console.log('!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!retriveBothInfo');
-        if (this.props.useMockData){
-            console.log('retriveBothInfo useMockData ');
+        if (USE_MOCK_DATA){
+            console.log('retriveBothInfo use mock data ');
             const mockData = Mockup_processMapping_Info;
             this.props.setInfo(mockData.sourceInfo,mockData.targetInfo);
 
