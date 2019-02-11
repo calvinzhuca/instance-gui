@@ -6,7 +6,7 @@ import { DropdownButton, MenuItem, SplitButton, select } from "patternfly-react"
 
 import MigrationPlans from './MigrationPlans';
 import MigrationDefinitions from './tabMigration/MigrationDefinitions';
-import {KIE_SERVER_ID} from './PimConstants';
+import {KIE_SERVER_ID} from './common/PimConstants';
 export default class MainPagewithPfTab extends Component {
 
 

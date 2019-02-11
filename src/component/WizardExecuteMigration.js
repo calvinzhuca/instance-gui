@@ -7,13 +7,12 @@ import { Icon } from "patternfly-react";
 
 import WizardBase from './WizardBase';
 import { renderWizardSteps } from './PfWizardRenderers';
-import { ExecuteMigrationItems } from './WizardItems';
+import { ExecuteMigrationItems } from './common/WizardItems';
 import PageMigrationRunningInstances from "./PageMigrationRunningInstances";
 import PageMigrationScheduler from "./PageMigrationScheduler";
 import PageReview from "./PageReview";
-import { MockupData_PIM_response } from './MockupData';
-import {BACKEND_URL,KIE_SERVER_ID} from './PimConstants';
-import {USE_MOCK_DATA} from './PimConstants';
+import { MockupData_PIM_response } from './common/MockupData';
+import {BACKEND_URL,KIE_SERVER_ID,USE_MOCK_DATA} from './common/PimConstants';
 
 export default class WizardExecuteMigration extends WizardBase {
 

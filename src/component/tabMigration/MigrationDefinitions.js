@@ -8,8 +8,8 @@ import { Icon } from "patternfly-react";
 import { MessageDialog } from 'patternfly-react';
 
 
-import { MockupData_runningInstances, MockupData_Migrations_Definitions, MockupData_Migrations_Logs } from '../MockupData';
-import {BACKEND_URL, USE_MOCK_DATA} from '../PimConstants';
+import { MockupData_runningInstances, MockupData_Migrations_Definitions, MockupData_Migrations_Logs } from '../common/MockupData';
+import {BACKEND_URL, USE_MOCK_DATA} from '../common/PimConstants';
 import PageViewMigrationLogs from './PageViewMigrationLogs';
 import PageEditMigrationDefinitionModal from './PageEditMigrationDefinitionModal';
 

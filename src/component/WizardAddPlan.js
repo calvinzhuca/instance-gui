@@ -7,7 +7,7 @@ import { Icon } from "patternfly-react";
 import WizardBase from './WizardBase';
 
 import { renderWizardSteps } from './PfWizardRenderers';
-import { AddPlanItems } from './WizardItems';
+import { AddPlanItems } from './common/WizardItems';
 import PageMapping from "./PageMapping";
 import PageDefinition from "./PageDefinition";
 import PagePlanName from "./PagePlanName";

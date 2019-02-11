@@ -5,7 +5,7 @@ import axios from 'axios';
 import { Button } from "patternfly-react";
 import { Modal } from "patternfly-react";
 
-import {BACKEND_URL, USE_MOCK_DATA} from '../PimConstants';
+import {BACKEND_URL, USE_MOCK_DATA} from '../common/PimConstants';
 import PageMigrationScheduler from "../PageMigrationScheduler";
 
 export default class PageEditMigrationDefinitionModal extends React.Component {

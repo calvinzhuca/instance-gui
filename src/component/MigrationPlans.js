@@ -14,8 +14,8 @@ import MigrationPlansEditPopup from './MigrationPlansEditPopup';
 import WizardAddPlan from './WizardAddPlan';
 import WizardExecuteMigration from './WizardExecuteMigration';
 
-import { AddPlanItems } from './WizardItems';
-import { ExecuteMigrationItems } from './WizardItems';
+import { AddPlanItems } from './common/WizardItems';
+import { ExecuteMigrationItems } from './common/WizardItems';
 
 export default class MigrationPlans extends MigrationPlansBase {
 

@@ -3,8 +3,8 @@ import { Button } from "patternfly-react";
 import axios from 'axios';
 
 import PageDefinitionSearchTable from "./PageDefinitionSearchTable";
-import { Mockup_processMapping_Info } from './MockupData';
-import {USE_MOCK_DATA} from './PimConstants';
+import { Mockup_processMapping_Info } from './common/MockupData';
+import {USE_MOCK_DATA} from './common/PimConstants';
 
 export default class PageDefinition extends Component {
     constructor (props) {
