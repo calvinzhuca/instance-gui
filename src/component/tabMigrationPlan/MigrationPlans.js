@@ -11,11 +11,11 @@ import MigrationPlansTable from './MigrationPlansTable';
 import MigrationPlanListFilter from './MigrationPlanListFilter'
 import MigrationPlansEditPopup from './MigrationPlansEditPopup';
 
-import WizardAddPlan from './WizardAddPlan';
-import WizardExecuteMigration from './WizardExecuteMigration';
+import WizardAddPlan from './wizardAddPlan/WizardAddPlan';
+import WizardExecuteMigration from './wizardExecuteMigration/WizardExecuteMigration';
 
-import { AddPlanItems } from './common/WizardItems';
-import { ExecuteMigrationItems } from './common/WizardItems';
+import { AddPlanItems } from '../common/WizardItems';
+import { ExecuteMigrationItems } from '../common/WizardItems';
 
 export default class MigrationPlans extends MigrationPlansBase {
 

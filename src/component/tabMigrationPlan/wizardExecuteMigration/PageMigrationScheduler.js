@@ -1,6 +1,6 @@
 import React, { Component } from 'react';
 import * as Datetime from 'react-datetime';
-import moment from 'moment'
+import moment from 'moment';
 
 export default class PageMigrationScheduler extends Component {
     constructor(props){

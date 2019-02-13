@@ -1,9 +1,9 @@
 import React from 'react';
-import PropTypes from 'prop-types';
-
 import axios from 'axios';
-import { MockupData_planList, MockupData_runningInstances, MockupData_PIM_response } from './common/MockupData';
-import {BACKEND_URL, USE_MOCK_DATA} from './common/PimConstants';
+
+import { MockupData_planList, MockupData_runningInstances, MockupData_PIM_response } from '../common/MockupData';
+import {BACKEND_URL, USE_MOCK_DATA} from '../common/PimConstants';
+
 export default class MigrationPlansBase extends React.Component {
 
   constructor(props) {

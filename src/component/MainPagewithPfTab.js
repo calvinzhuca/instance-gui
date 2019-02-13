@@ -4,7 +4,7 @@ import classNames from 'classnames';
 import { TabContainer, Nav, NavItem, TabPane, TabContent } from "patternfly-react";
 import { DropdownButton, MenuItem, SplitButton, select } from "patternfly-react";
 
-import MigrationPlans from './MigrationPlans';
+import MigrationPlans from './tabMigrationPlan/MigrationPlans';
 import MigrationDefinitions from './tabMigration/MigrationDefinitions';
 import {KIE_SERVER_ID} from './common/PimConstants';
 export default class MainPagewithPfTab extends Component {
@@ -16,7 +16,7 @@ export default class MainPagewithPfTab extends Component {
 
  createMenuItems() {
      let menuItems = [];
-      menuItems.push(<MenuItem >{KIE_SERVER_ID}</MenuItem>);
+      menuItems.push(<MenuItem eventKey={1} >{KIE_SERVER_ID}</MenuItem>);
       return menuItems;
  }
 
@@ -29,16 +29,18 @@ export default class MainPagewithPfTab extends Component {
      <div>
          <table border="0" width="100%" >
             <tbody>
-                <td>
-                    <b>Process Instance Migration</b>
-                </td>
-                <td align="right">
-                    <DropdownButton
-                        title={'KIE Server Name'}
-                        >
-                        {this.createMenuItems()}
-                     </DropdownButton>
-                </td>
+                <tr>
+                    <td>
+                        <b>Process Instance Migration</b>
+                    </td>
+                    <td align="right">
+                        <DropdownButton
+                            title={'KIE Server Name'}
+                            >
+                            {this.createMenuItems()}
+                         </DropdownButton>
+                    </td>
+                </tr>
             </tbody>
          </table>
           <TabContainer id="tabs-with-dropdown-pf" defaultActiveKey="first">

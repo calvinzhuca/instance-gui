@@ -4,15 +4,16 @@ import { Wizard } from "patternfly-react";
 import { Button } from "patternfly-react";
 import { Icon } from "patternfly-react";
 
-import WizardBase from './WizardBase';
+import WizardBase from '../WizardBase';
+import PageReview from "../PageReview";
+import { renderWizardSteps } from '../PfWizardRenderers';
 
-import { renderWizardSteps } from './PfWizardRenderers';
-import { AddPlanItems } from './common/WizardItems';
 import PageMapping from "./PageMapping";
 import PageDefinition from "./PageDefinition";
 import PagePlanName from "./PagePlanName";
-import PageReview from "./PageReview";
 
+
+import { AddPlanItems } from '../../common/WizardItems';
 
 export default class WizardAddPlan extends WizardBase {
 

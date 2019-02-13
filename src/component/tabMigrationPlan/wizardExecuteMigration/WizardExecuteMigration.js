@@ -5,14 +5,16 @@ import { Wizard } from "patternfly-react";
 import { Button } from "patternfly-react";
 import { Icon } from "patternfly-react";
 
-import WizardBase from './WizardBase';
-import { renderWizardSteps } from './PfWizardRenderers';
-import { ExecuteMigrationItems } from './common/WizardItems';
+import { ExecuteMigrationItems } from '../../common/WizardItems';
+import { MockupData_PIM_response } from '../../common/MockupData';
+import {BACKEND_URL,KIE_SERVER_ID,USE_MOCK_DATA} from '../../common/PimConstants';
+
+import WizardBase from '../WizardBase';
+import { renderWizardSteps } from '../PfWizardRenderers';
+
 import PageMigrationRunningInstances from "./PageMigrationRunningInstances";
 import PageMigrationScheduler from "./PageMigrationScheduler";
-import PageReview from "./PageReview";
-import { MockupData_PIM_response } from './common/MockupData';
-import {BACKEND_URL,KIE_SERVER_ID,USE_MOCK_DATA} from './common/PimConstants';
+import PageReview from "../PageReview";
 
 export default class WizardExecuteMigration extends WizardBase {
 

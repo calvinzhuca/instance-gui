@@ -6,7 +6,7 @@ import { Button } from "patternfly-react";
 import { Modal } from "patternfly-react";
 
 import {BACKEND_URL, USE_MOCK_DATA} from '../common/PimConstants';
-import PageMigrationScheduler from "../PageMigrationScheduler";
+import PageMigrationScheduler from "../tabMigrationPlan/wizardExecuteMigration/PageMigrationScheduler";
 
 export default class PageEditMigrationDefinitionModal extends React.Component {
 

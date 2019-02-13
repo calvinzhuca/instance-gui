@@ -1,7 +1,6 @@
 import React from 'react';
 
-import {Wizard} from "patternfly-react"
-
+import {Wizard} from "patternfly-react";
 
 export const renderWizardSteps = (wizardSteps, activeStepIndex, activeSubStepIndex, onStepClick) => {
   const activeStep = wizardSteps[activeStepIndex];
