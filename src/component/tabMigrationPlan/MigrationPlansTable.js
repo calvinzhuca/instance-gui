@@ -90,8 +90,9 @@ export default class MigrationPlansTable extends Component {
                   </Table.Actions>,
                   <Table.Actions key="1">
                         <MigrationPlansEditPopup
-                          title="Edit Migration Plan"
-                          actionName="Edit"
+                          title="Export Migration Plan"
+                          actionName="Export"
+                          buttonLabel="Copy To Clipboard"
                           content={JSON.stringify(rowData)}
                           retrieveAllPlans={this.props.retrieveAllPlans}
                           updatePlan={this.props.updatePlan}
@@ -102,7 +103,7 @@ export default class MigrationPlansTable extends Component {
                         <Table.Button bsStyle="default" onClick={() => this.props.showDeleteDialog(rowData.id)}>Delete</Table.Button>
                   </Table.Actions>,
                   <Table.Actions key="3">
-                        <Table.Button bsStyle="default" onClick={() => this.props.openAddPlanWizardwithInitialData(rowData)}>Edit with Wizard</Table.Button>
+                        <Table.Button bsStyle="default" onClick={() => this.props.openAddPlanWizardwithInitialData(rowData)}>Edit</Table.Button>
                   </Table.Actions>
                 ]
               ]

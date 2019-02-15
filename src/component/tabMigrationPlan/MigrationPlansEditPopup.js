@@ -19,14 +19,22 @@ export default class MigrationPlansEditPopup extends React.Component {
   }
 
   submit = () => {
-      var input = document.getElementById("planEditArea");
-      var value = input.value;
-      //console.log("planEditArea value: " + value);
+      if (this.props.actionName == "Import Plan"){
+          var input = document.getElementById("planEditArea");
+          var value = input.value;
+          //console.log("planEditArea value: " + value);
 
-      //could be addPlan or editPlan, the planId is only needed for editPlan
-      this.props.updatePlan(value, this.props.planId);
-      this.props.retrieveAllPlans();
-      this.setState({ showEditPlanPopup: false });
+          //could be addPlan or editPlan, the planId is only needed for editPlan
+          this.props.updatePlan(value, this.props.planId);
+          this.props.retrieveAllPlans();
+          this.setState({ showEditPlanPopup: false });          
+      }else{
+          var input = document.getElementById("planEditArea");
+          var value = input.value;
+          navigator.clipboard.writeText(value);
+      }
+
+
   }
 
 
@@ -62,7 +70,7 @@ export default class MigrationPlansEditPopup extends React.Component {
               Cancel
             </Button>
             <Button bsStyle="primary" onClick={this.submit}>
-              Submit
+              {this.props.buttonLabel}
             </Button>
           </Modal.Footer>
         </Modal>

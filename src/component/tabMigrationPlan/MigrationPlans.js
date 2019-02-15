@@ -117,6 +117,7 @@ export default class MigrationPlans extends MigrationPlansBase {
                   <MigrationPlansEditPopup
                     title="Import Migration Plan"
                     actionName="Import Plan"
+                    buttonLabel="Submit"
                     retrieveAllPlans={this.retrieveAllPlans}
                     updatePlan={this.addPlan}
                   />
