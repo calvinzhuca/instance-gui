@@ -19,6 +19,7 @@ export default class MigrationPlansEditPopup extends React.Component {
   }
 
   submit = () => {
+      //this component is used as "Import Plan"
       if (this.props.actionName == "Import Plan"){
           var input = document.getElementById("planEditArea");
           var value = input.value;
@@ -27,13 +28,13 @@ export default class MigrationPlansEditPopup extends React.Component {
           //could be addPlan or editPlan, the planId is only needed for editPlan
           this.props.updatePlan(value, this.props.planId);
           this.props.retrieveAllPlans();
-          this.setState({ showEditPlanPopup: false });          
       }else{
+      //this component is used as "Export Plan"
           var input = document.getElementById("planEditArea");
           var value = input.value;
           navigator.clipboard.writeText(value);
       }
-
+      this.setState({ showEditPlanPopup: false });
 
   }
 

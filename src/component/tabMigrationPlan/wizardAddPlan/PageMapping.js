@@ -20,17 +20,19 @@ export default class PageMapping extends Component {
 
   //This is used in add plan wizard (for edit plan) to load the inital data to form fields
 //  componentDidMount(){
-//      var test1 =  document.getElementById("nodeMappingField");
-//      console.log('PageMapping componentDidMount test1 ' + test1);
-//     test1.value=JSON.stringify(this.props.mappings);
+//      var mappingField =  document.getElementById("nodeMappingField");
+//      console.log('PageMapping componentDidMount mappingField ' + mappingField);
+//     mappingField.value=JSON.stringify(this.props.mappings);
 //  }
     componentDidUpdate(){
-        var test1 =  document.getElementById("nodeMappingField");
-        console.log('PageMapping componentDidUpdate test1 ' + test1);
-        if (test1 != null){
-            console.log('test1 != null ' );
-            if (test1.value === null || test1.value ===''){
-                test1.value=JSON.stringify(this.props.mappings);
+        var mappingField =  document.getElementById("nodeMappingField");
+        console.log('PageMapping componentDidUpdate mappingField ' + mappingField);
+        if (mappingField != null){
+            console.log('mappingField != null ' );
+            if (this.props.mappings !== null && this.props.mappings != ""){
+                if (mappingField.value === null || mappingField.value ===''){
+                    mappingField.value=JSON.stringify(this.props.mappings);
+                }
             }
         }
     }
