@@ -7,8 +7,7 @@ export default class PageMigrationScheduler extends Component {
         super(props);
         //this.disableScheduleTime();
         this.state = {
-          dateTimeInput:false,
-          dateTimePickerOpen:false
+          dateTimeInput:true
         };
 
     }
@@ -25,8 +24,7 @@ export default class PageMigrationScheduler extends Component {
 //        scheduleTime.value='';
 
         this.setState({
-            dateTimeInput:false,
-            dateTimePickerOpen:false
+            dateTimeInput:false
          });
          this.props.setScheduleStartTime('');
     }
@@ -35,8 +33,7 @@ export default class PageMigrationScheduler extends Component {
         console.log('enable scheduleTime');
         //document.getElementById("PageMigrationScheduler_scheduleTime").disabled = false;
         this.setState({
-            dateTimeInput:true,
-            dateTimePickerOpen:true
+            dateTimeInput:true
          });
     }
 
@@ -76,17 +73,16 @@ export default class PageMigrationScheduler extends Component {
                 <tr>
                     <td width="30%"/>
                     <td width="40%" align="left">
-                        <input type="radio" name="timeType" value="1" defaultChecked onClick={this.disableScheduleTime}/>Run Migration Now
+                        <input type="radio" name="timeType" value="1" onClick={this.disableScheduleTime}/>Run Migration Now
                     </td>
                     <td width="30%"/>
                 </tr>
                 <tr>
                     <td width="30%"/>
                     <td width="40%" align="left">
-                        <input type="radio" name="timeType" value="2" onClick={this.enableScheduleTime} />Schedule Migration
+                        <input type="radio" name="timeType" value="2" defaultChecked onClick={this.enableScheduleTime} />Schedule Migration
                         <Datetime id="PageMigrationScheduler_scheduleTime"
                             input={this.state.dateTimeInput}
-                            open={this.state.dateTimePickerOpen}
                             onChange={this.handleDateTimeInput}
                             isValidDate={this.validDate }
                         />
