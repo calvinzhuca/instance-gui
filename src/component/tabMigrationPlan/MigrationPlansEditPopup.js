@@ -55,7 +55,7 @@ export default class MigrationPlansEditPopup extends React.Component {
     );
 
     return (
-      <div>
+      <span>
         <Button bsStyle="default" onClick={this.openEditPlanPopup}>
           {this.props.actionName}
         </Button>
@@ -75,7 +75,7 @@ export default class MigrationPlansEditPopup extends React.Component {
             </Button>
           </Modal.Footer>
         </Modal>
-      </div>
+      </span>
     );
   }
 }

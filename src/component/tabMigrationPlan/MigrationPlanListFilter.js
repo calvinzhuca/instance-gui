@@ -24,7 +24,7 @@ export default class MigrationPlanListFilter extends React.Component {
     render() {
       return (
         <div>
-          <label htmlFor="filter">Filter by Source Container ID: </label>
+          <label htmlFor="filter">Filter by Source Container ID: </label>&nbsp;
           <input type="text" id="inputFilter"
             value={this.state.inputFilter}
             onChange={this.handleChange}/>

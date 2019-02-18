@@ -235,7 +235,7 @@ export default class MigrationDefinitions extends Component {
               formatters: [
                 (value, { rowData }) => [
                     <Table.Actions key="0">
-                          <Table.Button bsStyle="default" onClick={() => this.showDeleteDialog(rowData.id)}>Delete</Table.Button>
+                          <Table.Button bsStyle="link" onClick={() => this.showDeleteDialog(rowData.id)}><Icon type="fa" name="trash" /></Table.Button>
                     </Table.Actions>,
                     <DisplayActions rowData={rowData} openEditMigration={this.openEditMigration}/>
                 ]
@@ -283,7 +283,7 @@ export default class MigrationDefinitions extends Component {
     }
 
     return (
-        <div>
+      <div>
 
         {/* View migration logs pop-up */}
         <MessageDialog
@@ -315,16 +315,23 @@ export default class MigrationDefinitions extends Component {
           accessibleDescription="deleteConfirmationDialogContent"
         />
 
-
-
-          <input id="id_migrationsDefinitions_input1" type="search" placeholder="Search By Migration ID"/>
-          <button type="button" onClick={this.retriveMigrationDefinitions}><span className="fa fa-search"></span></button>
-
-          <Table.PfProvider striped columns={resultBootstrapColumns}>
-            <Table.Header />
-            <Table.Body rows={this.state.migrationsDefinitions} rowKey="id" />
-          </Table.PfProvider>
+<br/>
+        <div class="row">
+          <div class="col-xs-12">
+            <input id="id_migrationsDefinitions_input1" type="search" placeholder="Search By Migration ID"/>
+            <button type="button" onClick={this.retriveMigrationDefinitions}><span className="fa fa-search"></span></button>
+          </div>
         </div>
+<br/>
+        <div class="row">
+          <div class="col-xs-12">
+            <Table.PfProvider striped columns={resultBootstrapColumns}>
+              <Table.Header />
+              <Table.Body rows={this.state.migrationsDefinitions} rowKey="id" />
+            </Table.PfProvider>
+          </div>
+        </div>
+      </div>
 
 
 

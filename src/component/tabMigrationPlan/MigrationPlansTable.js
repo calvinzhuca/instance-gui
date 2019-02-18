@@ -1,6 +1,7 @@
 import React, { Component } from 'react';
 import { Button } from "patternfly-react";
 import { Table } from 'patternfly-react';
+import { Icon } from 'patternfly-react';
 import { actionHeaderCellFormatter } from "patternfly-react";
 
 import MigrationPlansEditPopup from './MigrationPlansEditPopup';
@@ -86,7 +87,7 @@ export default class MigrationPlansTable extends Component {
               formatters: [
                 (value, { rowData }) => [
                   <Table.Actions key="0">
-                        <Table.Button bsStyle="default" onClick={() => this.props.openMigrationWizard(rowData)}>Execute</Table.Button>
+                        <Table.Button bsStyle="link" onClick={() => this.props.openMigrationWizard(rowData)}><Icon type="fa" name="play" /></Table.Button>
                   </Table.Actions>,
                   <Table.Actions key="1">
                         <MigrationPlansEditPopup
@@ -100,11 +101,11 @@ export default class MigrationPlansTable extends Component {
                         />
                   </Table.Actions>,
                   <Table.Actions key="2">
-                        <Table.Button bsStyle="default" onClick={() => this.props.showDeleteDialog(rowData.id)}>Delete</Table.Button>
+                        <Table.Button bsStyle="link" onClick={() => this.props.showDeleteDialog(rowData.id)}><Icon type="fa" name="trash" /></Table.Button>
                   </Table.Actions>,
                   <Table.Actions key="3">
-                        <Table.Button bsStyle="default" onClick={() => this.props.openAddPlanWizardwithInitialData(rowData)}>Edit</Table.Button>
-                  </Table.Actions>
+                        <Table.Button bsStyle="link" onClick={() => this.props.openAddPlanWizardwithInitialData(rowData)}><Icon type="fa" name="edit" /></Table.Button>
+                  </Table.Actions>,
                 ]
               ]
           },

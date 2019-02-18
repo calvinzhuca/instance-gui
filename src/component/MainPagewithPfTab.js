@@ -22,27 +22,26 @@ export default class MainPagewithPfTab extends Component {
 
   render() {
       const bsClass = classNames('nav nav-tabs nav-tabs-pf', {
-        'nav-justified': true
+        'nav-justified': false
       });
 
     return (
-     <div>
-         <table border="0" width="100%" >
-            <tbody>
-                <tr>
-                    <td>
-                        <b>Process Instance Migration</b>
-                    </td>
-                    <td align="right">
-                        <DropdownButton
-                            title={'KIE Server Name'}
-                            >
-                            {this.createMenuItems()}
-                         </DropdownButton>
-                    </td>
-                </tr>
-            </tbody>
-         </table>
+     <div class="">
+         <div class="row" >
+                <div class="col-xs-9">
+                    <h1>Process Instance Migration</h1>
+                </div>
+                <div class="col-xs-3">
+                    <br/>
+                    <div class="pull-right">
+                      <DropdownButton
+                          title={'KIE Server Name'}
+                          >
+                          {this.createMenuItems()}
+                      </DropdownButton>
+                    </div>
+                </div>
+         </div>
           <TabContainer id="tabs-with-dropdown-pf" defaultActiveKey="first">
             <div>
               <Nav bsClass={bsClass} onSelect={this.onSelect}>

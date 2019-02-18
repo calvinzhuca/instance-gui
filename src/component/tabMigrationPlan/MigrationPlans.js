@@ -105,32 +105,28 @@ export default class MigrationPlans extends MigrationPlansBase {
                 accessibleName="deleteConfirmationDialog"
                 accessibleDescription="deleteConfirmationDialogContent"
               />
-
+<br/>
               {/* import plan & Add Plan */}
-            <table border="0" width="100%">
-            <tbody>
-              <tr>
-                <td>
+            <div class="row">
+                <div class="col-xs-9">
                   <MigrationPlanListFilter onChange={this.onFilterChange} />
-                </td>
-                <td  align="right">
-                  <MigrationPlansEditPopup
-                    title="Import Migration Plan"
-                    actionName="Import Plan"
-                    buttonLabel="Submit"
-                    retrieveAllPlans={this.retrieveAllPlans}
-                    updatePlan={this.addPlan}
-                  />
-                </td>
-                <td  align="left">
-                  <Button bsStyle="primary" onClick={this.openAddPlanWizard}>
-                    Add Plan
-                  </Button>
-                </td>
-              </tr>
-             </tbody>
-            </table>
-
+                </div>
+                <div class="col-xs-3">
+                  <div class="pull-right">
+                    <MigrationPlansEditPopup
+                      title="Import Migration Plan"
+                      actionName="Import Plan"
+                      retrieveAllPlans={this.retrieveAllPlans}
+                      updatePlan={this.addPlan}
+                    />
+                    &nbsp;
+                    <Button bsStyle="primary" onClick={this.openAddPlanWizard}>
+                      Add Plan
+                    </Button>
+                  </div>
+                </div>
+            </div>
+<br/>
             {/* Table lists all the migration plans */}
             <MigrationPlansTable
                 openMigrationWizard={this.openMigrationWizard}
