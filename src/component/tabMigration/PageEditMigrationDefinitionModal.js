@@ -4,6 +4,7 @@ import axios from 'axios';
 
 import { Button } from "patternfly-react";
 import { Modal } from "patternfly-react";
+import { Icon } from "patternfly-react";
 
 import {BACKEND_URL, USE_MOCK_DATA} from '../common/PimConstants';
 import PageMigrationScheduler from "../tabMigrationPlan/wizardExecuteMigration/PageMigrationScheduler";
@@ -153,8 +154,8 @@ export default class PageEditMigrationDefinitionModal extends React.Component {
 
     return (
       <div>
-        <Button bsStyle="default" onClick={this.openEditMigration}>
-          Edit
+        <Button bsStyle="link" onClick={this.openEditMigration}>
+          <Icon type="fa" name="edit" />
         </Button>
 
         <Modal show={this.state.showEditDialog} onHide={this.hideEditDialog} >
