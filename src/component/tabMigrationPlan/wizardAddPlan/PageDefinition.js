@@ -99,7 +99,6 @@ export default class PageDefinition extends Component {
     retriveBothInfo = () =>{
         //console.log('this.state.sourceProcessId ' + this.state.sourceProcessId);
         //console.log('this.state.targetProcessId ' + this.state.targetProcessId);
-        console.log('!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!retriveBothInfo');
         if (USE_MOCK_DATA){
             console.log('retriveBothInfo use mock data ');
             const mockData = Mockup_processMapping_Info;

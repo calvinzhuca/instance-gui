@@ -21,7 +21,6 @@ export default class PageEditMigrationDefinitionModal extends React.Component {
         callbackUrl:this.props.rowData.definition.execution.callbackUrl,
         showEditDialog:false
     };
-    console.log('!!!!!!!!!!!!! PageEditMigrationDefinition: ' + this.props);
   }
 
   convertFormDataToJson(){
@@ -93,10 +92,10 @@ export default class PageEditMigrationDefinitionModal extends React.Component {
           //need to create a temp variable "self" to store this, so I can invoke this inside axios call
           const self = this;
           const serviceUrl = BACKEND_URL + "/migrations/" + this.state.id;
-          console.log('editMigration url: ' + serviceUrl);
+          //console.log('editMigration url: ' + serviceUrl);
 
           const migrationDefinitionJsonStr = this.convertFormDataToJson();
-          console.log('!!!!!!!!!!!!!!!!!!!!!!!! migrationDefinitionJsonStr' + migrationDefinitionJsonStr);
+          //console.log('migrationDefinitionJsonStr' + migrationDefinitionJsonStr);
           axios.put(serviceUrl, migrationDefinitionJsonStr, {headers: {
                     "Content-Type": "application/json"}
           })

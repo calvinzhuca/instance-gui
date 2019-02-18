@@ -48,7 +48,9 @@ export default class WizardAddPlan extends WizardBase {
             targetContainerId:'',
             targetProcessId:'',
             mappings:'',
-            migrationPlanJsonStr:''
+            migrationPlanJsonStr:'',
+            editPlanMode:false,
+            planId:''
         });
     }
 
@@ -66,7 +68,9 @@ export default class WizardAddPlan extends WizardBase {
             targetContainerId:rowData.targetContainerId,
             targetProcessId:rowData.targetProcessId,
             mappings:rowData.mappings,
-            migrationPlanJsonStr:jsonStr
+            migrationPlanJsonStr:jsonStr,
+            editPlanMode:true,
+            planId:rowData.id
         });
     }
 
@@ -115,18 +119,24 @@ export default class WizardAddPlan extends WizardBase {
           formData.mappings = this.state.mappings;
       }
 
+      if (this.state.editPlanMode){
+          formData.id = this.state.planId;
+      }
+
       const jsonStr = JSON.stringify(formData, null, 2);
 
       this.setState({migrationPlanJsonStr: jsonStr});
 
-      //console.log("!!!!!!!!!!!!! dataContainer" + dataContainer.textContent);
     }
 
 
     onSubmitMigrationPlan = () => {
-        var plan = this.state.migrationPlanJsonStr;
         //call the addPlan. addPlan need to be in the parent because it's shared between WizardAddPlan and Import Plan pop-up
-        this.props.addPlan(plan);
+        if (!this.state.editPlanMode){
+            this.props.addPlan(this.state.migrationPlanJsonStr);
+        }else{
+            this.props.editPlan(this.state.migrationPlanJsonStr, this.state.planId);
+        }
         this.onNextButtonClick();
     }
 

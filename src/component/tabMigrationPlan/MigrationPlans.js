@@ -147,6 +147,7 @@ export default class MigrationPlans extends MigrationPlansBase {
                 showPlanWizard={showPlanWizard}
                 closeAddPlanWizard={this.closeAddPlanWizard}
                 addPlan={this.addPlan}
+                editPlan={this.editPlan}
                 steps={AddPlanItems}
                 ref="WizardAddPlanChild"
                 addPlanResponseJsonStr={this.state.addPlanResponseJsonStr}

@@ -107,11 +107,11 @@ export default class MigrationPlansBase extends React.Component {
 
           //console.log('addPlan is invoked');
           if (plan !== null && plan !== '' ){
-              //console.log('!!!!!!!!!!!!!!!!!!!submit plan' + plan);
+              //console.log('submit plan' + plan);
 
               //step 1, replace all \" to "
               plan = plan.replace(/\\\"/g, '\"');
-              //console.log('!!!!!!!!!!!!!!!!!!!submit plan1: ' + plan);
+              //console.log('submit plan1: ' + plan);
               //step 2, replace "{ to {
               plan = plan.replace('\"\{', '\{');
               console.log('plan2: ' + plan );
@@ -155,12 +155,16 @@ export default class MigrationPlansBase extends React.Component {
           //need to create a temp variable "self" to store this, so I can invoke this inside axios call
           const self = this;
           const serviceUrl = BACKEND_URL + "/plans/"+ planId;
+          console.log('serviceUrl: ' + serviceUrl);
           console.log('edit plan: ' + plan);
           axios.put(serviceUrl, plan, {headers: {
                     "Content-Type": "application/json"}
           })
           .then(function (response) {
             console.log('editPlan response: ' + response.data );
+            self.setState({
+                addPlanResponseJsonStr:JSON.stringify(response.data, null, 2),
+              })
             self.retrieveAllPlans();
           })
           .catch(function (error) {

@@ -259,7 +259,6 @@ export default class MigrationDefinitions extends Component {
     //only for status is "SCHEDULED" enable the "Edit" button
     function DisplayActions(props){
         const rowData = props.rowData;
-        const migrationPlanJsonStr='testString!!!!!!!!!!!!!';
         if ( rowData.status == "SCHEDULED"){
             return <Table.Actions key="1">
                           <PageEditMigrationDefinitionModal rowData={rowData}/>
