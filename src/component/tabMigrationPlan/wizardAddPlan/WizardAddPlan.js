@@ -259,8 +259,18 @@ export default class WizardAddPlan extends WizardBase {
                 <Icon type="fa" name="angle-left" />
                 Back
               </Button>
-              {(activeStepIndex === 0 || activeStepIndex === 1 || activeStepIndex === 2) && (
-                <Button bsStyle="primary" onClick={this.onNextButtonClick}>
+              {(activeStepIndex === 0 || activeStepIndex === 2) && (
+                <Button bsStyle="primary"
+                onClick={this.onNextButtonClick}>
+                  Next
+                  <Icon type="fa" name="angle-right" />
+                </Button>
+              )}
+
+              {(activeStepIndex === 1 ) && (
+                <Button bsStyle="primary"
+                disabled={this.state.sourceInfo == '' || this.state.targetInfo == ''}
+                onClick={this.onNextButtonClick}>
                   Next
                   <Icon type="fa" name="angle-right" />
                 </Button>

@@ -107,12 +107,12 @@ export default class MigrationPlans extends MigrationPlansBase {
               />
 <br/>
               {/* import plan & Add Plan */}
-            <div class="row">
-                <div class="col-xs-9">
+            <div className="row">
+                <div className="col-xs-9">
                   <MigrationPlanListFilter onChange={this.onFilterChange} />
                 </div>
-                <div class="col-xs-3">
-                  <div class="pull-right">
+                <div className="col-xs-3">
+                  <div className="pull-right">
                     <MigrationPlansEditPopup
                       title="Import Migration Plan"
                       actionName="Import Plan"

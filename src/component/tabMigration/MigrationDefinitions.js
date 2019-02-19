@@ -316,15 +316,15 @@ export default class MigrationDefinitions extends Component {
         />
 
 <br/>
-        <div class="row">
-          <div class="col-xs-12">
+        <div className="row">
+          <div className="col-xs-12">
             <input id="id_migrationsDefinitions_input1" type="search" placeholder="Search By Migration ID"/>
             <button type="button" onClick={this.retriveMigrationDefinitions}><span className="fa fa-search"></span></button>
           </div>
         </div>
 <br/>
-        <div class="row">
-          <div class="col-xs-12">
+        <div className="row">
+          <div className="col-xs-12">
             <Table.PfProvider striped columns={resultBootstrapColumns}>
               <Table.Header />
               <Table.Body rows={this.state.migrationsDefinitions} rowKey="id" />

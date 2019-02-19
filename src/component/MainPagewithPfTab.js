@@ -26,14 +26,14 @@ export default class MainPagewithPfTab extends Component {
       });
 
     return (
-     <div class="">
-         <div class="row" >
-                <div class="col-xs-9">
+     <div className="">
+         <div className="row" >
+                <div className="col-xs-9">
                     <h1>Process Instance Migration</h1>
                 </div>
-                <div class="col-xs-3">
+                <div className="col-xs-3">
                     <br/>
-                    <div class="pull-right">
+                    <div className="pull-right">
                       <DropdownButton
                           title={'KIE Server Name'}
                           >
