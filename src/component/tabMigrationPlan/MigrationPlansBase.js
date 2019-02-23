@@ -122,7 +122,6 @@ export default class MigrationPlansBase extends React.Component {
           //need to create a temp variable "self" to store this, so I can invoke this inside axios call
           const self = this;
           const servicsUrl = BACKEND_URL + "/plans";
-          //const serviceUrl = 'http://localhost:8280/plans';
           console.log('servicsUrl: ' + servicsUrl);
           axios.post(servicsUrl, plan, {headers: {
                     "Content-Type": "application/json"

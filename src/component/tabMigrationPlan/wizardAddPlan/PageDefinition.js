@@ -5,7 +5,7 @@ import { Button } from "patternfly-react";
 
 import PageDefinitionSearchTable from "./PageDefinitionSearchTable";
 import { Mockup_processMapping_Info } from '../../common/MockupData';
-import {USE_MOCK_DATA} from '../../common/PimConstants';
+import {BACKEND_URL, USE_MOCK_DATA} from '../../common/PimConstants';
 
 export default class PageDefinition extends Component {
     constructor (props) {
@@ -130,7 +130,8 @@ export default class PageDefinition extends Component {
             input.dispatchEvent(ev);
 
         }else{
-            axios.get('http://localhost:8080/backend/both', {
+            const servicesUrl = BACKEND_URL + "/both";
+            axios.get(servicesUrl, {
                 params: {
                     sourceProcessId: this.state.sourceProcessId,
                     sourceGroupId: this.state.sourceGroupId,
