@@ -9,11 +9,6 @@ import MigrationDefinitions from './tabMigration/MigrationDefinitions';
 import {KIE_SERVER_ID} from './common/PimConstants';
 export default class MainPagewithPfTab extends Component {
 
-
- onSelect = () =>{
-     console.log('onSelect');
- }
-
  createMenuItems() {
      let menuItems = [];
       menuItems.push(<MenuItem eventKey={1} >{KIE_SERVER_ID}</MenuItem>);
@@ -44,7 +39,7 @@ export default class MainPagewithPfTab extends Component {
          </div>
           <TabContainer id="tabs-with-dropdown-pf" defaultActiveKey="first">
             <div>
-              <Nav bsClass={bsClass} onSelect={this.onSelect}>
+              <Nav bsClass={bsClass} >
                 <NavItem eventKey="first">Migration Plans</NavItem>
                 <NavItem eventKey="second">Migrations</NavItem>
               </Nav>
